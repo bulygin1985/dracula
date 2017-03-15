@@ -1,0 +1,7 @@
+As you may have noticed, QsLog has been moved to a separate repository. You can find it at https://bitbucket.org/razvanpetru/qslog and contributions are more than welcome!
+
+The reasons for that are twofold:
+1. I only used Mercurial for personal projects, and only the basic features. On the other hand I have used git professionally and know it better. I am not passing judgement on which is the more capable tool, but I know which one I am more familiar with, so I will use that one. :-)
+Unfortunately bitbucket doesn't offer the possibility of converting a repository, so I decided to create a new one from the latest version of QsLog. In this case I considered "losing" the history as not so important to justify using the hg import tool.
+2. The other Qt components aren't so active, so it's confusing to have multiple components in a repo that move at such different speeds.
+

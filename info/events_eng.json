@@ -1,0 +1,312 @@
+{
+    "forewarned": {
+		"title" : "Forewarned",
+		"content" : "Play this card after Dracula reveals an encounter in
+					your location but before it takes effect. Discard the encounter without effect.
+					<br><br><i> 'My thanks', said Arthur, and pressed a coin into the boy's palm.",
+		"extra" : "Keep"
+	},
+	"newspaper_reports": {
+		"title" : "Newspaper reports",
+		"content" : "Reveal the oldest location in Dracula's Trail, unless it is Dracula's current location.
+					<br><br><i> Since those dark times I have found myself reading the papers more carefully. 
+					Always I wondered, when would it start again?",
+		"extra" : "Play immediately"
+	},
+	"consecrated_ground": {
+		"title" : "Consecrated Ground",
+		"content" : "Take the Consecrated Ground marker and place it on any city on the board except for Castle Dracula, Galatz, or Klausenburg. 
+					If the marker is already on the board, you may move it to any other city if you wish. If that city is in Dracula's Trail or Catacombs, 
+					it and any encounters on it are revealed. If Dracula is in the chosen city, he must leave that city on his next turn.",
+		"extra" : "Play immediately"
+	},
+	"telegraph_ahead": {
+		"title" : "Telegraph Ahead",
+		"content" : "Any cities in Dracula's Trail or Catacombs that are connected to the city you are in by a single road are
+					immediately revealed.
+					<br><br><i>ARRIVING BY MIDNIGHT TRAIN STOP PLEASE HAVE ITEMS WE DISCUSSED READY STOP",
+		"extra" : "Play immediately"
+	},
+	"hired_scouts": {
+		"title" : "Hired Scouts",
+		"content" : "Name two cities on the map. If those cities are in Dracula’s Trail or Catacombs, 
+					those locations and any encounters on them are immediately revealed.
+					<br><br><i>I shudder to think of the danger we put those poor souls in, but Van Helsing was adamant. 
+					The Count must be stopped at any cost.",
+		"extra" : "Play immediately"
+	},
+	"mystic_research": {
+		"title" : "Mystic Research",
+		"content" : "You may look at Dracula’s Event cards and share the information with the other Hunters.
+					<br><br><i>Van Helsing, of course, was never one to ignore folklore
+					and strange superstitions, but he has become, if anything,
+					odder over the years...",
+		"extra" : "Play immediately"
+	},
+	"re-equip": {
+		"title" : "Re-Equip",
+		"content" : "You may discard 1 of your Item cards to search the Item deck and take any 1 Item card from it. Afterwards, Item deck is shuffled.
+					<br><br><i>'Put it away!' hissed Van Helsing. 'Have you forgotten what it is that we face?'",
+		"extra" : "Play immediately"
+	},
+	"night_visit": {
+		"title" : "Night Visit",
+		"content" : "Play this card on any Bitten Hunter. The Hunter immediately loses 2 Health.
+					<br><br><i>...a crucifix around her neck, and we placed garlands of garlic flowers at every door and window – all in vain.
+					God forgive us, it was like Lucy all over again.",
+		"extra" : "Play immediately"
+	},
+	"false_tip-off": {
+		"title" : "False Tip-Off",
+		"content" : "Play this card when a Hunter attempts to catch a train. The Hunter does notroll the train die. 
+					Instead, he is automatically 'Delayed Over Papers' as if he had rolled an 'X' on the train die.
+					The Hunter may play <i>Chartered Carriage</i> card to cancel this card.
+					<br><br><i>'Oh yes,' wheedled the little man, 'those are the ones I warned you about...'",
+		"extra" : "Keep"
+	},
+	"chartered_carriage": {
+		"title" : "Chartered Carriage",
+		"content" : "Play this card when you attempt to catch a train. You do not roll the train die. 
+					Instead, you automatically catch a 'Fast/Express Train.' 
+					Dracula may play a <i>False Tip-off</i> card to cancel this card.
+					<br><br><i>Traveling with Arthur is true elegance. Our Lord Godalming knows how to make the miles fly past.",
+		"extra" : "Keep"
+	},
+	"devilish_power": {
+		"title" : "Devilish Power",
+		"content" : "Play this card to cancel the effects of an Event card that was just played, to discard a Heavenly Host marker from play, or to discard the Hunters’ current Ally from play.
+					<br><br><i>Oh, Dearest, how well you know the cruelty and might of our foe – you, best of all.
+					If he can turn me against you and our son, what can’t the do?",
+		"extra" : "Keep"
+	},
+	"time_runs_short": {
+		"title" : "Time Runs Short",
+		"content" : "Play this card at the start of your turn. Move the Day/Night marker forward along the Day/Night track by 1 space. 
+					You cannot play this card during the Small Hours.
+					<br><br><i> I heard the dull tolling of the
+					clocktower and my blood froze. Were we too late?
+					<br> But Van Helsing shouted at us, and once more we sped on into the growing twilight.",
+		"extra" : "Keep"
+	},
+	"roadblock": {
+		"title" : "Roadblock",
+		"content" : "Play this card at the start of your turn to take the Roadblock marker and place it on any 1 road and rail line on the board. 
+					Hunters cannot move along that road and rail line while
+					the roadblock remains in place. If the Roadblock marker is already on the board when you play this card, 
+					you may move it to a different road and rail line.",
+		"extra" : "Keep"
+	},
+	"good_luck": {
+		"title" : "Good Luck",
+		"content" : "Play this card to cancel the effects of an Event card that was just played, 
+					to discard the Roadblock marker from play, 
+					or to discard Dracula's current Ally from play.
+					<br><br><i>There was some Providence, some divine spirit, watching over us that day.",
+		"extra" : "Keep"
+	},
+	"long_day": {
+		"title" : "Long Day",
+		"content" : "Play this card at the start of your turn. Move the Day/Night counter
+					backwards along the Day/Night track by 1 space. 
+					You cannot play this card during Dawn.
+					<br><br><i>I always thought of the North as cold and dark, but in Summer; 
+					these days seem to last a week.",
+		"extra" : "Keep"
+	},
+	"excellent_weather": {
+		"title" : "Excellent Weather",
+		"content" : "Play this card when you embark to sea during your Movement Phase.
+					You may make up to four sea moves instead of just the normal one,
+					including embarking, sailing, and disembarking.
+					<br><br><i>Well do I remember the Counts storms and fog. Clear days are gifts from Heaven.",
+		"extra" : "Keep"
+	},
+	"control_storms": {
+		"title" : "Control Storm",
+		"content" : "Play on any 1 Hunter, or Group of Hunters, in a sea Zone at the Start of their Movement Phase. For their
+					move they are instantly placed, by you, into any port within 3 sea moves.
+					You may cause them to backtrack through a sea Zone using this card.
+					<br><br><i> I remember that first storm in my blackest dreams, and the Ship that accompanied it.",
+		"extra" : "Keep"
+	},
+	"money_trail": {
+		"title" : "Money Trail",
+		"content" : "Play this card at the start of your turn. All sea zones in Dracula's Trail are revealed.
+					<br><br><i>Fortunately, the Count has accounts and finances which, although tangled and
+					prodigious, are far from Supernatural.",
+		"extra" : "Keep"
+	},
+	"advance_planning": {
+		"title" : "Advance Planning",
+		"content" : "Play this card at the start of a combat. 
+					One participating Hunter of your choice receives +1 to all of 
+					his combat rolls until the end of the combat (limit 1 per combat).
+					<br><br><i>I intimated to you before, Dearest, that there was some darkness in my past. 
+					Now that it has returned, I will not make the same mistakes twice.",
+		"extra" : "Keep"
+	},
+	"trap": {
+		"title" : "Trap",
+		"content" : "Play this card at the start of a combat. You receive +1 to all of your combat
+					rolls until the end of the combat (limit 1 per combat).
+					<br><br><i>When the door closed behind me I began to regret not
+					bringing one of the men with
+					me. When it would not open again, I drew my pistol.",
+		"extra" : "Keep"
+	},
+	"dracula's_brides": {
+		"title" : "Dracula's Brides",
+		"content" : "While this Ally remains in play, your encounter hand Size is increased to 7 tokens. 
+					If this Ally leaves play for any reason, you must immediately discard down to your 
+					normal encounter hand size of 5.
+					<br><br><i>Van Helsing slammed the door and we retreated, but I Swear... 
+					I heard jealousy in the creature's voice.",
+		"extra" : "Ally"
+	},
+	"immanuel_hildesheim": {
+		"title" : "Immanuel Hildesheim",
+		"content" : "While this Ally remains in play, the number of Event cards you may have 
+				is increased to 6 cards. If this Ally leaves play for any reason, 
+				you must immediately discard downto your normal Event card limit of 4.
+				<br><br><i> Dr. Seward Sneered at the repulsive creature, 'Don't you
+				realize what you and your Cowardice have cost us... 
+				What you've cost the entire world?'",
+		"extra" : "Ally"
+	},
+	"seduction": {
+		"title" : "Seduction",
+		"content" : "Play this card when a Hunter finds a New Vampire encounter at night. 
+					Instead of resolving the encounter normally, the New Vampire Bites the Hunter. 
+					The New Vampire encounter is then returned to your encounter hand and you discard down to your encounter hand size. 
+					<br><br><i>... and all I could think of was the terrible lasciviousness the transformation had wrought in dear Lucy.",
+		"extra" : "Keep"
+	},
+	"sister_agatha": {
+		"title" : "Sister Agatha",
+		"content" : "While this card is in play, Dracula must play 2 Blood each time he plays Fangs or an Escape card (Bat, Mist, or Man), 
+					whether he wins the combat roll or not.
+					<br><br><i> Jonathan, I have met an Old friend of yours. When I told her our business, she did not laugh.",
+		"extra" : "Ally"
+	},
+	"jonathan_harker": {
+		"title" : "Jonathan Harker",
+		"content" : "While this card remains in play, the sixth card (to Dracula's right) in Dracula's Trail is always revealed.
+					<br><br><i> I had a letter from my husband not two days past. He is a brave and clever man,
+					but I worry for him - this is a dangerous business.",
+		"extra" : "Ally"
+	},
+	"rufus_smith": {
+		"title" : "Rufus Smith",
+		"content" : "While this card is in play, Dracula must pay 1 Blood for each Sea Zone that he moves through (instead of for every other sea Zone).
+					<br><br><i> We have telegraphs from Rufus almost daily, now. When the Count lands, we shall be waiting for him.",
+		"extra" : "Ally"
+	},
+	"quincey_p_morris": {
+		"title" : "Quincey P. Morris",
+		"content" : "While this Ally remains in play, choose l Hunter at the start of each of your turns. 
+					That Hunter loses 1 Health unless he shows you that he has either a Heavenly Host or a Crucifix.
+					<br><br><i> When the Un-Dead creature stepped into the candlelight, I recognized him, and I choked with despair.",
+		"extra" : "Ally"
+	},
+	"hypnosis": {
+		"title" : "Hypnosis",
+		"content" : "Play this card at the beginning of any Bitten Hunter's turn (including our own), with the permission of that Hunter: 
+					The Hunter rolls a Hunter dice. On a 1-2, this card is discarded without effect and the Hunter's turn immediately ends.
+					On a 3-6, Dracula's current location and any Vampires in his Trail and Catacombs are revealed. 
+					In addition, he must declare his next move.",
+		"extra" : "Keep"
+	},
+	"sence_of_emergency": {
+		"title" : "Sense of Emergency",
+		"content" : "Play at the start of your Movement Phase. Lose Health equal to the number of Vampires that Dracula still needs to win. 
+					Then, move to any location on the board. You may not play this card if doing so would reduce you to 0 Health
+					<br><br><i> I rode, Darling, I rode like the Devil himself was behind me...and perhaps he was. Sense of Emergency.",
+		"extra" : "Keep"
+	},
+	"wild_horses": {
+		"title" : "Wild Horses",
+		"content" : " Play this card when a Hunter has moved into Dracula's current location and is about to begin combat With Dracula.
+					You may move the Hunter into any city connected by a single road, and the combat does not take place. 
+					The Hunter may then rest, resupply, or trade",
+		"extra" : "Keep"
+	},
+	"escape_route": {
+		"title" : "Escape Route",
+		"content" : "Play this just before the start of any combat (whether you are participating in it or not). The combat does not take place. 
+					The Hunters who would have had to fight stay in the city, although they are still considered to have had an encounter this turn.
+					<br><br><i>... but Van Helsing was too clever to be so easily caught...",
+		"extra" : "Keep"
+	},
+	"evasion": {
+		"title" : "Evasion",
+		"content" : "You may immediately make an additional move. You may use this move to go to any city on the board (not a sea Zone) 
+					that does not contain a Hunter, regardless of distance.
+					<br><br><i> But by then, he was gone...",
+		"extra" : "Play immediately"
+	},
+	"blood_transfusion": {
+		"title" : "",
+		"content" : "",
+		"extra" : ""
+	},
+	"vampire_lair": {
+		"title" : "",
+		"content" : "",
+		"extra" : ""
+	},
+	"secret_weapon": {
+		"title" : "",
+		"content" : "",
+		"extra" : ""
+	},
+	"great_strength": {
+		"title" : "",
+		"content" : "",
+		"extra" : ""
+	},
+	"stormy_seas": {
+		"title" : "",
+		"content" : "",
+		"extra" : ""
+	},
+	"surprising_return": {
+		"title" : "",
+		"content" : "",
+		"extra" : ""
+	},
+	"heroic_leap": {
+		"title" : "",
+		"content" : "",
+		"extra" : ""
+	},
+	"rage": {
+		"title" : "",
+		"content" : "",
+		"extra" : ""
+	},
+	"relentless_minion": {
+		"title" : "",
+		"content" : "",
+		"extra" : ""
+	},
+	"sensationalist_press": {
+		"title" : "",
+		"content" : "",
+		"extra" : ""
+	},
+	"customs_search": {
+		"title" : "",
+		"content" : "",
+		"extra" : ""
+	},
+	"unearthly_swiftness": {
+		"title" : "",
+		"content" : "",
+		"extra" : ""
+	},
+	"vampiric_influence": {
+		"title" : "",
+		"content" : "",
+		"extra" : ""
+	}
+}

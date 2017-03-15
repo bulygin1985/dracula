@@ -1,0 +1,137 @@
+{
+    "ambush": {
+		"title" : "Ambush",
+		"content" : "<b>Encountered</b>: Dracula may draw 1 encounter from the encounter pool, and then he must 
+			discard back down to his hand limit. 
+			<br><b>Matured</b>: Dracula may play any one encounter from his encounter hand 
+			directly on any one Hunter who is not in a sea zone or the Hospital of St. Joseph and St. Mary. The Hunter must 
+			immediately resolve the encounter as though he had encountered it. Then Dracula Trail is cleared down to 3 cards.",
+		"extra" : "total in pool : 3"
+	},
+	"assassin": {
+		"title" : "Assassin",
+		"content" : "<b>Encountered</b>: The Hunter is attacked by an Agent who has all 5 Agent Tactics cards at his disposal.
+			If the Hunter escapes from this combat, his turn immediately ends (no further encounters, including Dracula). 
+			<br><b>Matured</b>: No effect.",
+		"extra" : "total in pool : 1"
+	},
+	"bats": {
+		"title" : "Bats",
+		"content" : "<b>Encountered</b>: The Hunter turn immediately ends (no further encounters, including Dracula) and he places this encounter in front of him. 
+			On his next turn, he returns this encounter to Dracula, who then controls the Hunter movement that turn (but must move the Hunter by Road,
+			not Sea or Rail), returning this encounter to the encounter pool afterwards. 
+			<br><b>Matured</b>: No effect.",
+		"extra" : "total in pool : 3"
+	},
+	"desecrated_soul": {
+		"title" : "Desecrated Soil",
+		"content" : "<b>Encountered</b>: Dracula draws 1 Event card. If the card is a Hunter event, it is discarded. Otherwise, Dracula gets it. 
+			<br><b>Matured</b>: Dracula draws Event cards until he draws a total of 2 Dracula events. Any Hunter events drawn are looked at and discarded. 
+			Then, Dracula trail is cleared down to 3 cards.",
+		"extra" : "total in pool : 3"
+	},
+	"fog": {
+		"title" : "Fog",
+		"content" : "<b>Encountered</b>: The Hunter turn immediately ends (no further encounters, including Dracula) and he places this encounter in front of him.
+			While it remains in front of the Hunter, no other Hunter may enter or leave the city he is in, although Dracula can move through it freely. 
+			Hunters in a space with fog may still rest, resupply, or trade as normal (although not on the turn the fog is first encountered). 
+			At the end of the Hunter next turn, the token is discarded to the encounter pool. 
+			<br><b>Matured</b>: No effect.",
+		"extra" : "total in pool : 4"
+	},
+	"minion_knife": {
+		"title" : "Minion",
+		"content" : "<b>Encountered</b>: The Hunter is attacked by an Agent who has Fist, Dodge, and Knife. 
+			If encountered in Eastern Europe, the Agent gets a +1 to all combat rolls. 
+			<br><b>Matured</b>: No effect.",
+		"extra" : "total in pool : 3"
+	},
+	"minion_knife_pistol": {
+		"title" : "Minion Pistol",
+		"content" : "<b>Encountered</b>: The Hunter is attacked by an Agent who has Fist, Dodge, Knife and Pistol. 
+			If encountered in Eastern Europe, the Agent gets a +1 to all combat rolls. 
+			<br><b>Matured</b>: No effect.",
+		"extra" : "total in pool : 2"
+	},
+	"minion_knife_rifle": {
+		"title" : "Minion Rifle",
+		"content" : "<b>Encountered</b>: The Hunter is attacked by an Agent who has Fist, Dodge, Knife and Rifle.
+			If encountered in Eastern Europe, the Agent gets a +1 to all combat rolls. 
+			<br><b>Matured</b>: No effect.",
+		"extra" : "total in pool : 2"
+	},
+	"hoax": {
+		"title" : "Hoax",
+		"content" : "<b>Encountered</b>: If encountered in Western Europe, the Hunter immediately discards all Event cards from his hand. 
+			If encountered in Eastern Europe, the Hunter immediately discards 1 Event card of his choice from his hand (assuming he has any).
+			<br><b>Matured</b>: No effect.",
+		"extra" : "total in pool : 2"
+	},
+	"lightning": {
+		"title" : "Lightning",
+		"content" : "<b>Encountered</b>: If the Hunter use a Crucifix or Heavenly Host card, this encounter is discarded without effect.
+			Otherwise, the Hunter loses 2 Health and must discard 1 Item card of his choice. 
+			<br><b>Matured</b>: No effect.",
+		"extra" : "total in pool : 2"
+	},
+	"peasants": {
+		"title" : "Peasants",
+		"content" : "<b>Encountered</b>: If encountered in Western Europe, the Hunter discards 1 Item card of his choice from his hand and draws a new one at random.
+			If encountered in Eastern Europe, the Hunter discards all of his Item cards from his hand and draws an equal number at random.
+			<br><b>Matured</b>: No effect.",
+		"extra" : "total in pool : 2"
+	},
+	"plague": {
+		"title" : "Plague",
+			"content" : "<b>Encountered</b>: The Hunter loses 2 Health. 
+			<br><b>Matured</b>: No effect.",
+		"extra" : "total in pool : 2"
+	},
+	"rats": {
+		"title" : "Rats",
+		"content" : "<b>Encountered</b>: If the Hunter has Dogs (faceup only), this encounter is discarded without effect. 
+			Otherwise, the Hunter rolls 4 dice and loses 1 Health for each 4-6 rolled. 
+			<br><b>Matured</b>: No effect.",
+		"extra" : "total in pool : 2"
+	},
+	"saboteur": {
+		"title" : "Saboteur",
+		"content" : "<b>Encountered</b>: If the Hunter has Dogs (faceup only), this encounter is discarded without effect. 
+			Otherwise, the Hunter  turn immediately ends (no further encounters, including Dracula) and he must discard 1 item or Event card of his choice. 
+			<br><b>Matured</b>: No effect.",
+		"extra" : "total in pool : 2"
+	},
+	"spy": {
+		"title" : "Spy",
+		"content" : "<b>Encountered</b>: Dracula may immediately look at all of the Hunter  Item and Event cards, and the Hunter must tell Dracula his
+			<br><b>Matured</b>: No effect.",
+		"extra" : "total in pool : 2"
+	},
+	"thief": {
+		"title" : "Thief",
+		"content" : "<b>Encountered</b>: If the Hunter has Dogs (faceup only), this encounter is discarded without effect. 
+			Otherwise, Dracula takes one random item or Event card (his choice which) from the Hunter, looks at it, and discards it. 
+			<br><b>Matured</b>: No effect.",
+		"extra" : "total in pool : 2"
+	},
+	"new_vampire": {
+		"title" : "New Vampire",
+		"content" : "<b>Encountered</b>: If it is Day, the Hunter kills the Vampire 
+			and this encounter is discarded without effect. If it is Night, roll a dice. On a 1-3, 
+			the Hunter is Bitten unless he shows Dracula that he has a Crucifix or Heavenly Host. On a 4-6, the Vampire escapes 
+			unless the Hunter discards a Knife or Stake from his hand. Unless the Vampire escapes, the encounter is returned to the
+			encounter pool (even if the Hunter is defeated). If the Vampire escapes, the encounter remains where it is and the Hunter  
+			turn immediately ends (no further encounters, including Dracula). Next turn, the Hunter may remain in the city to encounter the
+			Vampire again. 
+			<br><b>Matured</b>: Dracula advances his Vampire track by 2, and then Dracula Trail is cleared down to 1 card.",
+		"extra" : "total in pool : 6"
+	},
+	"wolves": {
+		"title" : "Wolves",
+		"content" : "<b>Encountered</b>: The Hunter loses 2 Health. The Hunter loses only 1 Health if 
+			he shows Dracula that he has a Pistol or a Rifle, and he loses no Health if he shows Dracula that he has 
+			both a Pistol and a Rifle. 
+			<br><b>Matured</b>: No effect.",
+		"extra" : "total in pool : 3"
+	}
+}

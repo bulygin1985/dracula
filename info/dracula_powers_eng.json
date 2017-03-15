@@ -1,0 +1,45 @@
+ {
+	 "dark_call": {
+		"title" : "Dark Call",
+		"content" : "Dracula must spend 2 Blood to play Dark Call. 
+		It is played faceup and Dracula does not place an encounter marker on it. 
+		He receives 10 extra encounters and then discards back down to his maximum encounter
+		hand size, keeping whichever encounters he wants. 
+		If Dracula plays this card while in a location with a Hunter, 
+		he must battle the Hunter during his Action Phase.",
+		"extra" :"day/night"
+	 },
+	 "double_back":  {
+		"title" : "Double Back",
+		"content" : "When this card is played, Dracula crosses his previous path, 
+		trying to lose the Hunters or double back to attack them. 
+		The Dracula player must use this power if he wishes to cross his own track or catacombs.
+		He plays Double Back faceup and places location from his track or catacombs on it.",
+		"extra" :"day/night"
+	 },
+	 "feed":  {
+		"title" : "Feed",
+		"content" : "The Dracula player plays it instead of a Location card, 
+			but Feed is played faceup in his Trail and Dracula does not place an encounter marker on 
+			it. Dracula then regains 1 Blood (up to his maximum of 15).",
+		"extra" :"night"
+	 },
+	 "hide":  {
+		"title" : "Hide",
+		"content" : "It is played facedown instead of a Location card just as though it were a Location card and Dracula has to put encounter on it. 
+			If a Hunter moves to a location where Dracula has played the Hide card, the Hide card and the Location card are both revealed, 
+			and the Hunter must face both encounters there, just like a card in the Catacombs. 
+			If the location where Dracula played this card drops off the Track, this card is revealed and drops off with it.
+			Encounters placed on this card can never be matured or placed in the Catacomb they are always returned to the encounter pool.",
+		"extra" :"day/night"
+	 },
+	 "wolf_form":  {
+		"title" : "Wolf Form",
+		"content" : "It is played in Dracula Trail faceup. Dracula must spend 1 Blood to play 
+			Wolf Form. Dracula can be up to two cities away by Road or play the Hide card with the Wolf Form card, 
+			if he wishes to bluff and stay in place. When using Wolf Form, Dracula can pass 
+			through a city containing a Hunter without stopping to fight that Hunter, 
+			although he still cannot pass through a city with a Heavenly Host or Consecrated Ground marker.",
+		"extra" :"night"
+	 }
+ }

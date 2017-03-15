@@ -1,0 +1,71 @@
+0	Alicante
+1	Amsterdam
+2	Athens
+3	Bari
+4	Barcelona
+5	Belgrade
+6	Berlin
+7	Bordeaux
+8	Brussels
+9	Budapest
+10	Bucharest
+11	Valona
+12	Varna
+13	Vienna
+14	Venice
+15	Havre
+16	Galatz
+17	Hamburg
+18	Genoa
+19	Granada
+20	Galway
+21	Dublin
+22	Geneva
+23	Zagreb
+24	Dracula Castle
+25	Cadiz
+26	Cagliari
+27	Cologne
+28	Klausenburg
+29	Clermont Ferrand
+30	Constanta
+31	Leipzig
+32	Liverpool
+33	Lisbon
+34	London
+35	Madrid
+36	Manchester
+37	Marseilles
+38	Milan
+39	Munich
+40	Nantes
+41	Naples
+42	Nuremburg
+43	Paris
+44	Plymouth
+45	Prague
+46	Rome
+47	Salonica
+48	Santander
+49	Saragossa
+50	Sarajevo
+51	Szeged
+52	Sofia
+53	Strasbourg
+54	Swansea
+55	Toulouse
+56	Florence
+57	Frankfurt
+58	Zurich
+59	Edinburgh
+60	St. Joseph And Mary
+61	Adriatic Sea
+62	Atlantic
+63	Bay Biscay
+64	Ionian Sea
+65	Irish Sea
+66	English Channel
+67	North Sea
+68	Mediterranean
+69	Tyrrhenian Sea
+70	Black Sea
