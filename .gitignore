@@ -1,0 +1,8 @@
+*~
+Makefile
+*.o
+dracula/dracula
+*.pro.user
+log.txt
+moc_*
+moc_*

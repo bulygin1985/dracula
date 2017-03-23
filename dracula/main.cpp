@@ -9,12 +9,12 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    freopen("error.log", "w", stderr); // redirect assert to error.log
+//    freopen("error.log", "w", stderr); // redirect assert to error.log
     // init the logging mechanism
     QsLogging::Logger& logger = QsLogging::Logger::instance();
 
     // set minimum log level and file name
-    logger.setLoggingLevel(QsLogging::InfoLevel );
+    logger.setLoggingLevel(QsLogging::DebugLevel );
     const QString sLogPath(QDir(a.applicationDirPath()).filePath("log.txt"));
 
     // Create log destinations
@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
     Action action("location", 5);
     manager.processAction(action);
     QLOG_INFO() << "Dracula new location number is " << manager.gameState.getDracula()->getLocationNum();
+    QLOG_INFO() << "Lord new location number is " << manager.gameState.getHunter(1)->getLocationNum();
     exit(0);
     return a.exec();
 }

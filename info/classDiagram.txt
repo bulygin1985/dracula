@@ -1,0 +1,53 @@
+
+@startuml
+
+player <-- dracula
+player <-- hunter
+
+hunter <-- doctor
+hunter <-- helsing
+hunter <-- lord
+hunter <-- mina
+
+gamemanager -- gamestate
+
+class doctor {
+}
+
+class dracula {
+}
+
+class helsing {
+}
+
+class hunter {
+}
+
+class lord {
+}
+
+class mina {
+}
+
+class player {
+}
+
+
+class logicobject {
+}
+
+
+class gamestate {
+}
+
+class gamemanager {
+}
+
+
+class Flight {
+   flightNumber : Integer
+   departureTime : Date
+}
+
+@enduml
+
