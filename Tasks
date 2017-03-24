@@ -2,7 +2,8 @@ Game rules:
 Firstly, 4 Hunters and 1 Dracula choose location on card (except sea zones). 
 Lord is first, then Doctor, Helsing and Mina. Dracula is last.
 Then each of them can move to adjacent city or sea . Dracula can see any hunter locations but Hunter cannot see 
-Dracula locations until find them. Last 6 Dracula locations is Dracula Track. Dracula cannot choose location that already exists
+Dracula locations until find them. Last 6 Dracula location cards is Dracula Track. Location track card has back and face sides.
+Back side shows - it is land or sea location. Face one shows the location. Dracula cannot choose location that already exists
 on Dracula Track. If Hunter visit Dracula Track and it is not sea => the location opens. If hunter meets
 Dracula in city => Dracula health is decreased on 3 (Dracula health = 15). If Dracula chooses sea location => his health is 
 decreased on 1. Hunter cannot see Dracula on sea. Sea locations on Dracula Track are always closed. 
