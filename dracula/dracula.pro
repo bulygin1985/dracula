@@ -6,9 +6,23 @@
 
 include ( ../3rdparty/QsLog/QsLog.pri )
 
-QT       += core
+QT += core gui
 
-QT       -= gui
+QT += network widgets
+
+CONFIG += console
+
+QT -= gui
+
+QT += qml quick
+
+RESOURCES += qml.qrc
+
+# Additional import path used to resolve QML modules in Qt Creator's code model
+QML_IMPORT_PATH =
+
+# Default rules for deployment.
+include(deployment.pri)
 
 TARGET = dracula
 CONFIG   += console
@@ -29,7 +43,8 @@ SOURCES += \
     Logic/helsing.cpp \
     Logic/mina.cpp \
     Logic/dracula.cpp \
-    gamemanager.cpp
+    gamemanager.cpp \
+    loader.cpp
 
 HEADERS += \
     constants.h \
@@ -42,4 +57,5 @@ HEADERS += \
     Logic/mina.h \
     Logic/dracula.h \
     Logic/logicobjects.h \
-    gamemanager.h
+    gamemanager.h \
+    loader.h

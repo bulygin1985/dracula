@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>GUI/main.qml</file>
+        <file>GUI/Scene.qml</file>
+    </qresource>
+</RCC>

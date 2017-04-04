@@ -1,13 +1,16 @@
-#include <QCoreApplication>
+#include <QApplication>
 #include <QCommandLineParser>
 #include <QDir>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
 
 #include "QsLog.h"
 #include "gamemanager.h"
+#include "loader.h"
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+    QApplication a(argc, argv);
 
 //    freopen("error.log", "w", stderr); // redirect assert to error.log
     // init the logging mechanism
@@ -35,6 +38,12 @@ int main(int argc, char *argv[])
     manager.processAction(action);
     QLOG_INFO() << "Dracula new location number is " << manager.gameState.getDracula()->getLocationNum();
     QLOG_INFO() << "Lord new location number is " << manager.gameState.getHunter(1)->getLocationNum();
-    exit(0);
+
+
+    QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("loader", &Loader::get());
+    engine.load(QUrl(QStringLiteral("qrc:/GUI/main.qml")));
+
+
     return a.exec();
 }
