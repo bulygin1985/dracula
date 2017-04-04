@@ -13,6 +13,12 @@ Rectangle {
         flickable.contentHeight = map.sourceSize.height * gameWindow.width / map.sourceSize.width
     }
 
+    Image {
+        id:background
+        source : "file:" + "../images/map_background.jpg"
+        anchors.fill: parent
+    }
+
     Flickable
     {
         id: flickable
@@ -45,34 +51,76 @@ Rectangle {
             }
 
             Repeater{
+                id : locationRepeater
                 model: 71
                 Rectangle{
                     color: "transparent"
-                    width : map.width * 0.03
+                    width : map.width * 100.0 / 3240.0
                     height: width
                     anchors.left: parent.left
                     anchors.top : parent.top
-                    border.color: "black"
-                    border.width: 2
+                    //border.color: "black"
+                    //border.width: 2
                     radius: width / 2
                     anchors.leftMargin: map.width * loader.getLocationPoint(index).x - radius
-                    anchors.topMargin: map.height * loader.getLocationPoint(index).y
+                    anchors.topMargin: map.height * loader.getLocationPoint(index).y - radius
+                    MouseArea {
+                        hoverEnabled: true
+                        anchors.fill: parent
+                        onEntered: {
+                            locationPointer.visible = true
+                            locationPointer.index = index
+                            locationPointer.state = "Selected"
+                        }
+                        onExited: {
+                            locationPointer.visible = false
+                            locationPointer.state = ""
+                        }
+                    }
                 }
             }
 
-//            Rectangle {
-//                id : testRect
-//                color: "#d72222"
-//                border.color: "black"
-//                //anchors.centerIn: parent
-//                anchors.left: parent.left
-//                anchors.top : parent.top
-//                anchors.leftMargin: parent.width * 0.2
-//                anchors.topMargin: parent.width * 0.3
-//                width:parent.width / 10
-//                height: parent.width / 10
-//                radius: width/2
-//            }
+            Image {
+                property int index
+                visible: false
+                id: locationPointer
+                anchors.left: parent.left
+                anchors.top : parent.top
+                width: map.width * 200.0 / 3240.0
+                height: width
+                anchors.leftMargin : map.width * loader.getLocationPoint(index).x - width / 2
+                anchors.topMargin : map.height * loader.getLocationPoint(index).y - width / 2
+                source: "file:" + "../images/locations/location_mark.png"
+                scale : 0.1
+                Behavior on visible {
+                    NumberAnimation {
+                        properties: "opacity"
+                    }
+                }
+                states: [
+                    State {
+                        name: "Selected"
+                        PropertyChanges {
+                            target: locationPointer
+                            scale : 1
+                            rotation : 90
+                            //width: map.width * 200.0 / 3240.0
+                        }
+                    }
+                ]
+                transitions: [
+                    Transition {
+                        from: "*"
+                        to: "*"
+                        NumberAnimation {
+                            easing.amplitude: 1.5
+                            easing.type: Easing.OutBounce
+                            properties: "scale"
+                            duration: 300
+                        }
+                    }
+                ]
+            }
         }
     }
 
