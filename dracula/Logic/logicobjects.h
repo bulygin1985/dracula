@@ -5,13 +5,11 @@
 
 struct Action
 {
-    Action(QString kind, int num)
+    Action(int num)
     {
-        this->kind = kind;
         this->number = num;
     }
 
-    QString kind;
     int number;
 };
 

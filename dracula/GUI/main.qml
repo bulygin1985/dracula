@@ -4,7 +4,7 @@ import QtQuick.Window 2.2
 
 Window {
     id : gameWindow
-    visibility: "Maximized"
+    //visibility: "Maximized"
     visible: true
     width: 800
     height: 800

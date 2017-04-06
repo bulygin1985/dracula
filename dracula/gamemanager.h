@@ -5,6 +5,7 @@
 
 #include "gamestate.h"
 #include "logicobjects.h"
+#include "guimanager.h"
 
 class GameManager : public QObject
 {
@@ -12,9 +13,13 @@ class GameManager : public QObject
 public:
     GameManager();
     GameState gameState; //TODO - remove to gameController.
+    Guimanager *guimanager;
+
+
+    Guimanager *getGuimanager() const;
 
 public slots:
-    bool processAction(Action action); //return false if Action is  incorrect
+    bool processAction(const Action &action); //return false if Action is  incorrect
 
 };
 

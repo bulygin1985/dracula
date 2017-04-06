@@ -7,6 +7,15 @@ Rectangle {
     anchors.fill: parent
     color: "#de1313"
     property var playerNames : ["Dracula", "Lord", "Doctor", "Helsing", "Mina"]
+
+    Connections {
+        target: guimanager
+        onRequestPaint: {
+            var num = guimanager.getPlayerLocation(1)
+            console.log("Location num = ", num)
+        }
+    }
+
     //property bool isWindowSizeChanged
     function changeMapSize() {
         flickable.contentWidth = gameWindow.width
@@ -15,7 +24,7 @@ Rectangle {
 
     Image {
         id:background
-        source : "file:" + "../images/map_background.jpg"
+        source : "file:" + "../images/wood.jpg"
         anchors.fill: parent
     }
 
@@ -76,6 +85,9 @@ Rectangle {
                             locationPointer.visible = false
                             locationPointer.state = ""
                         }
+                        onClicked: {
+                            guimanager.processAction(index)
+                        }
                     }
                 }
             }
@@ -123,8 +135,5 @@ Rectangle {
             }
         }
     }
-
-
-
     //TODO load city location, use repeater to create N mouse area, in cycle modify x,y
 }

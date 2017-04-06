@@ -44,7 +44,8 @@ SOURCES += \
     Logic/mina.cpp \
     Logic/dracula.cpp \
     gamemanager.cpp \
-    loader.cpp
+    loader.cpp \
+    GUI/guimanager.cpp
 
 HEADERS += \
     constants.h \
@@ -58,4 +59,5 @@ HEADERS += \
     Logic/dracula.h \
     Logic/logicobjects.h \
     gamemanager.h \
-    loader.h
+    loader.h \
+    GUI/guimanager.h

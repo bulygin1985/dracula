@@ -7,6 +7,8 @@
 #include "QsLog.h"
 #include "gamemanager.h"
 #include "loader.h"
+#include "guimanager.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -17,7 +19,7 @@ int main(int argc, char *argv[])
     QsLogging::Logger& logger = QsLogging::Logger::instance();
 
     // set minimum log level and file name
-    logger.setLoggingLevel(QsLogging::DebugLevel );
+    logger.setLoggingLevel(QsLogging::ErrorLevel );
     const QString sLogPath(QDir(a.applicationDirPath()).filePath("log.txt"));
 
     // Create log destinations
@@ -31,19 +33,16 @@ int main(int argc, char *argv[])
     logger.addDestination(fileDestination);
 
     QLOG_INFO() << "Program start";
-    Lord lord;
-    QLOG_INFO() << "Lord name is " << lord.getName();
     GameManager manager;
-    Action action("location", 5);
-    manager.processAction(action);
-    QLOG_INFO() << "Dracula new location number is " << manager.gameState.getDracula()->getLocationNum();
-    QLOG_INFO() << "Lord new location number is " << manager.gameState.getHunter(1)->getLocationNum();
 
-
+    Guimanager* guimanager = manager.getGuimanager();
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("loader", &Loader::get());
+    engine.rootContext()->setContextProperty("guimanager", guimanager);
     engine.load(QUrl(QStringLiteral("qrc:/GUI/main.qml")));
 
+    Action action(5);
+    manager.processAction(action);
 
     return a.exec();
 }
