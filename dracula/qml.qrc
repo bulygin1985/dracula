@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>GUI/main.qml</file>
         <file>GUI/Scene.qml</file>
+        <file>GUI/Track.qml</file>
+        <file>GUI/FlipableCard.qml</file>
     </qresource>
 </RCC>

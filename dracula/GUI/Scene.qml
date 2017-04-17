@@ -1,5 +1,6 @@
 import QtQuick 2.3
 import QtQuick.Window 2.2
+import "../GUI"
 
 Rectangle {
     id: scene
@@ -17,10 +18,12 @@ Rectangle {
     Connections {
         target: guimanager
         onRequestPaint: {
+            console.log("guimanager.getTrack() = ", guimanager.getTrack())
             var num = guimanager.getPlayerLocation(1)
             animated = true  //animation is turn on only during animationDuration
             timer.start()  // animation for player fig turns on
             var whoMoves = guimanager.getWhoMoves()
+            track.changeTrack(0 === whoMoves)
             console.log("whoMoves = ", whoMoves, "phi = ", guimanager.getPlayerPhi(k))
             for (var k = 0; k < playerRepeater.count; k++){
                 playerRepeater.itemAt(k).locationNum = guimanager.getPlayerLocation(k)
@@ -233,5 +236,28 @@ Rectangle {
             }
         }
     }
+
+    AnimatedImage {
+        anchors.top : parent.top
+        anchors.left: parent.left
+        anchors.leftMargin: 8 * gameWindow.width / 10
+        width : gameWindow.width / 10
+        height: sourceSize.height * width / sourceSize.width
+        source: "file:" + "../images/bat.gif"
+        MouseArea {
+            id: mouseAreaTrackIcon
+            anchors.fill: parent
+            hoverEnabled: true
+            onEntered: {
+                track.state = "trackOn"
+            }
+        }
+    }
+
+    Track{
+        id: track
+    }
+
+
     //TODO load city location, use repeater to create N mouse area, in cycle modify x,y
 }

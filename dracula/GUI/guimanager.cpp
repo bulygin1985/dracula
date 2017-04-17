@@ -78,3 +78,8 @@ double Guimanager::getPlayerPhi(int playerNum)
     return phi[playerNum];
 }
 
+QList<int> Guimanager::getTrack()
+{
+    return gameState->getDracula()->getTrack().getLocations();
+}
+

@@ -29,5 +29,17 @@ void Dracula::setEventMaxNumber(int value)
     eventMaxNumber = value;
 }
 
+void Dracula::setLocationNum(int value)
+{
+    QLOG_DEBUG() << "void Dracula::setLocationNum(" <<  value << ")";
+    Player::setLocationNum(value);
+    track.addLocation(value);
+}
+Track Dracula::getTrack() const
+{
+    return track;
+}
+
+
 
 
