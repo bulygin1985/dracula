@@ -1,0 +1,50 @@
+{
+    "rifle": {
+		"kind" : "combat",
+		"number" : 4
+	},
+	"stake": {
+		"kind" : "combat",
+		"number" : 4
+	},
+	"garlic": {
+		"kind" : "non-combat",
+		"number" : 4
+	},
+	"fast_horse": {
+		"kind" : "non-combat",
+		"number" : 3
+	},
+	"holy_water": {
+		"kind" : "combat",
+		"number" : 3
+	},
+	"crucifix": {
+		"kind" : "combat",
+		"number" : 3
+	},
+	"dogs": {
+		"kind" : "non-combat",
+		"number" : 2
+	},
+	"local_rumors": {
+		"kind" : "non-combat",
+		"number" : 2
+	},
+	"sacred_bullets": {
+		"kind" : "combat",
+		"number" : 3
+	},
+	"heavenly_host": {
+		"kind" : "non-combat",
+		"number" : 2
+	},
+	"pistol": {
+		"kind" : "combat",
+		"number" : 5
+	},
+	"knife": {
+		"kind" : "combat",
+		"number" : 5
+	}
+}

@@ -1,0 +1,227 @@
+{
+    "forewarned": {
+		"owner" : "hunter",
+		"kind" : "keep",
+		"number" : 3
+	},
+	"advance_planning": {
+		"owner" : "hunter",
+		"kind" : "keep",
+		"number" : 3
+	},
+	"mystic_research": {
+		"owner" : "hunter",
+		"kind" : "play",
+		"number" : 2
+	},
+	"money_trail": {
+		"owner" : "hunter",
+		"kind" : "keep",
+		"number" : 1
+	},
+	"blood_transfusion": {
+		"owner" : "hunter",
+		"kind" : "keep",
+		"number" : 1
+	},
+	"chartered_carriage": {
+		"owner" : "hunter",
+		"kind" : "keep",
+		"number" : 3
+	},
+	"hired_scouts": {
+		"owner" : "hunter",
+		"kind" : "play",
+		"number" : 3
+	},
+	"vampire_lair": {
+		"owner" : "hunter",
+		"kind" : "play",
+		"number" : 1
+	},
+	"re-equip": {
+		"owner" : "hunter",
+		"kind" : "play",
+		"number" : 3
+	},
+	"newspaper_reports": {
+		"owner" : "hunter",
+		"kind" : "play",
+		"number" : 5
+	},
+	"long_day": {
+		"owner" : "hunter",
+		"kind" : "keep",
+		"number" : 2
+	},
+	"jonathan_harker": {
+		"owner" : "hunter",
+		"kind" : "ally",
+		"number" : 1
+	},
+	"hypnosis": {
+		"owner" : "hunter",
+		"kind" : "keep",
+		"number" : 2
+	},
+	"secret_weapon": {
+		"owner" : "hunter",
+		"kind" : "keep",
+		"number" : 2
+	},
+	"telegraph_ahead": {
+		"owner" : "hunter",
+		"kind" : "play",
+		"number" : 2
+	},
+	"rufus_smith": {
+		"owner" : "hunter",
+		"kind" : "ally",
+		"number" : 1
+	},
+	"great_strength": {
+		"owner" : "hunter",
+		"kind" : "keep",
+		"number" : 1
+	},
+	"stormy_seas": {
+		"owner" : "hunter",
+		"kind" : "keep",
+		"number" : 1
+	},
+	"good_luck": {
+		"owner" : "hunter",
+		"kind" : "keep",
+		"number" : 2
+	},
+	"sister_agatha": {
+		"owner" : "hunter",
+		"kind" : "ally",
+		"number" : 1
+	},
+	"excellent_weather": {
+		"owner" : "hunter",
+		"kind" : "keep",
+		"number" : 2
+	},
+	"surprising_return": {
+		"owner" : "hunter",
+		"kind" : "play",
+		"number" : 2
+	},
+	"heroic_leap": {
+		"owner" : "hunter",
+		"kind" : "keep",
+		"number" : 1
+	},
+	"escape_route": {
+		"owner" : "hunter",
+		"kind" : "keep",
+		"number" : 2
+	},
+	"consecrated_ground": {
+		"owner" : "hunter",
+		"kind" : "play",
+		"number" : 1
+	},
+	"sence_of_emergency": {
+		"owner" : "hunter",
+		"kind" : "keep",
+		"number" : 2
+	},
+	"trap": {
+		"owner" : "dracula",
+		"kind" : "keep",
+		"number" : 3
+	},
+	"rage": {
+		"owner" : "dracula",
+		"kind" : "keep",
+		"number" : 1
+	},
+	"quincey_p_morris": {
+		"owner" : "dracula",
+		"kind" : "ally",
+		"number" : 1
+	},
+	"time_runs_short": {
+		"owner" : "dracula",
+		"kind" : "keep",
+		"number" : 1
+	},
+	"seduction": {
+		"owner" : "dracula",
+		"kind" : "keep",
+		"number" : 1
+	},
+	"immanuel_hildesheim": {
+		"owner" : "dracula",
+		"kind" : "ally",
+		"number" : 1
+	},
+	"roadblock": {
+		"owner" : "dracula",
+		"kind" : "keep",
+		"number" : 1
+	},
+	"relentless_minion": {
+		"owner" : "dracula",
+		"kind" : "keep",
+		"number" : 2
+	},
+	"sensationalist_press": {
+		"owner" : "dracula",
+		"kind" : "keep",
+		"number" : 1
+	},
+	"devilish_power": {
+		"owner" : "dracula",
+		"kind" : "keep",
+		"number" : 2
+	},
+	"customs_search": {
+		"owner" : "dracula",
+		"kind" : "keep",
+		"number" : 1
+	},
+	"unearthly_swiftness": {
+		"owner" : "dracula",
+		"kind" : "keep",
+		"number" : 1
+	},
+	"dracula's_brides": {
+		"owner" : "dracula",
+		"kind" : "ally",
+		"number" : 1
+	},
+	"evasion": {
+		"owner" : "dracula",
+		"kind" : "play",
+		"number" : 1
+	},
+	"control_storms": {
+		"owner" : "dracula",
+		"kind" : "keep",
+		"number" : 1
+	},
+	"night_visit": {
+		"owner" : "dracula",
+		"kind" : "play",
+		"number" : 1
+	},
+	"false_tip-off": {
+		"owner" : "dracula",
+		"kind" : "keep",
+		"number" : 2
+	},
+	"wild_horses": {
+		"owner" : "dracula",
+		"kind" : "keep",
+		"number" : 1
+	},
+	"vampiric_influence": {
+		"owner" : "dracula",
+		"kind" : "play",
+		"number" : 2
+	}
+}

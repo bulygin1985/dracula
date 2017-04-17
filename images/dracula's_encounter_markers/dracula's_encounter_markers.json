@@ -1,0 +1,56 @@
+{
+    "ambush": {
+		"number" : 3
+	},
+	"assassin": {
+		"number" : 1
+	},
+	"bats": {
+		"number" : 3
+	},
+	"desecrated_soul": {
+		"number" : 3
+	},
+	"fog": {
+		"number" : 4
+	},
+	"minion_knife": {
+		"number" : 3
+	},
+	"minion_knife_pistol": {
+		"number" : 2
+	},
+	"minion_knife_rifle": {
+		"number" : 2
+	},
+	"hoax": {
+		"number" : 2
+	},
+	"lightning": {
+		"number" : 2
+	},
+	"peasants": {
+		"number" : 2
+	},
+	"plague": {
+		"number" : 1
+	},
+	"rats": {
+		"number" : 2
+	},
+	"saboteur": {
+		"number" : 2
+	},
+	"spy": {
+		"number" : 2
+	},
+	"thief": {
+		"number" : 2
+	},
+	"new_vampire": {
+		"number" : 6
+	},
+	"wolves": {
+		"number" : 3
+	}
+}
