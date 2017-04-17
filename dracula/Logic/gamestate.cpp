@@ -26,6 +26,16 @@ Player *GameState::getWhoMoves()
     return players[whoMoves];
 }
 
+void GameState::startNextTurn()
+{
+    whoMoves = (whoMoves + 1) % PLAYER_AMOUNT;
+}
+
+int GameState::getWhoMovesNum() const
+{
+    return whoMoves;
+}
+
 Dracula *GameState::getDracula() const
 {
     QLOG_DEBUG() << "GameState::getDracula";

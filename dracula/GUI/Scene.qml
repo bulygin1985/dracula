@@ -7,17 +7,40 @@ Rectangle {
     anchors.fill: parent
     color: "#de1313"
     property var playerNames : ["Dracula", "Lord", "Doctor", "Helsing", "Mina"]
+    property string language : "rus"
+    property bool animated: false  //animated for player movement. It must be off if, f.e. rescale or windows size changing
+    property int animationDuration : 1000
+
+    FontLoader { id: seaFont; source: "file:" + "../fonts/Lobster-Regular.ttf" }
+    FontLoader { id: cityFont; source: "file:" + "../fonts/CormorantSC-Regular.ttf" }
 
     Connections {
         target: guimanager
         onRequestPaint: {
             var num = guimanager.getPlayerLocation(1)
-            console.log("Location num = ", num)
+            animated = true  //animation is turn on only during animationDuration
+            timer.start()  // animation for player fig turns on
+            var whoMoves = guimanager.getWhoMoves()
+            console.log("whoMoves = ", whoMoves, "phi = ", guimanager.getPlayerPhi(k))
+            for (var k = 0; k < playerRepeater.count; k++){
+                playerRepeater.itemAt(k).locationNum = guimanager.getPlayerLocation(k)
+                playerRepeater.itemAt(k).phi = guimanager.getPlayerPhi(k)
+                playerRepeater.itemAt(k).isChoosed = (k === whoMoves) ? true : false
+                playerRepeater.itemAt(k).scale = (k === whoMoves) ? 1.5 : 1
+            }
+        }
+    }
+    Timer {
+        id : timer
+        interval : animationDuration
+        onTriggered: {
+            animated = false
         }
     }
 
     //property bool isWindowSizeChanged
     function changeMapSize() {
+        animated = false // forbit any animation during resizing
         flickable.contentWidth = gameWindow.width
         flickable.contentHeight = map.sourceSize.height * gameWindow.width / map.sourceSize.width
     }
@@ -89,6 +112,71 @@ Rectangle {
                             guimanager.processAction(index)
                         }
                     }
+                    Text {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: -contentHeight
+                        text: loader.getLocationName(index, language)
+                        font {
+                            family: (index < 61) ? cityFont.name : seaFont.name;
+                            pixelSize:  map.width * 40.0 / 3240.0;
+                            weight: Font.Bold;
+                            //bold: true
+                        }
+                        font.bold: true
+                        color: (index >= 61) ? Qt.rgba(73.0 / 255.0, 84.0 / 255.0, 121.0 /255.0, 1) : "black"
+                        //QColor(73, 84, 121)
+                    }
+                }
+                Component.onCompleted: {
+                    playerRepeater.model = 5  //locationRepeater init before playerRepeater
+                }
+            }
+
+            Repeater{
+                id: playerRepeater
+//                model : 5
+                Image {
+                    property bool isChoosed : false
+                    anchors.left:  parent.left
+                    anchors.top : parent.top
+                    property var locationNum : guimanager.getPlayerLocation(index)
+                    property var phi : guimanager.getPlayerPhi(index)
+                    property point shift: (phi === -1) ? Qt.point(0, 0) : Qt.point((width / 2) * (Math.cos(phi) ), (width / 2) * (Math.sin(phi)))
+                    width: map.width * 100.0 / 3240.0
+                    height: width
+                    anchors.leftMargin : map.width * loader.getLocationPoint(locationNum).x - width / 2 + shift.x
+                    anchors.topMargin : map.height * loader.getLocationPoint(locationNum).y - width / 2 + shift.y
+                    source: "file:" + "../images/players/fig" + index + ".png"
+
+                    NumberAnimation on scale{
+                        id : scaleAnimation
+                        duration : 1000
+                        easing.type: Easing.SineCurve
+                        from : 1
+                        to : 1.5
+                        loops: Animation.Infinite
+                        running: isChoosed
+                    }
+
+                    Behavior on anchors.leftMargin
+                    {
+                        id : playerLeftMarginAnimation
+                        enabled : scene.animated
+                        NumberAnimation{
+                            duration : animationDuration
+
+                        }
+                    }
+                    Behavior on anchors.topMargin
+                    {
+                        id : playerTopMarginAnimation
+                        enabled : scene.animated
+                        NumberAnimation{
+                            duration : animationDuration
+                        }
+                    }
+
                 }
             }
 
@@ -132,6 +220,16 @@ Rectangle {
                         }
                     }
                 ]
+            }
+        }
+
+        Item {
+            anchors.fill: parent
+            focus: true
+            Keys.onPressed: {
+                if (event.key === Qt.Key_L) {
+                    scene.language = (language == "rus") ? "eng" : "rus"
+                }
             }
         }
     }

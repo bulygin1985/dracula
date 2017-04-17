@@ -2,6 +2,7 @@
 #define GUIMANAGER_H
 
 #include <QObject>
+#include <QVector>
 
 #include "logicobjects.h"
 #include "gamestate.h"
@@ -10,10 +11,11 @@ class Guimanager : public QObject
 {
     Q_OBJECT
 public:
-    Guimanager();
-
+    Guimanager(GameState * gameState);
     void paint(GameState * gameState);
-    Q_INVOKABLE int getPlayerLocation(int playerNum);
+    Q_INVOKABLE int getPlayerLocation(int playerNum) const;
+    Q_INVOKABLE int getWhoMoves() const;
+    Q_INVOKABLE double getPlayerPhi(int playerNum); //case if ther are several players on the same location
 
 signals:
     void requestPaint();
@@ -21,8 +23,11 @@ signals:
 
 public slots:
     void processAction(int num);
+
 private:
+    void calcPlayersPhi();
     GameState * gameState;
+    QVector<double> phi;
 };
 
 #endif // GUIMANAGER_H

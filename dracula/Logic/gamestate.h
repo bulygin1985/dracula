@@ -17,6 +17,8 @@ public:
     Hunter* getHunter(int num) const;
     Player * getPlayer(int num) const;
     Player* getWhoMoves();
+    void startNextTurn();
+    int getWhoMovesNum() const;
 
 private:
     std::vector<Player*> players;

@@ -1,7 +1,7 @@
 #include "player.h"
 #include "QsLog.h"
 
-Player::Player()
+Player::Player() : locationNum(0)
 {
     QLOG_DEBUG() << "Player constructor";
 }

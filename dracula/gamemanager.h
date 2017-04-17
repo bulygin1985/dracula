@@ -12,15 +12,18 @@ class GameManager : public QObject
     Q_OBJECT
 public:
     GameManager();
-    GameState gameState; //TODO - remove to gameController.
     Guimanager *guimanager;
 
 
     Guimanager *getGuimanager() const;
 
+    GameState* getGameState();
+
 public slots:
     bool processAction(const Action &action); //return false if Action is  incorrect
 
+private:
+    GameState* gameState; //TODO - remove to gameController.
 };
 
 #endif // GAMEMANAGER_H
