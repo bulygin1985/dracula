@@ -83,3 +83,16 @@ QList<int> Guimanager::getTrack()
     return gameState->getDracula()->getTrack().getLocations();
 }
 
+int Guimanager::getPlayerHealth(int playerNum) const
+{
+    QLOG_DEBUG() << "Guimanager::getPlayerHealth(" << playerNum << ")";
+    return gameState->getPlayer(playerNum)->getHealth();
+
+}
+
+int Guimanager::getPlayerMaxHealth(int playerNum) const
+{
+    QLOG_DEBUG() << "Guimanager::getPlayerHealth(" << playerNum << ")";
+    return gameState->getPlayer(playerNum)->getMaxHealth();
+}
+

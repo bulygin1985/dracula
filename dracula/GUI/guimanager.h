@@ -17,6 +17,8 @@ public:
     Q_INVOKABLE int getWhoMoves() const;
     Q_INVOKABLE double getPlayerPhi(int playerNum); //case if ther are several players on the same location
     Q_INVOKABLE QList<int> getTrack();
+    Q_INVOKABLE int getPlayerHealth(int playerNum) const;
+    Q_INVOKABLE int getPlayerMaxHealth(int playerNum) const;
 signals:
     void requestPaint();
     void action(const Action& action);

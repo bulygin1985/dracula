@@ -4,5 +4,6 @@
         <file>GUI/Scene.qml</file>
         <file>GUI/Track.qml</file>
         <file>GUI/FlipableCard.qml</file>
+        <file>GUI/PlayerCards.qml</file>
     </qresource>
 </RCC>

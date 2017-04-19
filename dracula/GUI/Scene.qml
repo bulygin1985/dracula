@@ -97,7 +97,7 @@ Rectangle {
                     //border.color: "black"
                     //border.width: 2
                     radius: width / 2
-                    anchors.leftMargin: map.width * loader.getLocationPoint(index).x - radius
+                    anchors.leftMargin: map.width * loader.getLocationPoint(index).x - radius //TODO: text coor
                     anchors.topMargin: map.height * loader.getLocationPoint(index).y - radius
                     MouseArea {
                         hoverEnabled: true
@@ -128,7 +128,23 @@ Rectangle {
                         }
                         font.bold: true
                         color: (index >= 61) ? Qt.rgba(73.0 / 255.0, 84.0 / 255.0, 121.0 /255.0, 1) : "black"
-                        //QColor(73, 84, 121)
+
+                        MouseArea { //maybe disable for cities
+                            hoverEnabled: true
+                            anchors.fill: parent
+                            onEntered: {
+                                locationPointer.visible = true
+                                locationPointer.index = index
+                                locationPointer.state = "Selected"
+                            }
+                            onExited: {
+                                locationPointer.visible = false
+                                locationPointer.state = ""
+                            }
+                            onClicked: {
+                                guimanager.processAction(index)
+                            }
+                        }
                     }
                 }
                 Component.onCompleted: {
@@ -148,8 +164,8 @@ Rectangle {
                     property point shift: (phi === -1) ? Qt.point(0, 0) : Qt.point((width / 2) * (Math.cos(phi) ), (width / 2) * (Math.sin(phi)))
                     width: map.width * 100.0 / 3240.0
                     height: width
-                    anchors.leftMargin : map.width * loader.getLocationPoint(locationNum).x - width / 2 + shift.x
-                    anchors.topMargin : map.height * loader.getLocationPoint(locationNum).y - width / 2 + shift.y
+                    anchors.leftMargin : (locationNum === -1) ? -width : map.width * loader.getLocationPoint(locationNum).x - width / 2 + shift.x
+                    anchors.topMargin : (locationNum === -1) ? -width : map.height * loader.getLocationPoint(locationNum).y - width / 2 + shift.y
                     source: "file:" + "../images/players/fig" + index + ".png"
 
                     NumberAnimation on scale{
@@ -257,7 +273,9 @@ Rectangle {
     Track{
         id: track
     }
-
+    PlayerCards {
+        id :playerCards
+    }
 
     //TODO load city location, use repeater to create N mouse area, in cycle modify x,y
 }
