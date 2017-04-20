@@ -7,6 +7,11 @@ Rectangle {
     property double scaleKoef:1
     anchors.fill: parent
     color: "#de1313"
+
+
+    property var dayNightY : [0.215997, 0.175820, 0.217840, 0.3052, 0.345742, 0.30446]
+    property var dayNightX : [0.746869, 0.785033, 0.823494, 0.8226, 0.785033, 0.74836]
+
     property var playerNames : ["Dracula", "Lord", "Doctor", "Helsing", "Mina"]
     property string language : "rus"
     property bool animated: false  //animated for player movement. It must be off if, f.e. rescale or windows size changing
@@ -29,8 +34,11 @@ Rectangle {
                 playerRepeater.itemAt(k).locationNum = guimanager.getPlayerLocation(k)
                 playerRepeater.itemAt(k).phi = guimanager.getPlayerPhi(k)
                 playerRepeater.itemAt(k).isChoosed = (k === whoMoves) ? true : false
-                playerRepeater.itemAt(k).scale = (k === whoMoves) ? 1.5 : 1
+                playerRepeater.itemAt(k).scale = 1
+                //playerRepeater.itemAt(k).scale = (k === whoMoves) ? 1.0 : 1
             }
+            dayNight.index = guimanager.getDayNightPosition()
+            console.log("DayNightPosition = ", guimanager.getDayNightPosition())
         }
     }
     Timer {
@@ -154,6 +162,10 @@ Rectangle {
 
             Repeater{
                 id: playerRepeater
+                property real w : map.width * 100.0 / 3240.0
+                property var startPos : [Qt.point(map.width / 2, -w), Qt.point(-w, map.height / 2),
+                    Qt.point(map.width * 0.25, map.height), Qt.point(map.width * 0.75, map.height),
+                    Qt.point(map.width, map.height / 2)]
 //                model : 5
                 Image {
                     property bool isChoosed : false
@@ -164,8 +176,9 @@ Rectangle {
                     property point shift: (phi === -1) ? Qt.point(0, 0) : Qt.point((width / 2) * (Math.cos(phi) ), (width / 2) * (Math.sin(phi)))
                     width: map.width * 100.0 / 3240.0
                     height: width
-                    anchors.leftMargin : (locationNum === -1) ? -width : map.width * loader.getLocationPoint(locationNum).x - width / 2 + shift.x
-                    anchors.topMargin : (locationNum === -1) ? -width : map.height * loader.getLocationPoint(locationNum).y - width / 2 + shift.y
+                    //TODO: do not use loader - only guimanager
+                    anchors.leftMargin : (locationNum === -1) ? playerRepeater.startPos[index].x : map.width * loader.getLocationPoint(locationNum).x - width / 2 + shift.x
+                    anchors.topMargin : (locationNum === -1) ? playerRepeater.startPos[index].y : map.height * loader.getLocationPoint(locationNum).y - width / 2 + shift.y
                     source: "file:" + "../images/players/fig" + index + ".png"
 
                     NumberAnimation on scale{
@@ -198,11 +211,38 @@ Rectangle {
 
                 }
             }
+            //TODO separate component
+            Image {
+                id: dayNight
+                anchors.left:  parent.left
+                anchors.top : parent.top
+                property  int index: 0
+                anchors.leftMargin: map.width * dayNightX[index]
+                anchors.topMargin:map.height * dayNightY[index]
+                width : map.width * 0.033
+                height: width
+                source: "file:" + "../images/tokens/day_night.png"
+                Behavior on anchors.leftMargin
+                {
+                    enabled : scene.animated
+                    NumberAnimation{
+                        duration : animationDuration
+
+                    }
+                }
+                Behavior on anchors.topMargin
+                {
+                    enabled : scene.animated
+                    NumberAnimation{
+                        duration : animationDuration
+                    }
+                }
+            }
 
             Image {
+                id: locationPointer
                 property int index
                 visible: false
-                id: locationPointer
                 anchors.left: parent.left
                 anchors.top : parent.top
                 width: map.width * 200.0 / 3240.0

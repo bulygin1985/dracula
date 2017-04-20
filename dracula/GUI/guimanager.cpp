@@ -96,3 +96,8 @@ int Guimanager::getPlayerMaxHealth(int playerNum) const
     return gameState->getPlayer(playerNum)->getMaxHealth();
 }
 
+int Guimanager::getDayNightPosition() const
+{
+    return gameState->getDayNightPosition();
+}
+

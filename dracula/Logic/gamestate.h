@@ -1,7 +1,7 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
-#include <vector>
+#include <QVector>
 
 #include "dracula.h"
 #include "lord.h"
@@ -20,10 +20,14 @@ public:
     void startNextTurn();
     int getWhoMovesNum() const;
 
+    int getDayNightPosition() const;
+
+    void setDayNightPosition(int value);
+
 private:
-    std::vector<Player*> players;
+    int dayNightPosition;            //from 0 to 5
+    QVector<Player*> players;
     int whoMoves;                     // 0 - dracula, 1 - lord, 2 - doctor, 3- helsing, 4 - mina
-    uint dayNightPosition;           //from 0 to 5
     uint hunterScore;
     uint draculaScore;
 };

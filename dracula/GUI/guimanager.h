@@ -19,6 +19,7 @@ public:
     Q_INVOKABLE QList<int> getTrack();
     Q_INVOKABLE int getPlayerHealth(int playerNum) const;
     Q_INVOKABLE int getPlayerMaxHealth(int playerNum) const;
+    Q_INVOKABLE int getDayNightPosition() const;
 signals:
     void requestPaint();
     void action(const Action& action);
