@@ -7,7 +7,7 @@ Image {
     property double part : 1.0
     property double heightToWidth : sourceSize.height /  sourceSize.width
     height: heightToWidth * gameWindow.width
-    anchors.right: parent.right
+//    anchors.right: parent.right
     anchors.left: parent.left
     anchors.top: parent.top
     anchors.topMargin: -heightToWidth * gameWindow.width * part

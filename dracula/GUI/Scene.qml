@@ -4,11 +4,10 @@ import "../GUI"
 
 Rectangle {
     id: scene
-    property double scaleKoef:1
-    anchors.fill: parent
-    color: "#de1313"
+    anchors.fill : parent
+    color: "transparent"
 
-
+    property real cardRowWidth : gameWindow.height *0.1
     property var dayNightY : [0.215997, 0.175820, 0.217840, 0.3052, 0.345742, 0.30446]
     property var dayNightX : [0.746869, 0.785033, 0.823494, 0.8226, 0.785033, 0.74836]
 
@@ -35,7 +34,6 @@ Rectangle {
                 playerRepeater.itemAt(k).phi = guimanager.getPlayerPhi(k)
                 playerRepeater.itemAt(k).isChoosed = (k === whoMoves) ? true : false
                 playerRepeater.itemAt(k).scale = 1
-                //playerRepeater.itemAt(k).scale = (k === whoMoves) ? 1.0 : 1
             }
             dayNight.index = guimanager.getDayNightPosition()
             console.log("DayNightPosition = ", guimanager.getDayNightPosition())
@@ -52,30 +50,45 @@ Rectangle {
     //property bool isWindowSizeChanged
     function changeMapSize() {
         animated = false // forbit any animation during resizing
-        flickable.contentWidth = gameWindow.width
-        flickable.contentHeight = map.sourceSize.height * gameWindow.width / map.sourceSize.width
+        var w = scene.width - playerCards.width
+        flickable.contentWidth = w
+        flickable.contentHeight = map.sourceSize.height * w / map.sourceSize.width
     }
 
     Image {
         id:background
         source : "file:" + "../images/wood.jpg"
-        anchors.fill: parent
+        anchors.fill: scene
+//        z:1
+    }
+
+    Rectangle{
+        id:mapRect
+        color: "transparent"
+        anchors.left: scene.left
+        anchors.top:scene.top
+        width : scene.width - playerCards.width
+        height: scene.height
     }
 
     Flickable
     {
         id: flickable
-        anchors.fill: parent
+//        anchors.fill: parent
+        anchors.fill : mapRect
         contentWidth:  map.width
         contentHeight: map.height
-        interactive: true
-        //boundsBehavior: Flickable.StopAtBounds
+//        interactive: true
+        boundsBehavior: Flickable.StopAtBounds
         Image {
             id: map
             anchors.fill: parent
             source: "file:" + "../images/map.jpg"
             Component.onCompleted: {
-                var mult = gameWindow.width / map.sourceSize.width
+//                var mult = gameWindow.width / map.sourceSize.width
+//                var mult = (scene.width - playerCards.width)/ map.sourceSize.width
+//                var mult = (gameWindow.width - playerCards.width)/ map.sourceSize.width
+                var mult = (gameWindow.width - cardRowWidth)/ map.sourceSize.width //TODO variable gameWindow.height*0.1 is in playerCard too
                 flickable.contentWidth = map.sourceSize.width * mult
                 flickable.contentHeight =  map.sourceSize.height * mult
             }
@@ -83,12 +96,20 @@ Rectangle {
                 id: mouseAreaScene
                 anchors.fill: parent
                 onWheel: {
-                    var sideIsBigger = flickable.contentWidth > gameWindow.width || flickable.contentHeight > gameWindow.height
-                    var sideIsSmaller = flickable.contentWidth < gameWindow.width || flickable.contentHeight < gameWindow.height
+                    var w = scene.width - playerCards.width
+//                    var w = gameWindow.width
+                    var sideIsBigger = flickable.contentWidth > w || flickable.contentHeight > scene.height
+//                    var sideIsSmaller = flickable.contentWidth < w || flickable.contentHeight < scene.height
+                     var sideIsSmaller = flickable.contentWidth < w
                     if ((sideIsBigger && wheel.angleDelta.y < 0) || (sideIsSmaller && wheel.angleDelta.y > 0))
                     {
                         flickable.contentWidth *= (1 + 0.25 * wheel.angleDelta.y / 1800)
                         flickable.contentHeight *= (1 + 0.25 * wheel.angleDelta.y / 1800)
+                        if (flickable.contentWidth  > w) {
+                            var mult = w / flickable.contentWidth
+                            flickable.contentWidth *= mult
+                            flickable.contentHeight *= mult
+                        }
                     }
                 }
             }
@@ -295,9 +316,11 @@ Rectangle {
 
     AnimatedImage {
         anchors.top : parent.top
+//        anchors.horizontalCenter: parent.horizontalCenter
         anchors.left: parent.left
-        anchors.leftMargin: 8 * gameWindow.width / 10
-        width : gameWindow.width / 10
+        anchors.leftMargin: 0
+//        anchors.leftMargin: 8 * gameWindow.width / 10
+        width : gameWindow.width / 12
         height: sourceSize.height * width / sourceSize.width
         source: "file:" + "../images/bat.gif"
         MouseArea {
@@ -312,9 +335,21 @@ Rectangle {
 
     Track{
         id: track
+        width : scene.width - scene.cardRowWidth
     }
     PlayerCards {
         id :playerCards
+        imageWidth: scene.height * 0.1
+    }
+
+    GameMenu{
+        id : gameMenu
+        anchors.centerIn: parent
+        visible: false
+    }
+
+    Keys.onPressed: {
+        if (event.key === Qt.Key_Escape) gameMenu.visible = !gameMenu.visible;
     }
 
     //TODO load city location, use repeater to create N mouse area, in cycle modify x,y

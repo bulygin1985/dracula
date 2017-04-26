@@ -1,9 +1,13 @@
 import QtQuick 2.0
 
-Row {
-    anchors.bottom: parent.bottom
-    anchors.horizontalCenter: parent.horizontalCenter
-    spacing: scene.width / 6
+Column {
+    id : cardColumn
+    property real imageWidth
+    anchors.right: scene.right
+    anchors.top : scene.top
+    height: scene.height
+    anchors.verticalCenter: scene.verticalCenter
+    spacing: scene.height / 5 - imageWidth
     Repeater {
         id : hunterCards
         model: 5
@@ -11,9 +15,9 @@ Row {
             objectName: "playerCard" + index
             //id: name111
             opacity: 0.5
-            width : scene.width * 0.05
+            width : imageWidth
             height: width
-            source: "file:" + "../images/players/fig" + index + ".png"
+            source: "file:" + "../images/players/card" + index + ".png"
             //property int nameOpacity : 0
             Text {
                 id: name
