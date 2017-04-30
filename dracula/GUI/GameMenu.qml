@@ -22,9 +22,11 @@ Rectangle {
     ColumnLayout {
         anchors.fill: parent
         Repeater{
+            id: repeater
 //            anchors.fill: parent
             model : menuItems.length
             Text {
+
                 Layout.alignment: Qt.AlignCenter
                 text : menuItems[index]
                 font {
@@ -36,9 +38,20 @@ Rectangle {
                 }
                 color : "red"
                 MouseArea{
+                    hoverEnabled: true
                     anchors.fill: parent
                     onClicked: {
                         gameWindow.close()
+                    }
+                    onEntered: {
+                        console.log("onEntered", index)
+//                        repeater.childAt(index).scale += 0.2
+//                        scale += 0.2
+                    }
+                    onExited: {
+                        console.log("onExited", index)
+//                        repeater.childAt(index).scale -= 0.2
+//                        scale -= 0.2
                     }
                 }
             }

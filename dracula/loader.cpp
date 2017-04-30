@@ -2,6 +2,8 @@
 #include <QTextStream>
 #include <QFile>
 #include <QTextCodec>
+#include <QStringList>
+#include <iostream>
 
 #include "loader.h"
 #include "QsLog.h"
@@ -12,6 +14,10 @@ Loader::Loader()
     loadLocations();
     loadLocationNames(locationNamesRus, "../info/location_names_rus.txt");
     loadLocationNames(locationNamesEng, "../info/location_names_eng.txt");
+    loadGraph("../info/roads_seas.txt", roadSeasGraph);
+//    loadGraph("../info/railway.txt", railWayGraph);
+//    loadGraph("../info/land_param.txt", landParam);
+
 }
 
 Loader& Loader::get()
@@ -70,14 +76,26 @@ void Loader::loadLocations()
     }
 }
 
+void Loader::loadGraph(QString path, QVector<QVector<int> > &graph)
+{
+    QLOG_ERROR() << "Loader::loadGraph(" << path << ")";
+    QFile graphFile(path);
+    assert(graphFile.open(QFile::ReadOnly));
+    QTextStream graphFileStream(&graphFile);
+    while (!graphFileStream.atEnd())
+    {
+        QStringList list = graphFileStream.readLine().split(" ");
+        QVector<int> neighbours;
+        for (QString num: list) neighbours.push_back(num.toInt());
+        graph.push_back(neighbours);
+    }
+}
+
 void Loader::loadLocationNames(QVector<QString> &locationNames, QString path)
 {
     QLOG_DEBUG() << "Loader::loadLocationNames(" << path << ")";
     QFile locatioNameFile(path);
-    if (!locatioNameFile.open(QFile::ReadOnly))
-    {
-        assert("cannot open location_names_rus.txt");
-    }
+    assert(locatioNameFile.open(QFile::ReadOnly));
     QTextCodec *codec = QTextCodec::codecForName("windows-1251");
     QTextStream locatioNameStream(&locatioNameFile);
     locatioNameStream.setCodec(codec);

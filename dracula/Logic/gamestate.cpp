@@ -55,7 +55,23 @@ void GameState::setDayNightPosition(int value)
     dayNightPosition = value;
 }
 
+Track GameState::getTrack() const
+{
+    return getDracula()->getTrack();
+}
 
+void GameState::copy(GameState *state) //TODO clone players
+{
+    QLOG_DEBUG() << "GameState::copy()";
+    dayNightPosition = state->dayNightPosition;
+    whoMoves = state->whoMoves;
+    hunterScore = state->hunterScore;
+    draculaScore = state->draculaScore;
+    for (int i = 0; i < players.size(); i++)
+    {
+        players[i]->copy(state->players[i]);
+    }
+}
 
 Dracula *GameState::getDracula() const
 {

@@ -5,7 +5,7 @@ import QtQuick.Window 2.2
 Window {
     id : gameWindow
     //visibility: "Maximized"
-    flags: (gameWindow.visibility === Window.Maximized) ? "FramelessWindowHint" : ""
+//    flags: (gameWindow.visibility === Window.Maximized) ? "FramelessWindowHint" : ""
     //flags: "WindowTitleHint"
     visible: true
     width: 800
@@ -19,7 +19,7 @@ Window {
     }
 
     onVisibilityChanged: {
-        console.log("gameWindow.visibility = ", gameWindow.visibility)
+//        console.log("gameWindow.visibility = ", gameWindow.visibility)
         scene.changeMapSize()
     }
 

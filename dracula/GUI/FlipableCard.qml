@@ -3,7 +3,7 @@ import "../GUI"
 
 Flipable {
     id: flipable
-    property bool flipped: true
+    property bool isOpened: false
     property string frontSource;
     property string backSource;
 
@@ -29,15 +29,15 @@ Flipable {
     states: State {
         name: "back"
         PropertyChanges { target: rotation; angle: 180 }
-        when: flipable.flipped
+        when: !flipable.isOpened
     }
 
     transitions: Transition {
         NumberAnimation { target: rotation; property: "angle"; duration: 500 }
     }
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: flipable.flipped = !flipable.flipped
-    }
+//    MouseArea {
+//        anchors.fill: parent
+//        onClicked: flipable.isOpened = !flipable.isOpened
+//    }
 }

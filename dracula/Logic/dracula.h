@@ -17,7 +17,10 @@ public:
 
     virtual void setLocationNum(int value);
 
+
+
     Track getTrack() const;
+    virtual void copy(Player * player);
 
 private:
     int encounterMaxNumber;  //maximum possible dracula encounters. Possible numbers: 5(initial), 7(if ally dracula's bride)

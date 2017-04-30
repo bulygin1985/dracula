@@ -50,6 +50,22 @@ void Player::setHealth(int value)
 {
     health = value;
 }
+QList<int> Player::getPossibleLocations() const
+{
+    return possibleLocations;
+}
+void Player::setPossibleLocations(const QList<int> &value)
+{
+    possibleLocations = value;
+}
+
+
+
+//void Player::copy(Player *player)
+//{
+//    QLOG_DEBUG() << "Player::copy";
+//    *this = *player;
+//}
 
 
 

@@ -19,11 +19,58 @@ Image {
         anchors.fill: parent
         onEntered: {
             track.state = "trackOn"
+            scene.stopTimerCloseTrack();
         }
         onExited: {
             track.state = ""
         }
     }
+    Image {
+        id : eye
+        source: "file:" + "../images/eye.png"
+        anchors.top : parent.top
+        anchors.left : parent.left
+        anchors.topMargin: track.height * 0.1
+        anchors.leftMargin: track.width * 0.814
+        width : track.width * 0.04
+        height: width
+        MouseArea {
+            property bool isOpened : false
+            anchors.fill: parent
+            onClicked: {
+                var trackLocations = guimanager.getLocations("track")
+                var trackLocationsState = guimanager.getOpenState("track_locations")
+                for (var j = 0; j < trackLocations.length; j++)
+                {
+                    if (trackLocations[j] !== -1) // ther is no location on this track element
+                    {
+                        if (!isOpened) {
+                            locationRepeater.itemAt(trackLocations[j]).isOpened = true
+                        }
+                        else {
+                            locationRepeater.itemAt(trackLocations[j]).isOpened = trackLocationsState[j]
+                        }
+                    }
+                }
+                isOpened = !isOpened
+                edge.borderWidth = isOpened * 5
+            }
+        }
+        Rectangle {
+            id : edge
+            property int borderWidth : 0
+            anchors.top : eye.top
+            anchors.left : eye.left
+            width : eye.width
+            height: width
+            radius: width / 2
+            color: "transparent"
+            border.color: "red"
+            border.width: borderWidth
+        }
+    }
+
+
     Repeater {
         id : locationRepeater
         model : 70
@@ -48,22 +95,26 @@ Image {
     }
     function changeTrack(isShown){
         if (isShown) track.state = "trackOn"
-        var trackList = guimanager.getTrack()
         for (var j = 0; j < locationRepeater.count; j++)
         {
-            var item = locationRepeater.itemAt(trackList[j])
+            var item = locationRepeater.itemAt(j)
             item.frontSource = ""
             item.backSource = ""
             item.position = -2
         }
-
-        for (j = 0; j < trackList.length; j++)
+        var trackLocations = guimanager.getLocations("track")
+        var trackLocationsState = guimanager.getOpenState("track_locations")
+        for (j = 0; j < trackLocations.length; j++)
         {
-            item = locationRepeater.itemAt(trackList[j])
-            item.frontSource = "file:" + "../images/locations/cards/" + (trackList[j] + 1) + ".png"
-            item.backSource = (trackList[j] < 60) ? "file:" + "../images/locations/cards/back.png" :
-                                                 "file:" + "../images/locations/cards/back_sea.png"
-            item.position = j
+            if (trackLocations[j] !== -1) // ther is no location on this track element
+            {
+                item = locationRepeater.itemAt(trackLocations[j])
+                item.frontSource = "file:" + "../images/locations/cards/" + (trackLocations[j] + 1) + ".png"
+                item.backSource = (trackLocations[j] < 60) ? "file:" + "../images/locations/cards/back.png" :
+                                                     "file:" + "../images/locations/cards/back_sea.png"
+                item.position = j
+                item.isOpened = trackLocationsState[j]
+            }
         }
     }
 

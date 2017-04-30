@@ -15,4 +15,10 @@ void Hunter::setBiteNum(int value)
     biteNum = value;
 }
 
+void Hunter::copy(Player *player)
+{
+    QLOG_DEBUG() << "Hunter::copy()";
+    *this = *dynamic_cast<Hunter*>(player);
+}
+
 

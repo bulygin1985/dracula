@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include <QString>
+#include <QList>
 
 class Player
 {
@@ -23,6 +24,9 @@ public:
 
     virtual int getHealth() const;
     virtual void setHealth(int value);
+    virtual void copy(Player * player) = 0;
+    QList<int> getPossibleLocations() const;
+    void setPossibleLocations(const QList<int> &value);
 
 protected:
     int locationNum;   // land 1-60 - locations(cities), sea 61-70 - sea location
@@ -30,6 +34,7 @@ protected:
     uint maxHealth;
     Phase phase;
     int health;
+    QList<int> possibleLocations;
 };
 
 #endif // PLAYER_H

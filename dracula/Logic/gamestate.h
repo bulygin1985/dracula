@@ -23,6 +23,8 @@ public:
     int getDayNightPosition() const;
 
     void setDayNightPosition(int value);
+    Track getTrack() const;
+    void copy(GameState * state);
 
 private:
     int dayNightPosition;            //from 0 to 5

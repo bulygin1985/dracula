@@ -1,15 +1,17 @@
 #include "guimanager.h"
 #include "QsLog.h"
 #include "constants.h"
+#include "logicobjects.h"
 
 #include <QSet>
 #include <assert.h>
 #include <qmath.h>
 
-Guimanager::Guimanager(GameState *gameState)
+Guimanager::Guimanager(GameState *gameState, GameState * prevGameState)
 {
     QLOG_DEBUG() << " Guimanager constructor";
     this->gameState = gameState;
+    this->prevGameState = prevGameState;
     phi.fill(0, PLAYER_AMOUNT);
 }
 
@@ -52,10 +54,10 @@ void Guimanager::calcPlayersPhi()
         }
     }
 }
-void Guimanager::paint(GameState *gameState)
+void Guimanager::paint(GameState *gameState, GameState *prevGameState)
 {
     QLOG_DEBUG() << " Guimanager::paint";
-
+    this->prevGameState = prevGameState;
     this->gameState = gameState;
     calcPlayersPhi();
     emit requestPaint();
@@ -78,9 +80,35 @@ double Guimanager::getPlayerPhi(int playerNum)
     return phi[playerNum];
 }
 
-QList<int> Guimanager::getTrack()
+QList<int> Guimanager::getLocations(QString type)
 {
-    return gameState->getDracula()->getTrack().getLocations();
+    QLOG_DEBUG() << " Guimanager::getLocations";
+    QList<int> locations;
+    if ("track" == type)
+    {
+        for ( TrackElement& element : gameState->getDracula()->getTrack().getElements())
+        {
+            locations.push_back(element.location.number);
+        }
+    }
+    else if ("catacombs" == type)
+    {
+
+    }
+    return locations;
+}
+
+QList<bool> Guimanager::getOpenState(QString name)
+{
+    QList<bool> states;
+    if ("track_locations" == name)
+    {
+        for ( TrackElement& element : gameState->getDracula()->getTrack().getElements())
+        {
+            states.push_back(element.location.isOpened);
+        }
+    }
+    return states;
 }
 
 int Guimanager::getPlayerHealth(int playerNum) const
@@ -99,5 +127,24 @@ int Guimanager::getPlayerMaxHealth(int playerNum) const
 int Guimanager::getDayNightPosition() const
 {
     return gameState->getDayNightPosition();
+}
+
+bool Guimanager::isTrackerChanged() const
+{
+    QLOG_DEBUG() << "Guimanager::isTrackerChanged()";
+    if (prevGameState->getTrack() == gameState->getTrack())
+    {
+        return false;
+    }
+    return true;
+}
+
+QList<int> Guimanager::getPossibleLocations()
+{
+    QLOG_DEBUG() << "Guimanager::getPossibleLocations()";
+    QLOG_ERROR() << "getPossibleLocations = " <<  gameState->getWhoMoves()->getPossibleLocations();
+
+    return gameState->getWhoMoves()->getPossibleLocations();
+    //return QList<int>() << 4 << 49 << 55;
 }
 

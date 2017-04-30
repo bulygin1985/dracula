@@ -2,14 +2,18 @@
 #define TRACK_H
 
 #include <QList>
+#include <logicobjects.h>
 
 class Track
 {
 public:
     Track();
-    void addLocation(int number);
+    //track elelement is added only to begin of track
+    void addTrackElement(const TrackElement& element);
+    QList<TrackElement> elements;
 
-    QList<int> getLocations() const;
+    QList<TrackElement> getElements() const;
+    bool operator==(const Track &l) const;
 
 private:
     QList<int> locations;

@@ -11,6 +11,8 @@ public:
     int getBiteNum() const;
     void setBiteNum(int value);
 
+    virtual void copy(Player * player);
+
 protected:
     int biteNum;
 };

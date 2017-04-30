@@ -24,6 +24,8 @@ const uint DOCTOR_MAX_HEALTH = 10;
 const uint HELSING_MAX_HEALTH = 8;
 const uint MINA_MAX_HEALTH = 8;
 
+const uint DRACULA_CASTLE_NUM = 24;
+
 const uint CASTLE_DRACULA_NUM = 24;
 const uint HOSPITAL_NUM = 60;
 

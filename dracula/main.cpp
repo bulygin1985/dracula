@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("loader", &Loader::get());
     engine.rootContext()->setContextProperty("guimanager", guimanager);
     engine.load(QUrl(QStringLiteral("qrc:/GUI/main.qml")));
-    emit manager.getGuimanager()->paint(manager.getGameState());
+    emit manager.getGuimanager()->paint(manager.getGameState(), manager.getPrevGameState());
 
     return a.exec();
 }

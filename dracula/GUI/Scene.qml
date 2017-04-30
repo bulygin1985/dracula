@@ -11,6 +11,7 @@ Rectangle {
     property var dayNightY : [0.215997, 0.175820, 0.217840, 0.3052, 0.345742, 0.30446]
     property var dayNightX : [0.746869, 0.785033, 0.823494, 0.8226, 0.785033, 0.74836]
 
+    property var possibleLocations : []
     property var playerNames : ["Dracula", "Lord", "Doctor", "Helsing", "Mina"]
     property string language : "rus"
     property bool animated: false  //animated for player movement. It must be off if, f.e. rescale or windows size changing
@@ -22,23 +23,79 @@ Rectangle {
     Connections {
         target: guimanager
         onRequestPaint: {
-            console.log("guimanager.getTrack() = ", guimanager.getTrack())
             var num = guimanager.getPlayerLocation(1)
             animated = true  //animation is turn on only during animationDuration
             timer.start()  // animation for player fig turns on
+
             var whoMoves = guimanager.getWhoMoves()
-            track.changeTrack(0 === whoMoves)
-            console.log("whoMoves = ", whoMoves, "phi = ", guimanager.getPlayerPhi(k))
+            if (guimanager.isTrackerChanged()) {
+                track.changeTrack(true)
+                timerCloseTrack.start();
+            }
             for (var k = 0; k < playerRepeater.count; k++){
                 playerRepeater.itemAt(k).locationNum = guimanager.getPlayerLocation(k)
                 playerRepeater.itemAt(k).phi = guimanager.getPlayerPhi(k)
                 playerRepeater.itemAt(k).isChoosed = (k === whoMoves) ? true : false
                 playerRepeater.itemAt(k).scale = 1
+                playerCards.itemAt(k).health = guimanager.getPlayerHealth(k)
             }
             dayNight.index = guimanager.getDayNightPosition()
-            console.log("DayNightPosition = ", guimanager.getDayNightPosition())
+            showPossibleMovements()
         }
     }
+
+    function showPossibleMovements()
+    {
+        for (var i = 0; i < scene.possibleLocations.length; i++)
+        {
+            scene.possibleLocations[i].destroy()
+        }
+        var list = guimanager.getPossibleLocations()
+        for (var j = 0; j < list.length; j++)
+        {
+
+            var object = Qt.createQmlObject('import QtQuick 2.0
+            Rectangle {
+                property int index : 0
+                anchors.left: parent.left
+                anchors.top : parent.top
+                width: map.width * 100.0 / 3240.0
+                height: width
+                anchors.leftMargin : map.width * loader.getLocationPoint(index).x - width / 2
+                anchors.topMargin : map.height * loader.getLocationPoint(index).y - width / 2
+                radius: width / 2
+                border.width: 3
+                border.color : "green"
+                opacity: 0.5
+                color: "transparent"
+                NumberAnimation on scale{
+                    id : scaleAnimation
+                    duration : 1000
+                    easing.type: Easing.SineCurve
+                    from : 1
+                    to : 1.5
+                    loops: Animation.Infinite
+                }
+                }', map)
+            object.index = list[j]
+            scene.possibleLocations[j] = object
+        }
+
+    }
+
+    function stopTimerCloseTrack()
+    {
+        timerCloseTrack.stop();
+    }
+
+    Timer {
+        id : timerCloseTrack
+        interval : animationDuration + 2000
+        onTriggered: {
+            track.state = "";
+        }
+    }
+
     Timer {
         id : timer
         interval : animationDuration
@@ -50,7 +107,7 @@ Rectangle {
     //property bool isWindowSizeChanged
     function changeMapSize() {
         animated = false // forbit any animation during resizing
-        var w = scene.width - playerCards.width
+        var w = scene.width - playerCards.imageWidth
         flickable.contentWidth = w
         flickable.contentHeight = map.sourceSize.height * w / map.sourceSize.width
     }
@@ -67,7 +124,7 @@ Rectangle {
         color: "transparent"
         anchors.left: scene.left
         anchors.top:scene.top
-        width : scene.width - playerCards.width
+        width : scene.width - playerCards.imageWidth
         height: scene.height
     }
 
@@ -85,9 +142,6 @@ Rectangle {
             anchors.fill: parent
             source: "file:" + "../images/map.jpg"
             Component.onCompleted: {
-//                var mult = gameWindow.width / map.sourceSize.width
-//                var mult = (scene.width - playerCards.width)/ map.sourceSize.width
-//                var mult = (gameWindow.width - playerCards.width)/ map.sourceSize.width
                 var mult = (gameWindow.width - cardRowWidth)/ map.sourceSize.width //TODO variable gameWindow.height*0.1 is in playerCard too
                 flickable.contentWidth = map.sourceSize.width * mult
                 flickable.contentHeight =  map.sourceSize.height * mult
@@ -96,8 +150,7 @@ Rectangle {
                 id: mouseAreaScene
                 anchors.fill: parent
                 onWheel: {
-                    var w = scene.width - playerCards.width
-//                    var w = gameWindow.width
+                    var w = scene.width - playerCards.imageWidth
                     var sideIsBigger = flickable.contentWidth > w || flickable.contentHeight > scene.height
 //                    var sideIsSmaller = flickable.contentWidth < w || flickable.contentHeight < scene.height
                      var sideIsSmaller = flickable.contentWidth < w
@@ -184,22 +237,24 @@ Rectangle {
             Repeater{
                 id: playerRepeater
                 property real w : map.width * 100.0 / 3240.0
-                property var startPos : [Qt.point(map.width / 2, -w), Qt.point(-w, map.height / 2),
-                    Qt.point(map.width * 0.25, map.height), Qt.point(map.width * 0.75, map.height),
-                    Qt.point(map.width, map.height / 2)]
+//                property var startPos : [Qt.point(map.width / 2, -w), Qt.point(-w, map.height / 2),
+//                    Qt.point(map.width * 0.25, map.height), Qt.point(map.width * 0.75, map.height),
+//                    Qt.point(map.width, map.height / 2)]
+
 //                model : 5
                 Image {
                     property bool isChoosed : false
                     anchors.left:  parent.left
                     anchors.top : parent.top
-                    property var locationNum : guimanager.getPlayerLocation(index)
+                    property int locationNum : guimanager.getPlayerLocation(index)
+                    visible: (locationNum === -1) ? false : true
                     property var phi : guimanager.getPlayerPhi(index)
                     property point shift: (phi === -1) ? Qt.point(0, 0) : Qt.point((width / 2) * (Math.cos(phi) ), (width / 2) * (Math.sin(phi)))
                     width: map.width * 100.0 / 3240.0
                     height: width
                     //TODO: do not use loader - only guimanager
-                    anchors.leftMargin : (locationNum === -1) ? playerRepeater.startPos[index].x : map.width * loader.getLocationPoint(locationNum).x - width / 2 + shift.x
-                    anchors.topMargin : (locationNum === -1) ? playerRepeater.startPos[index].y : map.height * loader.getLocationPoint(locationNum).y - width / 2 + shift.y
+                    anchors.leftMargin : (locationNum === -1) ? playerCards.itemAt(index).x : map.width * loader.getLocationPoint(locationNum).x - width / 2 + shift.x
+                    anchors.topMargin : (locationNum === -1) ? playerCards.itemAt(index).y : map.height * loader.getLocationPoint(locationNum).y - width / 2 + shift.y
                     source: "file:" + "../images/players/fig" + index + ".png"
 
                     NumberAnimation on scale{

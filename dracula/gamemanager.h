@@ -18,12 +18,14 @@ public:
     Guimanager *getGuimanager() const;
 
     GameState* getGameState();
+    GameState *getPrevGameState() const;
 
 public slots:
     bool processAction(const Action &action); //return false if Action is  incorrect
 
 private:
     GameState* gameState; //TODO - remove to gameController.
+    GameState* prevGameState;
 };
 
 #endif // GAMEMANAGER_H

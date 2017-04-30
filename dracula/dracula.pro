@@ -63,3 +63,5 @@ HEADERS += \
     loader.h \
     GUI/guimanager.h \
     Logic/track.h
+
+CONFIG += c++11
