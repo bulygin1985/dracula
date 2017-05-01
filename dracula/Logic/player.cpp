@@ -59,6 +59,11 @@ void Player::setPossibleLocations(const QList<int> &value)
     possibleLocations = value;
 }
 
+void Player::resetPossibleAction()
+{
+    possibleLocations = QList<int>();
+}
+
 
 
 //void Player::copy(Player *player)

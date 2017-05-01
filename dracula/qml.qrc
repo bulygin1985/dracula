@@ -6,5 +6,8 @@
         <file>GUI/FlipableCard.qml</file>
         <file>GUI/PlayerCards.qml</file>
         <file>GUI/GameMenu.qml</file>
+        <file>GUI/Locations.qml</file>
+        <file>GUI/DayNightToken.qml</file>
+        <file>GUI/LocationPointer.qml</file>
     </qresource>
 </RCC>

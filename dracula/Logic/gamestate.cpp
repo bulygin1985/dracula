@@ -31,7 +31,6 @@ void GameState::startNextTurn()
     QLOG_DEBUG() << "GameState::startNextTurn()";
     whoMoves = (whoMoves + 1) % PLAYER_AMOUNT;
     int num =  players[DRACULA_NUM]->getLocationNum();
-    QLOG_ERROR() << "num = " << num;
     if ((DRACULA_NUM == whoMoves) &&
             (num <= 60)     //time stops on sea
             && (num != -1)) //it is notfirst round

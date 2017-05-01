@@ -46,41 +46,14 @@ Rectangle {
 
     function showPossibleMovements()
     {
-        for (var i = 0; i < scene.possibleLocations.length; i++)
-        {
-            scene.possibleLocations[i].destroy()
-        }
         var list = guimanager.getPossibleLocations()
-        for (var j = 0; j < list.length; j++)
-        {
-
-            var object = Qt.createQmlObject('import QtQuick 2.0
-            Rectangle {
-                property int index : 0
-                anchors.left: parent.left
-                anchors.top : parent.top
-                width: map.width * 100.0 / 3240.0
-                height: width
-                anchors.leftMargin : map.width * loader.getLocationPoint(index).x - width / 2
-                anchors.topMargin : map.height * loader.getLocationPoint(index).y - width / 2
-                radius: width / 2
-                border.width: 3
-                border.color : "green"
-                opacity: 0.5
-                color: "transparent"
-                NumberAnimation on scale{
-                    id : scaleAnimation
-                    duration : 1000
-                    easing.type: Easing.SineCurve
-                    from : 1
-                    to : 1.5
-                    loops: Animation.Infinite
-                }
-                }', map)
-            object.index = list[j]
-            scene.possibleLocations[j] = object
+        for (var k = 0; k < locationRepeater.count; k++) {
+            locationRepeater.itemAt(k).isVisiblePossibleMovements = false
         }
-
+        for (var i in list)
+        {
+            locationRepeater.itemAt(list[i]).isVisiblePossibleMovements = true
+        }
     }
 
     function stopTimerCloseTrack()
@@ -167,68 +140,8 @@ Rectangle {
                 }
             }
 
-            Repeater{
+            Locations{
                 id : locationRepeater
-                model: 71
-                Rectangle{
-                    color: "transparent"
-                    width : map.width * 100.0 / 3240.0
-                    height: width
-                    anchors.left: parent.left
-                    anchors.top : parent.top
-                    //border.color: "black"
-                    //border.width: 2
-                    radius: width / 2
-                    anchors.leftMargin: map.width * loader.getLocationPoint(index).x - radius //TODO: text coor
-                    anchors.topMargin: map.height * loader.getLocationPoint(index).y - radius
-                    MouseArea {
-                        hoverEnabled: true
-                        anchors.fill: parent
-                        onEntered: {
-                            locationPointer.visible = true
-                            locationPointer.index = index
-                            locationPointer.state = "Selected"
-                        }
-                        onExited: {
-                            locationPointer.visible = false
-                            locationPointer.state = ""
-                        }
-                        onClicked: {
-                            guimanager.processAction(index)
-                        }
-                    }
-                    Text {
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        anchors.bottom: parent.bottom
-                        anchors.bottomMargin: -contentHeight
-                        text: loader.getLocationName(index, language)
-                        font {
-                            family: (index < 61) ? cityFont.name : seaFont.name;
-                            pixelSize:  map.width * 40.0 / 3240.0;
-                            weight: Font.Bold;
-                            //bold: true
-                        }
-                        font.bold: true
-                        color: (index >= 61) ? Qt.rgba(73.0 / 255.0, 84.0 / 255.0, 121.0 /255.0, 1) : "black"
-
-                        MouseArea { //maybe disable for cities
-                            hoverEnabled: true
-                            anchors.fill: parent
-                            onEntered: {
-                                locationPointer.visible = true
-                                locationPointer.index = index
-                                locationPointer.state = "Selected"
-                            }
-                            onExited: {
-                                locationPointer.visible = false
-                                locationPointer.state = ""
-                            }
-                            onClicked: {
-                                guimanager.processAction(index)
-                            }
-                        }
-                    }
-                }
                 Component.onCompleted: {
                     playerRepeater.model = 5  //locationRepeater init before playerRepeater
                 }
@@ -258,7 +171,6 @@ Rectangle {
                     source: "file:" + "../images/players/fig" + index + ".png"
 
                     NumberAnimation on scale{
-                        id : scaleAnimation
                         duration : 1000
                         easing.type: Easing.SineCurve
                         from : 1
@@ -284,78 +196,16 @@ Rectangle {
                             duration : animationDuration
                         }
                     }
-
                 }
             }
             //TODO separate component
-            Image {
+            DayNightToken {
                 id: dayNight
-                anchors.left:  parent.left
-                anchors.top : parent.top
-                property  int index: 0
-                anchors.leftMargin: map.width * dayNightX[index]
-                anchors.topMargin:map.height * dayNightY[index]
-                width : map.width * 0.033
-                height: width
-                source: "file:" + "../images/tokens/day_night.png"
-                Behavior on anchors.leftMargin
-                {
-                    enabled : scene.animated
-                    NumberAnimation{
-                        duration : animationDuration
-
-                    }
-                }
-                Behavior on anchors.topMargin
-                {
-                    enabled : scene.animated
-                    NumberAnimation{
-                        duration : animationDuration
-                    }
-                }
             }
-
-            Image {
+            LocationPointer {
                 id: locationPointer
-                property int index
-                visible: false
-                anchors.left: parent.left
-                anchors.top : parent.top
-                width: map.width * 200.0 / 3240.0
-                height: width
-                anchors.leftMargin : map.width * loader.getLocationPoint(index).x - width / 2
-                anchors.topMargin : map.height * loader.getLocationPoint(index).y - width / 2
-                source: "file:" + "../images/locations/location_mark.png"
-                scale : 0.1
-                Behavior on visible {
-                    NumberAnimation {
-                        properties: "opacity"
-                    }
-                }
-                states: [
-                    State {
-                        name: "Selected"
-                        PropertyChanges {
-                            target: locationPointer
-                            scale : 1
-                            rotation : 90
-                            //width: map.width * 200.0 / 3240.0
-                        }
-                    }
-                ]
-                transitions: [
-                    Transition {
-                        from: "*"
-                        to: "*"
-                        NumberAnimation {
-                            easing.amplitude: 1.5
-                            easing.type: Easing.OutBounce
-                            properties: "scale"
-                            duration: 300
-                        }
-                    }
-                ]
             }
+
         }
 
         Item {

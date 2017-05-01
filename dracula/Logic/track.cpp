@@ -30,15 +30,6 @@ QList<TrackElement> Track::getElements() const
 
 bool Track::operator==(const Track &l) const
 {
-    QLOG_ERROR() << "elements == l.elements : " << (elements == l.elements);
-    QLOG_ERROR() << "left size:" << elements.size();
-    QLOG_ERROR() << "right size:" << l.elements.size();
-
-//    for (int i = 0; i < elements.size(); i++)
-//    {
-//         QLOG_ERROR() << "right:" << elements.at(i).location.number;
-//         QLOG_ERROR() << "left:" << l.elements.at(i).location.number;
-//    }
     return (elements == l.elements);
 }
 

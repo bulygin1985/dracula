@@ -27,6 +27,7 @@ public:
     virtual void copy(Player * player) = 0;
     QList<int> getPossibleLocations() const;
     void setPossibleLocations(const QList<int> &value);
+    void resetPossibleAction();  //set possible action containers as empty
 
 protected:
     int locationNum;   // land 1-60 - locations(cities), sea 61-70 - sea location

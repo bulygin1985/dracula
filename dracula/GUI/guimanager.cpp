@@ -142,9 +142,6 @@ bool Guimanager::isTrackerChanged() const
 QList<int> Guimanager::getPossibleLocations()
 {
     QLOG_DEBUG() << "Guimanager::getPossibleLocations()";
-    QLOG_ERROR() << "getPossibleLocations = " <<  gameState->getWhoMoves()->getPossibleLocations();
-
     return gameState->getWhoMoves()->getPossibleLocations();
-    //return QList<int>() << 4 << 49 << 55;
 }
 
