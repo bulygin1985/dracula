@@ -160,3 +160,28 @@ QString Guimanager::getLocationName(int i, QString language)
     return Loader::get().getLocationName(i, language);
 }
 
+QStringList Guimanager::getEvents(int playerNum)
+{
+    assert((playerNum >= DRACULA_NUM) && (playerNum <= MINA_NUM));
+    QStringList list;
+    if (DRACULA_NUM == playerNum)
+    {
+        list.append("claws");
+        list.append("dodge");
+        list.append("escape_bat");
+        list.append("escape_man");
+        list.append("escape_mist");
+        list.append("fangs");
+        list.append("mesmerize");
+        list.append("strength");
+    }
+    else
+    {
+        list.append("crucifix");
+        list.append("stake");
+        list.append("rifle");
+    }
+    return list;
+
+}
+

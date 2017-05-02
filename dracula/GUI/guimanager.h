@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QVector>
 #include <QPointF>
+#include <QStringList>
 
 #include "logicobjects.h"
 #include "gamestate.h"
@@ -27,6 +28,7 @@ public:
     Q_INVOKABLE QList<int> getPossibleLocations();
     Q_INVOKABLE QPointF getLocationPoint(int i); //TODO -> to GuiManager
     Q_INVOKABLE QString getLocationName(int i, QString language = "rus");
+    Q_INVOKABLE QStringList getEvents(int playerNum);
 
 
 signals:

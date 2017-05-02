@@ -1,5 +1,6 @@
 import QtQuick 2.3
 import QtQuick.Window 2.2
+import QtMultimedia 5.0
 import "../GUI"
 
 Rectangle {
@@ -44,8 +45,9 @@ Rectangle {
         }
         onWrongAction: {
             console.log(message)
-//            message.visible = true
-//            message.textValue = message
+            messageRect.textValue = message
+            messageRect.startAnim()
+            warningSound.play()
         }
     }
 
@@ -220,27 +222,17 @@ Rectangle {
         }
     }
 
-//    Rectangle{
-//        id : message
-//        property string textValue;
-//        anchors.centerIn: scene.Center;
-//        visible: true;
-////        width: messageText.width * 1.5
-////        height: messageText.height * 1.5
-//        height: map.width * 60.0 / 3240.0
-//        width: map.width * 400.0 / 3240.0
-//        radius: width / 2
-//        color : "red"
-//        z : 999
-//        Text {
-//            id : messageText
-//            anchors.centerIn: parent.Center;
-//            font.pixelSize: map.width * 40.0 / 3240.0;
-//            text : textValue
-//        }
-//    }
+    SoundEffect {
+        id: warningSound
+        source: "file:" + "../sound/warning.wav"
+    }
+
+    WarningMessage {
+        id : messageRect
+    }
 
     AnimatedImage {
+        id : bat
         anchors.top : parent.top
         anchors.left: parent.left
         anchors.leftMargin: 0
@@ -265,6 +257,7 @@ Rectangle {
         id :playerCards
         imageWidth: scene.height * 0.1
     }
+
 
     GameMenu{
         id : gameMenu
