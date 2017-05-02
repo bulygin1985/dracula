@@ -32,6 +32,7 @@ TEMPLATE = app
 
 INCLUDEPATH += ./GUI/
 INCLUDEPATH += ./Logic/
+INCLUDEPATH += ./Tools/
 
 SOURCES += \
     Logic/gamestate.cpp \
@@ -46,7 +47,10 @@ SOURCES += \
     gamemanager.cpp \
     loader.cpp \
     GUI/guimanager.cpp \
-    Logic/track.cpp
+    Logic/track.cpp \
+    Tools/movementcalculator.cpp \
+    Logic/gamecontroller.cpp \
+    Logic/possibleactioncalculator.cpp
 
 HEADERS += \
     constants.h \
@@ -62,6 +66,9 @@ HEADERS += \
     gamemanager.h \
     loader.h \
     GUI/guimanager.h \
-    Logic/track.h
+    Logic/track.h \
+    Tools/movementcalculator.h \
+    Logic/gamecontroller.h \
+    Logic/possibleactioncalculator.h
 
 CONFIG += c++11

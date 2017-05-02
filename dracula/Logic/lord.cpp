@@ -10,3 +10,8 @@ Lord::Lord()
     health = maxHealth;
 }
 
+Lord::~Lord()
+{
+
+}
+

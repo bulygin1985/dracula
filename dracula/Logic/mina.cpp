@@ -10,3 +10,8 @@ Mina::Mina()
     health = maxHealth;
 }
 
+Mina::~Mina()
+{
+
+}
+

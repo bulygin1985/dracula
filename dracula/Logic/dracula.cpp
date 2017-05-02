@@ -2,8 +2,9 @@
 #include "QsLog.h"
 #include "constants.h"
 #include "logicobjects.h"
+#include "movementcalculator.h"
 
-Dracula::Dracula()
+Dracula::Dracula() : movementModifier(NONE)
 {
     name = DRACULA_NAME;
     maxHealth = DRACULA_MAX_HEALTH;
@@ -37,6 +38,20 @@ void Dracula::setLocationNum(int value)
     track.addTrackElement(TrackElement(value));
 }
 
+void Dracula::calcPossibleMovements(const QSet<int> forbittenPlaces, int prevLoc)
+{
+    QLOG_DEBUG() << "Dracula::calcPossibleMovements()";
+    MovementCalculator* mc = MovementCalculator::get();
+    QVector<int> near = mc->getMovement(locationNum, prevLoc, forbittenPlaces);
+    switch(movementModifier)
+    {
+        case NONE:
+            for (int i : near) { if (!track.isOnTrack(i) )
+                    possibleLocations.push_back(i);}
+
+    }
+}
+
 Track Dracula::getTrack() const
 {
     return track;
@@ -48,6 +63,21 @@ void Dracula::copy(Player *player)
     *this = *dynamic_cast<Dracula*>(player);
 }
 
+Dracula::MovementModifier Dracula::getMovementModifier() const
+{
+    return movementModifier;
+}
+
+void Dracula::setMovementModifier(const MovementModifier &value)
+{
+    movementModifier = value;
+}
+
+
+Dracula::~Dracula()
+{
+
+}
 
 
 

@@ -22,5 +22,4 @@ Window {
 //        console.log("gameWindow.visibility = ", gameWindow.visibility)
         scene.changeMapSize()
     }
-
 }

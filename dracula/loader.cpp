@@ -7,6 +7,7 @@
 
 #include "loader.h"
 #include "QsLog.h"
+#include "constants.h"
 
 Loader::Loader()
 {
@@ -15,8 +16,8 @@ Loader::Loader()
     loadLocationNames(locationNamesRus, "../info/location_names_rus.txt");
     loadLocationNames(locationNamesEng, "../info/location_names_eng.txt");
     loadGraph("../info/roads_seas.txt", roadSeasGraph);
-//    loadGraph("../info/railway.txt", railWayGraph);
-//    loadGraph("../info/land_param.txt", landParam);
+    loadGraph("../info/railway.txt", railWayGraph);
+    loadGraph("../info/land_param.txt", landParam);
 
 }
 
@@ -32,6 +33,12 @@ QPointF Loader::getLocationPoint(int i)
     return locationPoints[i];
 }
 
+QVector<int> Loader::getNeighbours(int locationNumber)
+{
+    assert(locationNumber >= 0 && locationNumber <= LOCATION_NUMBER);
+    return roadSeasGraph[locationNumber];
+}
+
 QString Loader::getLocationName(int i, QString language)
 {
     QLOG_DEBUG() << " Loader::getLocationName(" << i << ")," << language <<")";
@@ -44,6 +51,7 @@ QString Loader::getLocationName(int i, QString language)
     assert(i >= 0 && i < locationNamesRus.length());
     return locationNamesRus[i];
 }
+
 
 void Loader::loadLocations()
 {

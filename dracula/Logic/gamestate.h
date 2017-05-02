@@ -13,18 +13,24 @@ class GameState
 {
 public:
     GameState();
+    ~GameState();
     Dracula* getDracula() const;
     Hunter* getHunter(int num) const;
     Player * getPlayer(int num) const;
     Player* getWhoMoves();
-    void startNextTurn();
     int getWhoMovesNum() const;
 
     int getDayNightPosition() const;
 
     void setDayNightPosition(int value);
+    void incrementDayNightPosition();
     Track getTrack() const;
     void copy(GameState * state);
+
+    void setWhoMoves(int value);
+    QSet<int> getSaintPlaces() const;
+    QSet<int> getHunterBlockedLocation(uint playerNum) const;
+
 
 private:
     int dayNightPosition;            //from 0 to 5

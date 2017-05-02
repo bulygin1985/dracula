@@ -2,6 +2,7 @@
 #include "QsLog.h"
 #include "constants.h"
 #include "logicobjects.h"
+#include "loader.h"
 
 #include <QSet>
 #include <assert.h>
@@ -54,13 +55,16 @@ void Guimanager::calcPlayersPhi()
         }
     }
 }
-void Guimanager::paint(GameState *gameState, GameState *prevGameState)
+void Guimanager::paint()
 {
     QLOG_DEBUG() << " Guimanager::paint";
-    this->prevGameState = prevGameState;
-    this->gameState = gameState;
     calcPlayersPhi();
     emit requestPaint();
+}
+
+void Guimanager::setWrongMessage(QString message)
+{
+    emit wrongAction(message);
 }
 
 int Guimanager::getPlayerLocation(int playerNum) const
@@ -142,6 +146,17 @@ bool Guimanager::isTrackerChanged() const
 QList<int> Guimanager::getPossibleLocations()
 {
     QLOG_DEBUG() << "Guimanager::getPossibleLocations()";
+    QLOG_ERROR() << "getPossibleLocations = " << gameState->getWhoMoves()->getPossibleLocations();
     return gameState->getWhoMoves()->getPossibleLocations();
+}
+
+QPointF Guimanager::getLocationPoint(int i)
+{
+    return Loader::get().getLocationPoint(i);
+}
+
+QString Guimanager::getLocationName(int i, QString language)
+{
+    return Loader::get().getLocationName(i, language);
 }
 

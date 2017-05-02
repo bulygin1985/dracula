@@ -7,6 +7,7 @@ class Lord : public Hunter
 {
 public:
     Lord();
+    virtual ~Lord();
 };
 
 #endif // LORD_H

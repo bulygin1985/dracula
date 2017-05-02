@@ -3,11 +3,13 @@
 
 #include <QString>
 #include <QList>
+#include <QSet>
 
 class Player
 {
 public:
     Player();
+    virtual ~Player();
     enum class Phase {WAIT = 0, MOVEMENT = 1, ACTION = 2, END_TURN = 3};
 
     virtual int getLocationNum() const;
@@ -28,6 +30,9 @@ public:
     QList<int> getPossibleLocations() const;
     void setPossibleLocations(const QList<int> &value);
     void resetPossibleAction();  //set possible action containers as empty
+    void addPossibleLocation(int i);
+    virtual void calcPossibleMovements(const QSet<int> forbittenPlaces = QSet<int>(), int prevLoc = -1) = 0;
+
 
 protected:
     int locationNum;   // land 1-60 - locations(cities), sea 61-70 - sea location

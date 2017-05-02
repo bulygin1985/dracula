@@ -7,6 +7,7 @@ class Doctor  :public Hunter
 {
 public:
     Doctor();
+    virtual ~Doctor();
 };
 
 #endif // DOCTOR_H

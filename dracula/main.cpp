@@ -8,6 +8,7 @@
 #include "gamemanager.h"
 #include "loader.h"
 #include "guimanager.h"
+#include "movementcalculator.h"
 
 
 int main(int argc, char *argv[])
@@ -34,13 +35,15 @@ int main(int argc, char *argv[])
 
     QLOG_INFO() << "Program start";
     GameManager manager;
+    Loader& loader = Loader::get();
+    MovementCalculator::create(loader.roadSeasGraph,
+                               loader.railWayGraph, loader.landParam);
 
     Guimanager* guimanager = manager.getGuimanager();
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty("loader", &Loader::get());
     engine.rootContext()->setContextProperty("guimanager", guimanager);
     engine.load(QUrl(QStringLiteral("qrc:/GUI/main.qml")));
-    emit manager.getGuimanager()->paint(manager.getGameState(), manager.getPrevGameState());
+    emit manager.getGuimanager()->paint();
 
     return a.exec();
 }

@@ -14,6 +14,8 @@ public:
 
     QList<TrackElement> getElements() const;
     bool operator==(const Track &l) const;
+    bool operator!=(const Track &l) const;
+    bool isOnTrack(int i);
 
 private:
     QList<int> locations;

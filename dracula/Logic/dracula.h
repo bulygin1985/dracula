@@ -7,8 +7,15 @@
 class Dracula : public Player
 {
 public:
-    Dracula();
+    enum MovementModifier{
+        NONE = 0,
+        DOUBLE_BACK = 1,
+        WOLF_FORM = 2,
+        BAT = 3
+    };
 
+    Dracula();
+    virtual ~Dracula();
     int getEncounterMaxNumber() const;
     void setEncounterMaxNumber(int value);
 
@@ -16,16 +23,19 @@ public:
     void setEventMaxNumber(int value);
 
     virtual void setLocationNum(int value);
-
-
+    virtual void calcPossibleMovements(const QSet<int> forbittenPlaces = QSet<int>(), int prevLoc = -1);
 
     Track getTrack() const;
     virtual void copy(Player * player);
+
+    MovementModifier getMovementModifier() const;
+    void setMovementModifier(const MovementModifier &value);
 
 private:
     int encounterMaxNumber;  //maximum possible dracula encounters. Possible numbers: 5(initial), 7(if ally dracula's bride)
     int eventMaxNumber;      //depends on dracula ally
     Track track;
+    MovementModifier movementModifier;
 
 };
 

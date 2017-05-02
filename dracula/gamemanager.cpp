@@ -3,6 +3,7 @@
 #include "QsLog.h"
 #include "constants.h"
 #include "loader.h"
+#include "QsLog.h"
 
 #include <assert.h>
 
@@ -11,6 +12,9 @@ GameManager::GameManager()
     prevGameState = new GameState();
     gameState = new GameState();
     guimanager = new Guimanager(gameState, prevGameState);
+    gameController = new GameController(gameState);
+    possibleActionCalculator = new PossibleActionCalculator(gameState, prevGameState);
+    possibleActionCalculator->calc();
     connect(guimanager, SIGNAL(action(Action)), this, SLOT(processAction(Action)));
 }
 
@@ -21,26 +25,25 @@ Guimanager *GameManager::getGuimanager() const
 
 bool GameManager::processAction(const Action& action)
 {
+    QString message;
+    if (!possibleActionCalculator->isActionPossible(action, message))
+    {
+        guimanager->setWrongMessage(message);
+        return false;
+    }
     prevGameState->copy(gameState);
-    {
-        assert(action.number >= 0 && action.number <= 70);
-        gameState->getWhoMoves()->setLocationNum(action.number);
-        gameState->startNextTurn();
-    }
-    for (int i = DRACULA_NUM ; i <= MINA_NUM; i++ )
-    {
-        gameState->getPlayer(i)->resetPossibleAction();
-    }
-    int locNum = gameState->getWhoMoves()->getLocationNum();
-    if (locNum != -1)
-    {
-        QVector<int> possibleLocationsVector = Loader::get().roadSeasGraph[locNum];
-        gameState->getWhoMoves()->setPossibleLocations(possibleLocationsVector.toList());
-    }
+    gameController->process(action);
 
-    guimanager->paint(gameState, prevGameState);
+    possibleActionCalculator->calc();
 
+    guimanager->paint();
+    return true;
 }
+GameController *GameManager::getGameController() const
+{
+    return gameController;
+}
+
 GameState *GameManager::getPrevGameState() const
 {
     return prevGameState;
@@ -49,5 +52,14 @@ GameState *GameManager::getPrevGameState() const
 GameState* GameManager::getGameState()
 {
     return gameState;
+}
+
+GameManager::~GameManager()
+{
+    QLOG_DEBUG() << "GameManager destructor";
+    delete gameState;
+    delete prevGameState;
+    delete gameController;
+    delete guimanager;
 }
 

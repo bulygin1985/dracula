@@ -10,3 +10,7 @@ Doctor::Doctor()
     health = maxHealth;
 }
 
+Doctor::~Doctor()
+{
+
+}

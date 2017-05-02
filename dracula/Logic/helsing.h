@@ -7,6 +7,7 @@ class Helsing : public Hunter
 {
 public:
     Helsing();
+    virtual ~Helsing();
 };
 
 #endif // HELSING_H

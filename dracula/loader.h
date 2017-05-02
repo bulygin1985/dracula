@@ -10,9 +10,9 @@ class Loader : public QObject
 {
     Q_OBJECT
 private:
-    QVector<QPointF> locationPoints;
     QVector<QString> locationNamesRus;
     QVector<QString> locationNamesEng;
+    QVector<QPointF> locationPoints;
 
 
 private:
@@ -22,13 +22,15 @@ private:
     Loader();
 
 public:
+
     QVector<QVector<int> > roadSeasGraph;
     QVector<QVector<int> > railWayGraph;
     QVector<QVector<int> > landParam;
 
     static Loader& get();
-    Q_INVOKABLE QPointF getLocationPoint(int i); //TODO -> to GuiManager
-    Q_INVOKABLE QString getLocationName(int i, QString language = "rus");
+    QString getLocationName(int i, QString language = "rus");
+    QPointF getLocationPoint(int i);
+    QVector<int> getNeighbours(int locationNumber);
 };
 
 #endif // LOADER_H

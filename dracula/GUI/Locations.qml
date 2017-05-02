@@ -13,8 +13,8 @@ Repeater{
         //border.color: "black"
         //border.width: 2
         radius: width / 2
-        anchors.leftMargin: map.width * loader.getLocationPoint(index).x - radius //TODO: text coor
-        anchors.topMargin: map.height * loader.getLocationPoint(index).y - radius
+        anchors.leftMargin: map.width * guimanager.getLocationPoint(index).x - radius //TODO: text coor
+        anchors.topMargin: map.height * guimanager.getLocationPoint(index).y - radius
         MouseArea {
             hoverEnabled: true
             anchors.fill: parent
@@ -35,7 +35,7 @@ Repeater{
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
             anchors.bottomMargin: -contentHeight
-            text: loader.getLocationName(index, language)
+            text: guimanager.getLocationName(index, language)
             font {
                 family: (index < 61) ? cityFont.name : seaFont.name;
                 pixelSize:  map.width * 40.0 / 3240.0;
@@ -84,7 +84,3 @@ Repeater{
         }
     }
 }
-
-
-
-

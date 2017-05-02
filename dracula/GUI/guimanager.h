@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QVector>
+#include <QPointF>
 
 #include "logicobjects.h"
 #include "gamestate.h"
@@ -12,7 +13,8 @@ class Guimanager : public QObject
     Q_OBJECT
 public:
     Guimanager(GameState * gameState, GameState * prevGameState);
-    void paint(GameState * gameState, GameState * prevGameState);
+    void paint();
+    void setWrongMessage(QString message);
     Q_INVOKABLE int getPlayerLocation(int playerNum) const; //TODO : return playreLoc + Phi
     Q_INVOKABLE int getWhoMoves() const;
     Q_INVOKABLE double getPlayerPhi(int playerNum); //case if ther are several players on the same location
@@ -23,8 +25,13 @@ public:
     Q_INVOKABLE int getDayNightPosition() const;
     Q_INVOKABLE bool isTrackerChanged() const;
     Q_INVOKABLE QList<int> getPossibleLocations();
+    Q_INVOKABLE QPointF getLocationPoint(int i); //TODO -> to GuiManager
+    Q_INVOKABLE QString getLocationName(int i, QString language = "rus");
+
+
 signals:
     void requestPaint();
+    void wrongAction(QString message);
     void action(const Action& action);
 
 public slots:

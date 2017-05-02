@@ -7,6 +7,7 @@ class Mina : public Hunter
 {
 public:
     Mina();
+    virtual ~Mina();
 };
 
 #endif // MINA_H

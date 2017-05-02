@@ -73,7 +73,7 @@ Image {
 
     Repeater {
         id : locationRepeater
-        model : 70
+        model : 71
         anchors.top : parent.top
         anchors.left : parent.left
 

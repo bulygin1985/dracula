@@ -42,6 +42,11 @@ Rectangle {
             dayNight.index = guimanager.getDayNightPosition()
             showPossibleMovements()
         }
+        onWrongAction: {
+            console.log(message)
+//            message.visible = true
+//            message.textValue = message
+        }
     }
 
     function showPossibleMovements()
@@ -84,6 +89,8 @@ Rectangle {
         flickable.contentWidth = w
         flickable.contentHeight = map.sourceSize.height * w / map.sourceSize.width
     }
+
+
 
     Image {
         id:background
@@ -150,10 +157,6 @@ Rectangle {
             Repeater{
                 id: playerRepeater
                 property real w : map.width * 100.0 / 3240.0
-//                property var startPos : [Qt.point(map.width / 2, -w), Qt.point(-w, map.height / 2),
-//                    Qt.point(map.width * 0.25, map.height), Qt.point(map.width * 0.75, map.height),
-//                    Qt.point(map.width, map.height / 2)]
-
 //                model : 5
                 Image {
                     property bool isChoosed : false
@@ -166,8 +169,8 @@ Rectangle {
                     width: map.width * 100.0 / 3240.0
                     height: width
                     //TODO: do not use loader - only guimanager
-                    anchors.leftMargin : (locationNum === -1) ? playerCards.itemAt(index).x : map.width * loader.getLocationPoint(locationNum).x - width / 2 + shift.x
-                    anchors.topMargin : (locationNum === -1) ? playerCards.itemAt(index).y : map.height * loader.getLocationPoint(locationNum).y - width / 2 + shift.y
+                    anchors.leftMargin : (locationNum === -1) ? playerCards.itemAt(index).x : map.width * guimanager.getLocationPoint(locationNum).x - width / 2 + shift.x
+                    anchors.topMargin : (locationNum === -1) ? playerCards.itemAt(index).y : map.height * guimanager.getLocationPoint(locationNum).y - width / 2 + shift.y
                     source: "file:" + "../images/players/fig" + index + ".png"
 
                     NumberAnimation on scale{
@@ -198,14 +201,12 @@ Rectangle {
                     }
                 }
             }
-            //TODO separate component
             DayNightToken {
                 id: dayNight
             }
             LocationPointer {
                 id: locationPointer
             }
-
         }
 
         Item {
@@ -219,12 +220,30 @@ Rectangle {
         }
     }
 
+//    Rectangle{
+//        id : message
+//        property string textValue;
+//        anchors.centerIn: scene.Center;
+//        visible: true;
+////        width: messageText.width * 1.5
+////        height: messageText.height * 1.5
+//        height: map.width * 60.0 / 3240.0
+//        width: map.width * 400.0 / 3240.0
+//        radius: width / 2
+//        color : "red"
+//        z : 999
+//        Text {
+//            id : messageText
+//            anchors.centerIn: parent.Center;
+//            font.pixelSize: map.width * 40.0 / 3240.0;
+//            text : textValue
+//        }
+//    }
+
     AnimatedImage {
         anchors.top : parent.top
-//        anchors.horizontalCenter: parent.horizontalCenter
         anchors.left: parent.left
         anchors.leftMargin: 0
-//        anchors.leftMargin: 8 * gameWindow.width / 10
         width : gameWindow.width / 12
         height: sourceSize.height * width / sourceSize.width
         source: "file:" + "../images/bat.gif"

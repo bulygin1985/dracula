@@ -2,7 +2,7 @@
 #define CONSTANTS
 
 
-const uint PLAYER_AMOUNT = 5;
+const int PLAYER_AMOUNT = 5;
 enum PLAYER_NUM
 {
     DRACULA_NUM = 0,
@@ -24,10 +24,13 @@ const uint DOCTOR_MAX_HEALTH = 10;
 const uint HELSING_MAX_HEALTH = 8;
 const uint MINA_MAX_HEALTH = 8;
 
-const uint DRACULA_CASTLE_NUM = 24;
+const int DRACULA_CASTLE_NUM = 24;
 
-const uint CASTLE_DRACULA_NUM = 24;
-const uint HOSPITAL_NUM = 60;
+const int LOCATION_NUMBER = 71;
+
+const int CITIES_NUMBER = 61;
+
+const int HOSPITAL_NUM = 60;
 
 const int DAY_LENTH = 6;
 const int HUNTER_SCORE_PLACES_NUM = 7;

@@ -26,21 +26,6 @@ Player *GameState::getWhoMoves()
     return players[whoMoves];
 }
 
-void GameState::startNextTurn()
-{
-    QLOG_DEBUG() << "GameState::startNextTurn()";
-    whoMoves = (whoMoves + 1) % PLAYER_AMOUNT;
-    int num =  players[DRACULA_NUM]->getLocationNum();
-    if ((DRACULA_NUM == whoMoves) &&
-            (num <= 60)     //time stops on sea
-            && (num != -1)) //it is notfirst round
-    {
-        QLOG_ERROR() << "dayNightPosition = " << dayNightPosition;
-        dayNightPosition++;
-        dayNightPosition %= DAY_LENTH;
-    }
-}
-
 int GameState::getWhoMovesNum() const
 {
     return whoMoves;
@@ -52,6 +37,12 @@ int GameState::getDayNightPosition() const
 void GameState::setDayNightPosition(int value)
 {
     dayNightPosition = value;
+}
+
+void GameState::incrementDayNightPosition()
+{
+    dayNightPosition++;
+    dayNightPosition %= DAY_LENTH;
 }
 
 Track GameState::getTrack() const
@@ -71,6 +62,11 @@ void GameState::copy(GameState *state) //TODO clone players
         players[i]->copy(state->players[i]);
     }
 }
+void GameState::setWhoMoves(int value)
+{
+    whoMoves = value;
+}
+
 
 Dracula *GameState::getDracula() const
 {
@@ -90,5 +86,27 @@ Hunter *GameState::getHunter(int num) const
     QLOG_DEBUG() << "GameState::getHunter";
     assert(num >= LORD_NUM && num <= MINA_NUM);
     return dynamic_cast<Hunter*>(players[num]);
+}
+
+QSet<int> GameState::getSaintPlaces() const
+{
+    QSet<int> saintPlaces;
+    saintPlaces << 60;
+    return saintPlaces;
+}
+
+QSet<int> GameState::getHunterBlockedLocation(uint playerNum) const
+{
+    assert(playerNum >= LORD_NUM && playerNum <= MINA_NUM);
+    QSet<int> blocked;
+    return blocked;
+}
+
+GameState::~GameState()
+{
+    for (int i = 0; i < players.size(); i++)
+    {
+        delete players[i];
+    }
 }
 

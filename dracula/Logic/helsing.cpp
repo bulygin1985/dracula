@@ -10,3 +10,8 @@ Helsing::Helsing()
     health = maxHealth;
 }
 
+Helsing::~Helsing()
+{
+
+}
+

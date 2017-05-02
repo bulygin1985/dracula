@@ -32,6 +32,23 @@ bool Track::operator==(const Track &l) const
 {
     return (elements == l.elements);
 }
+bool Track::operator!=(const Track&l) const
+{
+    return (!(*this == l));
+}
+
+bool Track::isOnTrack(int i)
+{
+    QLOG_DEBUG() << "Track::isOnTrack";
+    for (TrackElement  &element : elements)
+    {
+        if (i == element.location.number)
+        {
+            return true;
+        }
+    }
+    return false;
+}
 
 
 

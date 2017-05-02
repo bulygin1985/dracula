@@ -8,8 +8,8 @@ Image {
     anchors.top : parent.top
     width: map.width * 200.0 / 3240.0
     height: width
-    anchors.leftMargin : map.width * loader.getLocationPoint(index).x - width / 2
-    anchors.topMargin : map.height * loader.getLocationPoint(index).y - width / 2
+    anchors.leftMargin : map.width * guimanager.getLocationPoint(index).x - width / 2
+    anchors.topMargin : map.height * guimanager.getLocationPoint(index).y - width / 2
     source: "file:" + "../images/locations/location_mark.png"
     scale : 0.1
     Behavior on visible {
