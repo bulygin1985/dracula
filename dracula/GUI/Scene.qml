@@ -87,7 +87,7 @@ Rectangle {
     //property bool isWindowSizeChanged
     function changeMapSize() {
         animated = false // forbit any animation during resizing
-        var w = scene.width - playerCards.imageWidth
+        var w = scene.width - playerCards.imageHeight
         flickable.contentWidth = w
         flickable.contentHeight = map.sourceSize.height * w / map.sourceSize.width
     }
@@ -106,7 +106,7 @@ Rectangle {
         color: "transparent"
         anchors.left: scene.left
         anchors.top:scene.top
-        width : scene.width - playerCards.imageWidth
+        width : scene.width - playerCards.imageHeight
         height: scene.height
     }
 
@@ -132,7 +132,7 @@ Rectangle {
                 id: mouseAreaScene
                 anchors.fill: parent
                 onWheel: {
-                    var w = scene.width - playerCards.imageWidth
+                    var w = scene.width - playerCards.imageHeight
                     var sideIsBigger = flickable.contentWidth > w || flickable.contentHeight > scene.height
 //                    var sideIsSmaller = flickable.contentWidth < w || flickable.contentHeight < scene.height
                      var sideIsSmaller = flickable.contentWidth < w
@@ -251,11 +251,11 @@ Rectangle {
 
     Track{
         id: track
-        width : scene.width - scene.cardRowWidth
+        width : scene.width - scene.cardRowWidth //what is it?
     }
     PlayerCards {
         id :playerCards
-        imageWidth: scene.height * 0.1
+        imageHeight: scene.height * 0.1
     }
 
 

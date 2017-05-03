@@ -42,7 +42,6 @@ void PossibleActionCalculator::calcPossibleMovements()
                     gameState->getSaintPlaces() : gameState->getHunterBlockedLocation(whoMoves);
         int prevLoc = prevGameState->getPlayer(whoMoves)->getLocationNum();
         player->calcPossibleMovements(forbittenPlaces, prevLoc);
-//        QLOG_ERROR() << "possibleLocationsVector = " << possibleLocationsVector;
     }
 }
 

@@ -37,7 +37,7 @@ signals:
     void action(const Action& action);
 
 public slots:
-    void processAction(int num);
+    void processAction(int type, int num, int who = 0);
 
 private:
     // case if there are several player on the same location
@@ -46,6 +46,8 @@ private:
     GameState * prevGameState;
 
     QVector<double> phi;
+    QStringList draculaItems;
+    QVector<QStringList> hunterItemsVector;
 };
 
 #endif // GUIMANAGER_H

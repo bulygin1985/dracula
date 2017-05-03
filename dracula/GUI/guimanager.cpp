@@ -14,12 +14,31 @@ Guimanager::Guimanager(GameState *gameState, GameState * prevGameState)
     this->gameState = gameState;
     this->prevGameState = prevGameState;
     phi.fill(0, PLAYER_AMOUNT);
+
+    draculaItems << "claws" << "dodge" << "escape_bat" << "escape_man" << "escape_mist" << "fangs" << "mesmerize" << "strength";
+    QStringList hunterItems;
+    hunterItems << "crucifix" << "stake" << "rifle";
+    hunterItemsVector = QVector<QStringList>(4, hunterItems);
 }
 
-void Guimanager::processAction(int num)
+void Guimanager::processAction(int type, int num, int who) //TODO Enum class Type
 {
     QLOG_DEBUG() << " Guimanager::processAction(" << num << ")";
-    emit action(Action(num));
+    switch (type) {
+    case 0:
+        emit action(Action(num));
+        break;
+    case 1:
+        if (DRACULA_NUM == who)
+        {
+            draculaItems.removeAt(num);
+        }
+        else if (who >= LORD_NUM && who <=MINA_NUM)
+        {
+             hunterItemsVector[who - 1].removeAt(num);
+        }
+        break;
+    }
 }
 
 void Guimanager::calcPlayersPhi()
@@ -146,7 +165,7 @@ bool Guimanager::isTrackerChanged() const
 QList<int> Guimanager::getPossibleLocations()
 {
     QLOG_DEBUG() << "Guimanager::getPossibleLocations()";
-    QLOG_ERROR() << "getPossibleLocations = " << gameState->getWhoMoves()->getPossibleLocations();
+//    QLOG_ERROR() << "getPossibleLocations = " << gameState->getWhoMoves()->getPossibleLocations();
     return gameState->getWhoMoves()->getPossibleLocations();
 }
 
@@ -163,25 +182,7 @@ QString Guimanager::getLocationName(int i, QString language)
 QStringList Guimanager::getEvents(int playerNum)
 {
     assert((playerNum >= DRACULA_NUM) && (playerNum <= MINA_NUM));
-    QStringList list;
-    if (DRACULA_NUM == playerNum)
-    {
-        list.append("claws");
-        list.append("dodge");
-        list.append("escape_bat");
-        list.append("escape_man");
-        list.append("escape_mist");
-        list.append("fangs");
-        list.append("mesmerize");
-        list.append("strength");
-    }
-    else
-    {
-        list.append("crucifix");
-        list.append("stake");
-        list.append("rifle");
-    }
-    return list;
-
+    if (DRACULA_NUM == playerNum) return draculaItems;
+    else return hunterItemsVector[playerNum-1];
 }
 

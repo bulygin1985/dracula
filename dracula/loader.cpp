@@ -93,6 +93,7 @@ void Loader::loadGraph(QString path, QVector<QVector<int> > &graph)
     while (!graphFileStream.atEnd())
     {
         QStringList list = graphFileStream.readLine().split(" ");
+        list.pop_front(); // first number is equal to vector index
         QVector<int> neighbours;
         for (QString num: list) neighbours.push_back(num.toInt());
         graph.push_back(neighbours);

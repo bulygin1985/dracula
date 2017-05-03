@@ -8,6 +8,8 @@ MovementCalculator* MovementCalculator::movementCalculator = nullptr;
 #include <assert.h>
 #include <QVector>
 
+#include "QsLog.h"
+
 MovementCalculator::MovementCalculator(QVector<QVector<int> >& roadSeaGraph, QVector<QVector<int> >& railwayGraph, QVector<QVector<int> > &landParam)
 {
     this->roadSeaGraph = roadSeaGraph;

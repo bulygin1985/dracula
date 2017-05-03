@@ -1,19 +1,25 @@
-import QtQuick 2.0
+import QtQuick 2.5
+//import QtQuick.Controls 1.2
+import QtQuick.Controls 2.1
 import "../GUI"
 
 Repeater {
-    property real imageWidth
+    property real imageHeight
     id : playerCards
     model: 5
     Image {
+        id : playerCardImage
+        property string textItemValue: guimanager.getEvents(index).length
+
         property int health: guimanager.getPlayerHealth(index)
-        property real textSize : scene.width * 40.0 / 3240.0
+        property real textSize : scene.height * 60.0 / 3240.0
         anchors.right: scene.right
         anchors.top: scene.top
-        anchors.topMargin: index * scene.height / 5 + textSize;
+        property real iconHeight : imageHeight * 0.4
+        anchors.topMargin: (index === 0) ? textSize : index * (imageHeight) + (index + 1) * (textSize + iconHeight);
         objectName: "playerCard" + index
 //        opacity: 0.5
-        width : imageWidth
+        width : imageHeight
         height: width
         source: "file:" + "../images/players/card" + index + ".png"
         Text {
@@ -46,48 +52,133 @@ Repeater {
             }
         }
         Image {
-            source: "file:" + "../images/weapon_card.png"
-            width : parent.width * 0.4
+            id : weaponIcon
+            source: "file:" + "../images/weapon_icon4.png"
+            width : iconHeight
             height: width
             anchors.top: parent.bottom
+            property string textValue: guimanager.getEvents(index).length
+            Text {
+                color: "white"
+                anchors.centerIn: parent
+//                text: playerCardImage.textItemValue
+                text : weaponIcon.textValue
+                font.pixelSize : textSize
+                font.bold: true
+            }
+            Rectangle {
+                id : weaponBorderRect
+                anchors.fill: parent
+                border.color:"blue"
+                border.width: 3
+                color : "transparent"
+                visible : false
+            }
+
             MouseArea {
                 hoverEnabled: true
                 anchors.fill: parent
                 onClicked: {
-                    console.log("item", index)
+//                    console.log("item", index)
                     itemView.visible = !itemView.visible //TODO state : event, item
+                    itemView.focus = !itemView.focus
+                    weaponBorderRect.visible = !weaponBorderRect.visible
                 }
             }
         }
 
         ListView {
             id : itemView
-            width: 100; height: 100
+            property string textItemValue : ""
+            visible: false
             anchors.right : parent.left
             anchors.top : parent.top
-//            anchors.topMargin: (index == 0) ? -50 : 0
-            visible : false
+            width: imageHeight *2; height: imageHeight *4
             model: guimanager.getEvents(index)
-            delegate: Rectangle {
+            property int playerIndex : index
+            ScrollBar.vertical: ScrollBar { id : scrollBar; position: 0.5}
+            focus: false
+            Keys.onUpPressed: scrollBar.decrease()
+            Keys.onDownPressed: scrollBar.increase()
+
+            delegate: Image {
                 id : delegate
-                height: 25
-                width: 100
-                border.width: 1
-                border.color: "black"
-                color : "grey"
-                Text { text: modelData }
+                width: parent.width
+                height: sourceSize.height * width / sourceSize.width
+                source: {
+                    if (itemView.playerIndex === 0) "file:" + "../images/menu_tactics1.png"
+                    else "file:" + "../images/menu_item1.png"
+                }
+//                border.width: 1
+//                border.color: "black"
+//                color : "grey"
+                Text { id : menuText; text: modelData; anchors.centerIn: parent; font.pixelSize: textSize }
                 MouseArea {
                     hoverEnabled: true
                     anchors.fill: parent
                     onEntered: {
-                        cardShow.filename = guimanager.getEvents(playerCards.index)[model.index] //TODO - get data from model
-                        console.log("index = ", model.index, guimanager.getEvents(playerCards.index)[model.index])
+//                        console.log("index = ", model.index, modelData)
+//                        console.log("playerCards.index = ", itemView.playerIndex)
+                        if (itemView.playerIndex === 0) {
+                            cardShow.source = "file:" + "../images/tactic_cards/dracula/" + modelData + ".png"
+                        }
+                        else {
+                            cardShow.source = "file:" + "../images/items/" + modelData + ".png"
+                        }
+                        menuBorderRect.visible = true
                     }
                     onExited: {
-                        cardShow.filename = ""
+                        cardShow.source = ""
+                        menuBorderRect.visible = false
                     }
+                    Image {
+                        id : cancelImage
+                        source: "file:" + "../images/cancel.png"
+                        anchors.left: parent.left
+                        anchors.top: parent.top
+                        height: parent.height / 2
+                        width : height
+                        opacity: 0.5
+                        anchors.leftMargin: width
+                        MouseArea {
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            onEntered: {
+                                console.log("Entered")
+                                cancelImage.opacity =1
+                                cancelImage.scale = 1.5
+                            }
+                            onExited: {
+                                console.log("Exited")
+
+                                cancelImage.opacity = 0.5
+                                cancelImage.scale = 1.0
+                            }
+
+                            onClicked: {
+                                cardShow.source = ""
+                                guimanager.processAction(1, index, itemView.playerIndex)
+                                weaponIcon.textValue = guimanager.getEvents(itemView.playerIndex).length
+                                itemView.model = guimanager.getEvents(itemView.playerIndex)
+                            }
+                        }
+                    }
+
                 }
+                Rectangle {
+                    id : menuBorderRect
+                    anchors.fill: parent
+                    border.color:"yellow"
+                    opacity : 0.5
+                    border.width: 3
+                    radius: width / 12
+                    color : "transparent"
+                    visible : false
+                }
+
             }
+//            highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
+
         }
 
 
@@ -99,9 +190,7 @@ Repeater {
             height: parent.height * 4
             property real proportion : height / sourceSize.height
             width: sourceSize.width * proportion
-            property string filename: ""
-            source: (index === 0) ? ("file:" + "../images/tactic_cards/dracula/" + filename + ".png") :
-                                                ("file:" + "../images/items/" + filename + ".png")
+            source: ""
         }
 
 //        MouseArea {
