@@ -69,6 +69,7 @@ HEADERS += \
     Logic/track.h \
     Tools/movementcalculator.h \
     Logic/gamecontroller.h \
-    Logic/possibleactioncalculator.h
+    Logic/possibleactioncalculator.h \
+    parameters.h
 
 CONFIG += c++11

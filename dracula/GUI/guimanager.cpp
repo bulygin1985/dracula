@@ -3,6 +3,7 @@
 #include "constants.h"
 #include "logicobjects.h"
 #include "loader.h"
+#include "parameters.h"
 
 #include <QSet>
 #include <assert.h>
@@ -26,7 +27,14 @@ void Guimanager::processAction(int type, int num, int who) //TODO Enum class Typ
     QLOG_DEBUG() << " Guimanager::processAction(" << num << ")";
     switch (type) {
     case 0:
-        emit action(Action(num));
+        if (areYou(gameState->getWhoMovesNum()))
+        {
+            emit action(Action(num));
+        }
+        else
+        {
+            setWrongMessage("you cannot move " + gameState->getPlayer(gameState->getWhoMovesNum())->getName());
+        }
         break;
     case 1:
         if (DRACULA_NUM == who)
@@ -184,5 +192,12 @@ QStringList Guimanager::getEvents(int playerNum)
     assert((playerNum >= DRACULA_NUM) && (playerNum <= MINA_NUM));
     if (DRACULA_NUM == playerNum) return draculaItems;
     else return hunterItemsVector[playerNum-1];
+}
+
+bool Guimanager::areYou(int playerNum)
+{
+    QLOG_DEBUG() << "Guimanager::getWhoAreYou()";
+    assert((playerNum >= DRACULA_NUM) && (playerNum <= MINA_NUM));
+    return Parameters::get().whoAreYou.contains(playerNum);
 }
 

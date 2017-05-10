@@ -37,6 +37,9 @@ bool GameManager::processAction(const Action& action)
     possibleActionCalculator->calc();
 
     guimanager->paint();
+
+    //TODO - send if network
+    //TODO - AI if single player
     return true;
 }
 GameController *GameManager::getGameController() const

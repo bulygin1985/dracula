@@ -86,7 +86,7 @@ void Loader::loadLocations()
 
 void Loader::loadGraph(QString path, QVector<QVector<int> > &graph)
 {
-    QLOG_ERROR() << "Loader::loadGraph(" << path << ")";
+    QLOG_DEBUG() << "Loader::loadGraph(" << path << ")";
     QFile graphFile(path);
     assert(graphFile.open(QFile::ReadOnly));
     QTextStream graphFileStream(&graphFile);

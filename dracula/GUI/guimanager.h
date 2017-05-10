@@ -29,6 +29,7 @@ public:
     Q_INVOKABLE QPointF getLocationPoint(int i); //TODO -> to GuiManager
     Q_INVOKABLE QString getLocationName(int i, QString language = "rus");
     Q_INVOKABLE QStringList getEvents(int playerNum);
+    Q_INVOKABLE bool areYou(int playerNum);
 
 
 signals:

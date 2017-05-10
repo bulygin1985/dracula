@@ -144,13 +144,10 @@ Repeater {
                             anchors.fill: parent
                             hoverEnabled: true
                             onEntered: {
-                                console.log("Entered")
                                 cancelImage.opacity =1
                                 cancelImage.scale = 1.5
                             }
                             onExited: {
-                                console.log("Exited")
-
                                 cancelImage.opacity = 0.5
                                 cancelImage.scale = 1.0
                             }
