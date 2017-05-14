@@ -63,3 +63,9 @@ bool PossibleActionCalculator::isActionPossible(const Action &action, QString &m
     return isLocationPossible;
 }
 
+void PossibleActionCalculator::setGameStates(GameState *gameState, GameState *prevGameState)
+{
+    this->gameState = gameState;
+    this->prevGameState = prevGameState;
+}
+

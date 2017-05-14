@@ -1,19 +1,12 @@
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QDir>
-#include <QQmlApplicationEngine>
-#include <QQmlContext>
-#include <QCommandLineParser>
 #include <assert.h>
 #include <QStringList>
 
 #include "QsLog.h"
-#include "gamemanager.h"
-#include "loader.h"
-#include "guimanager.h"
-#include "movementcalculator.h"
 #include "parameters.h"
-
+#include "gameapplication.h"
 
 int main(int argc, char *argv[])
 {
@@ -24,7 +17,7 @@ int main(int argc, char *argv[])
     QsLogging::Logger& logger = QsLogging::Logger::instance();
 
     // set minimum log level and file name
-    logger.setLoggingLevel(QsLogging::ErrorLevel );
+    logger.setLoggingLevel(QsLogging::InfoLevel );
     const QString sLogPath(QDir(a.applicationDirPath()).filePath("log.txt"));
 
     // Create log destinations
@@ -77,17 +70,9 @@ int main(int argc, char *argv[])
     QLOG_ERROR() << "param.whoAreYou = " << param.whoAreYou;
     QLOG_ERROR() << "param.mode = " <<param.mode;
 
-
-    GameManager manager;
-    Loader& loader = Loader::get();
-    MovementCalculator::create(loader.roadSeasGraph,
-                               loader.railWayGraph, loader.landParam);
-
-    Guimanager* guimanager = manager.getGuimanager();
-    QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty("guimanager", guimanager);
-    engine.load(QUrl(QStringLiteral("qrc:/GUI/main.qml")));
-    emit manager.getGuimanager()->paint();
+    GameApplication gameApplication;
+    gameApplication.runMainMenu();
+//    gameApplication.runGame();
 
     return a.exec();
 }

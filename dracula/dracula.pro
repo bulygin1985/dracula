@@ -50,7 +50,8 @@ SOURCES += \
     Logic/track.cpp \
     Tools/movementcalculator.cpp \
     Logic/gamecontroller.cpp \
-    Logic/possibleactioncalculator.cpp
+    Logic/possibleactioncalculator.cpp \
+    gameapplication.cpp
 
 HEADERS += \
     constants.h \
@@ -70,6 +71,7 @@ HEADERS += \
     Tools/movementcalculator.h \
     Logic/gamecontroller.h \
     Logic/possibleactioncalculator.h \
-    parameters.h
+    parameters.h \
+    gameapplication.h
 
 CONFIG += c++11

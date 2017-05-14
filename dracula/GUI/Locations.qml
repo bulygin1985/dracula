@@ -58,7 +58,7 @@ Repeater{
                     locationPointer.state = ""
                 }
                 onClicked: {
-                    guimanager.processAction(index)
+                    guimanager.processAction(0, index)
                 }
             }
         }

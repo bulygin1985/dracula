@@ -24,7 +24,7 @@ Guimanager::Guimanager(GameState *gameState, GameState * prevGameState)
 
 void Guimanager::processAction(int type, int num, int who) //TODO Enum class Type
 {
-    QLOG_DEBUG() << " Guimanager::processAction(" << num << ")";
+    QLOG_INFO() << " Guimanager::processAction(type = " << type << "num = " << num << "who = " << who << " )";
     switch (type) {
     case 0:
         if (areYou(gameState->getWhoMovesNum()))
@@ -92,6 +92,12 @@ void Guimanager::paint()
 void Guimanager::setWrongMessage(QString message)
 {
     emit wrongAction(message);
+}
+
+void Guimanager::setGameStates(GameState *gameState, GameState *prevGameState)
+{
+    this->gameState = gameState;
+    this->prevGameState = prevGameState;
 }
 
 int Guimanager::getPlayerLocation(int playerNum) const
@@ -199,5 +205,16 @@ bool Guimanager::areYou(int playerNum)
     QLOG_DEBUG() << "Guimanager::getWhoAreYou()";
     assert((playerNum >= DRACULA_NUM) && (playerNum <= MINA_NUM));
     return Parameters::get().whoAreYou.contains(playerNum);
+}
+
+void Guimanager::playGame()
+{
+    emit playClicked();
+}
+
+void Guimanager::backToMainMenu()
+{
+    QLOG_ERROR() << "Guimanager::backToMainMenu()";
+    emit mainMenuClicked();
 }
 

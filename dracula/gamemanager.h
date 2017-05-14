@@ -22,6 +22,7 @@ public:
     GameState *getPrevGameState() const;
 
     GameController *getGameController() const;
+    void reset();
 
 public slots:
     bool processAction(const Action &action); //return false if Action is  incorrect

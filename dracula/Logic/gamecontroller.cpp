@@ -4,9 +4,10 @@
 #include "QsLog.h"
 #include "constants.h"
 
-GameController::GameController(GameState *gameState) : gameState(gameState)
+GameController::GameController(GameState *gameState, GameState *prevGameState) :
+    gameState(gameState),
+    prevGameState(prevGameState)
 {
-
 }
 
 void GameController::process(const Action &action)
@@ -15,6 +16,12 @@ void GameController::process(const Action &action)
     assert(action.number >= 0 && action.number <= 70);
     gameState->getWhoMoves()->setLocationNum(action.number);
     startNextTurn();
+}
+
+void GameController::setGameStates(GameState *gameState, GameState *prevGameState)
+{
+    this->gameState = gameState;
+    this->prevGameState = prevGameState;
 }
 
 void GameController::startNextTurn()

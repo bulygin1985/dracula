@@ -23,6 +23,8 @@ GameState::GameState()
 
 Player *GameState::getWhoMoves()
 {
+    QLOG_DEBUG() << "GameState::getWhoMoves";
+    QLOG_INFO() << "GameState :: whoMoves = " << whoMoves;
     return players[whoMoves];
 }
 
@@ -47,6 +49,10 @@ void GameState::incrementDayNightPosition()
 
 Track GameState::getTrack() const
 {
+    QLOG_DEBUG() << "GameState::getTrack()";
+    QLOG_DEBUG() << "players[DRACULA_NUM]->name = " <<dynamic_cast<Dracula*>(players[DRACULA_NUM])->getName();
+    QLOG_DEBUG() << "players[DRACULA_NUM]->name = " <<dynamic_cast<Dracula*>(players[DRACULA_NUM])->getHealth();
+
     return getDracula()->getTrack();
 }
 

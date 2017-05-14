@@ -4,9 +4,12 @@ import "../GUI"
 
 Rectangle {
     id  : menuRect
-    property var menuItems : ["Play", "Window Mode", "Help", "Load", "Exit"]
-    width: scene.width / 2
+    property var menuItems : ["Play", "Main Menu", "Help", "Load", "Exit"]
+    width: 0
     height: width * gameMenuBackground.sourceSize.height / gameMenuBackground.sourceSize.width
+    property real pixelSize : 0
+    property string textColor : "red"
+    signal mainMenu
 
     Image {
         id: gameMenuBackground
@@ -23,37 +26,28 @@ Rectangle {
         anchors.fill: parent
         Repeater{
             id: repeater
-//            anchors.fill: parent
             model : menuItems.length
-            Text {
-
+            MenuText {
+                onClicked: {   //user signal clicked in MenuText.qml
+                    console.log(index)
+                    if (menuItems[index] === "Exit") {
+                        gameWindow.close()
+                    }
+                    else if (menuItems[index] === "Play") {
+                        menuRect.visible = false
+                    }
+                    else if (menuItems[index] === "Main Menu") {
+                        menuRect.mainMenu()
+                    }
+                }
                 Layout.alignment: Qt.AlignCenter
                 text : menuItems[index]
                 font {
-                    family: cityFont.name;
-                    pixelSize: scene.width * 1 / 50
-//                    pixelSize:  gameMenuBackground.sourceSize.height / (8 * menuItems.length);
-                    weight: Font.Bold;
-                    //bold: true
+                    family: draculaFont.name;
+                    pixelSize: pixelSize
                 }
-                color : "red"
-                MouseArea{
-                    hoverEnabled: true
-                    anchors.fill: parent
-                    onClicked: {
-                        gameWindow.close()
-                    }
-                    onEntered: {
-                        console.log("onEntered", index)
-//                        repeater.childAt(index).scale += 0.2
-//                        scale += 0.2
-                    }
-                    onExited: {
-                        console.log("onExited", index)
-//                        repeater.childAt(index).scale -= 0.2
-//                        scale -= 0.2
-                    }
-                }
+                color : textColor
+
             }
         }
     }

@@ -1,7 +1,7 @@
 #ifndef LOGICOBJECTS
 #define LOGICOBJECTS
 
-#include "QString"
+#include <QString>
 
 struct Action
 {
@@ -74,6 +74,10 @@ struct TrackElement
     bool operator!=(const TrackElement &l) const
     {
         return (!(*this == l));
+    }
+    QString toQString() {
+        return ( "(" + QString::number(location.number) + ", " + encounter.name + ", " +
+                 draculaPower.name + ")" );
     }
 };
 

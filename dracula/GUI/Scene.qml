@@ -8,7 +8,6 @@ Rectangle {
     anchors.fill : parent
     color: "transparent"
 
-    property real cardRowWidth : gameWindow.height *0.1
     property var dayNightY : [0.215997, 0.175820, 0.217840, 0.3052, 0.345742, 0.30446]
     property var dayNightX : [0.746869, 0.785033, 0.823494, 0.8226, 0.785033, 0.74836]
 
@@ -17,14 +16,16 @@ Rectangle {
     property string language : "rus"
     property bool animated: false  //animated for player movement. It must be off if, f.e. rescale or windows size changing
     property int animationDuration : 1000
+//    property real playerCardsWidth : scene.height * 0.1
+    property real playerCardsWidth : 0
 
-    FontLoader { id: seaFont; source: "file:" + "../fonts/Lobster-Regular.ttf" }
-    FontLoader { id: cityFont; source: "file:" + "../fonts/CormorantSC-Regular.ttf" }
+    onWidthChanged: {
+        scene.changeMapSize()
+    }
 
     Connections {
         target: guimanager
         onRequestPaint: {
-            var num = guimanager.getPlayerLocation(1)
             animated = true  //animation is turn on only during animationDuration
             timer.start()  // animation for player fig turns on
 
@@ -87,7 +88,7 @@ Rectangle {
     //property bool isWindowSizeChanged
     function changeMapSize() {
         animated = false // forbit any animation during resizing
-        var w = scene.width - playerCards.imageHeight
+        var w = scene.width - playerCardsWidth
         flickable.contentWidth = w
         flickable.contentHeight = map.sourceSize.height * w / map.sourceSize.width
     }
@@ -101,20 +102,11 @@ Rectangle {
 //        z:1
     }
 
-    Rectangle{
-        id:mapRect
-        color: "transparent"
-        anchors.left: scene.left
-        anchors.top:scene.top
-        width : scene.width - playerCards.imageHeight
-        height: scene.height
-    }
-
     Flickable
     {
         id: flickable
-//        anchors.fill: parent
-        anchors.fill : mapRect
+        anchors.fill: parent
+//        anchors.fill : mapRect
         contentWidth:  map.width
         contentHeight: map.height
 //        interactive: true
@@ -124,7 +116,7 @@ Rectangle {
             anchors.fill: parent
             source: "file:" + "../images/map.jpg"
             Component.onCompleted: {
-                var mult = (gameWindow.width - cardRowWidth)/ map.sourceSize.width //TODO variable gameWindow.height*0.1 is in playerCard too
+                var mult = (gameWindow.width - playerCardsWidth)/ map.sourceSize.width //TODO variable gameWindow.height*0.1 is in playerCard too
                 flickable.contentWidth = map.sourceSize.width * mult
                 flickable.contentHeight =  map.sourceSize.height * mult
             }
@@ -161,6 +153,7 @@ Rectangle {
                 property real w : map.width * 100.0 / 3240.0
 //                model : 5
                 Image {
+                    smooth: true
                     property bool isChoosed : false
                     anchors.left:  parent.left
                     anchors.top : parent.top
@@ -170,7 +163,6 @@ Rectangle {
                     property point shift: (phi === -1) ? Qt.point(0, 0) : Qt.point((width / 2) * (Math.cos(phi) ), (width / 2) * (Math.sin(phi)))
                     width: map.width * 100.0 / 3240.0
                     height: width
-                    //TODO: do not use loader - only guimanager
                     anchors.leftMargin : (locationNum === -1) ? playerCards.itemAt(index).x : map.width * guimanager.getLocationPoint(locationNum).x - width / 2 + shift.x
                     anchors.topMargin : (locationNum === -1) ? playerCards.itemAt(index).y : map.height * guimanager.getLocationPoint(locationNum).y - width / 2 + shift.y
                     source: "file:" + "../images/players/fig" + index + ".png"
@@ -251,23 +243,27 @@ Rectangle {
 
     Track{
         id: track
-        width : scene.width - scene.cardRowWidth //what is it?
+        width : scene.width - scene.playerCardsWidth //what is it?
     }
     PlayerCards {
         id :playerCards
-        imageHeight: scene.height * 0.1
+        imageHeight: playerCardsWidth
     }
-
 
     GameMenu{
         id : gameMenu
+        width: scene.width / 2
         anchors.centerIn: parent
         visible: false
+        pixelSize: scene.width / 50.0
+        textColor: "red"
+        onMainMenu: {
+            gameMenu.visible = false
+            guimanager.backToMainMenu()
+        }
     }
 
     Keys.onPressed: {
         if (event.key === Qt.Key_Escape) gameMenu.visible = !gameMenu.visible;
     }
-
-    //TODO load city location, use repeater to create N mouse area, in cycle modify x,y
 }

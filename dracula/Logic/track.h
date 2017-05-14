@@ -3,6 +3,7 @@
 
 #include <QList>
 #include <logicobjects.h>
+#include <QString>
 
 class Track
 {
@@ -16,6 +17,7 @@ public:
     bool operator==(const Track &l) const;
     bool operator!=(const Track &l) const;
     bool isOnTrack(int i);
+    QString toQString();
 
 private:
     QList<int> locations;

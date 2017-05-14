@@ -54,6 +54,8 @@ void Dracula::calcPossibleMovements(const QSet<int> forbittenPlaces, int prevLoc
 
 Track Dracula::getTrack() const
 {
+    QLOG_DEBUG() << "Dracula::getTrack()";
+    QLOG_DEBUG() << "track.getElements().size() = "<< track.getElements().size();
     return track;
 }
 

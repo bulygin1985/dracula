@@ -10,5 +10,7 @@
         <file>GUI/DayNightToken.qml</file>
         <file>GUI/LocationPointer.qml</file>
         <file>GUI/WarningMessage.qml</file>
+        <file>GUI/MainMenu.qml</file>
+        <file>GUI/MenuText.qml</file>
     </qresource>
 </RCC>

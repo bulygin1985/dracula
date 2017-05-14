@@ -16,6 +16,7 @@ public:
     Guimanager(GameState * gameState, GameState * prevGameState);
     void paint();
     void setWrongMessage(QString message);
+    void setGameStates(GameState * gameState, GameState * prevGameState);
     Q_INVOKABLE int getPlayerLocation(int playerNum) const; //TODO : return playreLoc + Phi
     Q_INVOKABLE int getWhoMoves() const;
     Q_INVOKABLE double getPlayerPhi(int playerNum); //case if ther are several players on the same location
@@ -30,12 +31,17 @@ public:
     Q_INVOKABLE QString getLocationName(int i, QString language = "rus");
     Q_INVOKABLE QStringList getEvents(int playerNum);
     Q_INVOKABLE bool areYou(int playerNum);
-
+    Q_INVOKABLE void playGame();  //emit signal
+    Q_INVOKABLE void backToMainMenu();
 
 signals:
-    void requestPaint();
-    void wrongAction(QString message);
-    void action(const Action& action);
+    void requestPaint();                //to QML
+    void wrongAction(QString message);  //to QML
+    void action(const Action& action); //to GameManager
+    void menuChoosed();
+    void gameChoosed();
+    void playClicked();
+    void mainMenuClicked();
 
 public slots:
     void processAction(int type, int num, int who = 0);

@@ -50,5 +50,16 @@ bool Track::isOnTrack(int i)
     return false;
 }
 
+QString Track::toQString()
+{
+    QLOG_DEBUG() << "Track::toQString";
+    QString trackString;
+    for (TrackElement & element : elements)
+    {
+        trackString += (element.toQString()) + " ";
+    }
+    return trackString;
+}
+
 
 

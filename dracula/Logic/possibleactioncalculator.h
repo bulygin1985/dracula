@@ -12,6 +12,8 @@ public:
     void calcPossibleMovements();
     void calc();
     bool isActionPossible(const Action &action, QString& message);
+    void setGameStates(GameState * gameState, GameState * prevGameState);
+
 
 private:
     GameState * gameState;
