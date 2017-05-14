@@ -24,7 +24,6 @@ GameState::GameState()
 Player *GameState::getWhoMoves()
 {
     QLOG_DEBUG() << "GameState::getWhoMoves";
-    QLOG_INFO() << "GameState :: whoMoves = " << whoMoves;
     return players[whoMoves];
 }
 

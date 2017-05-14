@@ -5,13 +5,19 @@
 
 struct Action
 {
-    Action(int num)
+    Action(int type, int num, int who = 0)
     {
+        this->type = type;
         this->number = num;
+        this->who = who;
     }
-
+    int type;
     int number;
-    int who; // ???
+    int who; // - for events, items which are played by hunters, dracula
+    QString toQString() const{
+        return ( "(" + QString::number(type) + ", " + QString::number(number) +
+                 ", " + QString::number(who) + ")" );
+    }
 };
 
 struct LocationCard
@@ -75,7 +81,7 @@ struct TrackElement
     {
         return (!(*this == l));
     }
-    QString toQString() {
+    QString toQString() const{
         return ( "(" + QString::number(location.number) + ", " + encounter.name + ", " +
                  draculaPower.name + ")" );
     }

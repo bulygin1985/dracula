@@ -24,12 +24,12 @@ Guimanager::Guimanager(GameState *gameState, GameState * prevGameState)
 
 void Guimanager::processAction(int type, int num, int who) //TODO Enum class Type
 {
-    QLOG_INFO() << " Guimanager::processAction(type = " << type << "num = " << num << "who = " << who << " )";
+    QLOG_INFO() << " Guimanager::processAction(type =" << type << ", num =" << num << ", who =" << who << " )";
     switch (type) {
     case 0:
         if (areYou(gameState->getWhoMovesNum()))
         {
-            emit action(Action(num));
+            emit action(Action(type, num, who));
         }
         else
         {

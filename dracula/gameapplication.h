@@ -5,6 +5,8 @@
 #include <QQmlContext>
 
 #include "gamemanager.h"
+#include "client.h"
+#include "server.h"
 
 class GameApplication : QObject
 {
@@ -19,6 +21,8 @@ public:
 
 private:
     GameManager * gameManager;
+    Client * client;
+    Server * server;
     QQmlApplicationEngine engine;
 
 public slots:

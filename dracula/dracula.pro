@@ -51,7 +51,9 @@ SOURCES += \
     Tools/movementcalculator.cpp \
     Logic/gamecontroller.cpp \
     Logic/possibleactioncalculator.cpp \
-    gameapplication.cpp
+    gameapplication.cpp \
+    client.cpp \
+    server.cpp
 
 HEADERS += \
     constants.h \
@@ -72,6 +74,8 @@ HEADERS += \
     Logic/gamecontroller.h \
     Logic/possibleactioncalculator.h \
     parameters.h \
-    gameapplication.h
+    gameapplication.h \
+    client.h \
+    server.h
 
 CONFIG += c++11

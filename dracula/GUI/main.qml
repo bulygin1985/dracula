@@ -80,7 +80,7 @@ Window {
 //    }
 
     onVisibilityChanged: {
-        console.log("gameWindow.visibility = ", gameWindow.visibility)
+//        console.log("gameWindow.visibility = ", gameWindow.visibility)
         scene.changeMapSize()
     }
 }

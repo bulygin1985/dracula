@@ -25,7 +25,8 @@ public:
     void reset();
 
 public slots:
-    bool processAction(const Action &action); //return false if Action is  incorrect
+    bool processAction(const Action &action); //return false if Action is incorrect
+    void receiveAction(const Action &action); //for network game
 
 private:
     GameState* gameState; //TODO - remove to gameController.
@@ -33,6 +34,9 @@ private:
     GameController * gameController;
     Guimanager *guimanager;
     PossibleActionCalculator * possibleActionCalculator;
+
+signals:
+    void sendAction(const Action &action);
 };
 
 #endif // GAMEMANAGER_H

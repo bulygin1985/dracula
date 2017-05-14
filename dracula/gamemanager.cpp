@@ -4,6 +4,7 @@
 #include "constants.h"
 #include "loader.h"
 #include "QsLog.h"
+#include "parameters.h"
 
 #include <assert.h>
 
@@ -41,10 +42,24 @@ bool GameManager::processAction(const Action& action)
 
     guimanager->paint();
 
-    //TODO - send if network
+    if (Parameters::MULTI_PLAYER == Parameters::get().mode)
+    {
+        emit sendAction(action);
+    }
     //TODO - AI if single player
     return true;
 }
+
+void GameManager::receiveAction(const Action &action)
+{
+    QLOG_INFO() << "GameManager::receiveAction(" << action.toQString() << ")";
+    //only correct action could be received from server
+    prevGameState->copy(gameState);
+    gameController->process(action);
+    possibleActionCalculator->calc();
+    guimanager->paint();
+}
+
 GameController *GameManager::getGameController() const
 {
     QLOG_DEBUG() << "GameManager::getGameController";

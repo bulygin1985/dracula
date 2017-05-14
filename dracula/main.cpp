@@ -38,6 +38,7 @@ int main(int argc, char *argv[])
     parser.setApplicationDescription("Fury of Dracula computer game");
     parser.addOption({{"m", "mode"}, "game mode : single_player, multi_player", "multi_player"});
     parser.addOption({{"w", "who"}, "who are you ? Set in number, f.e. -w 1 -w 2 -w 3, or -w dracula, -w hunters -w all", "all"});
+    parser.addOption({{"s", "server"}, "start server at the computer"});
 
     parser.process(a);
 
@@ -61,8 +62,12 @@ int main(int argc, char *argv[])
             if (isOk) param.whoAreYou << num;
         }
     }
+    if (parser.isSet("server"))
+    {
+        param.isServer = true;
+    }
 
-    if (param.whoAreYou.isEmpty())
+    if (param.whoAreYou.isEmpty()) //default value
     {
         param.whoAreYou << 0 << 1 << 2 << 3 << 4;
     }

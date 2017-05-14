@@ -14,6 +14,7 @@ struct Parameters
         ALPHA = 3 //only implemented events, encounters
     };
     QString serverIP;
+    int port;
     QSet<int> whoAreYou;
     bool isServer;
     Mode mode;
@@ -21,6 +22,7 @@ struct Parameters
     {
         isServer = false;
         serverIP = "127.0.0.1";
+        port = 8888;
         mode = MULTI_PLAYER;
     }
     static Parameters& get()
