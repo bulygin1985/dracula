@@ -9,8 +9,12 @@ public:
     GameController(GameState *gameState, GameState *prevGameState);
     void process(const Action &action);
     void setGameStates(GameState * gameState, GameState * prevGameState);
+    void reachDracula();
+    bool isGameFinished();
+
 
 private:
+    bool draculaAttack();
     void startNextTurn();
     GameState *gameState;
     GameState * prevGameState;

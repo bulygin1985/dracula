@@ -56,27 +56,30 @@ void GameApplication::runGame()
 {
     QLOG_DEBUG() << "GameApplication::run()";
     Parameters & param = Parameters::get();
-    if (Parameters::MULTI_PLAYER == param.mode)
-    {
-        client = new Client;
-        connect( gameManager, SIGNAL(sendAction(Action)), client, SLOT(sendData(Action)) );
-        connect( client, SIGNAL(actionIsReceived(Action)), gameManager, SLOT(receiveAction(Action)) );
-    }
     if (param.isServer)
     {
-        QLOG_INFO() << "start server";
+        QLOG_INFO() << "start Server";
         server = new Server;
         server->start(); //first time hang app on 2 seconds
     }
-    if (client->state() != QTcpSocket::ConnectedState) //???
+    if (Parameters::MULTI_PLAYER == param.mode)
     {
-        client->connectToHost(param.serverIP, param.port);
-        if (client->waitForConnected(1000))
+        QLOG_INFO() << "start Client";
+        client = new Client;
+        connect( gameManager, SIGNAL(sendAction(Action)), client, SLOT(sendData(Action)) );
+        connect( client, SIGNAL(actionIsReceived(Action)), gameManager, SLOT(receiveAction(Action)) );
+        if (client->state() != QTcpSocket::ConnectedState) //???
         {
-            QLOG_INFO() << "client is connected!";
+            client->connectToHost(param.serverIP, param.port);
+            if (client->waitForConnected(1000))
+            {
+                QLOG_INFO() << "client is connected!";
+            }
         }
     }
-    emit gameManager->getGuimanager()->paint();
+//    gameManager->getGameState()->getTrack().getElements();
+
+    emit gameManager->getGuimanager()->paint(Action(-1,-1));
     if (gameManager != nullptr)
     {
         emit gameManager->getGuimanager()->gameChoosed();
@@ -87,6 +90,7 @@ void GameApplication::runMainMenu()
 {
     QLOG_DEBUG() << "GameApplication::runMainMenu()";
     reset();
+    QLOG_INFO() << "whoAreYou = "<<Parameters::get().whoAreYou;
     if (gameManager != nullptr)
     {
         emit gameManager->getGuimanager()->menuChoosed();

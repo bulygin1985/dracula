@@ -34,6 +34,19 @@ Rectangle {
                 track.changeTrack(true)
                 timerCloseTrack.start();
             }
+            if (guimanager.isDraculaHealthChanged()) {
+                console.log("type = ", type, "num =", num);
+                healthMinusSound.play()
+
+            }
+            //TODO - logic to guimanager
+            if ((type === 0) && (who === 0) && (num > 60) && guimanager.isDraculaHealthChanged()) {
+                track.setBlood(num, true)
+            }
+            else if (type >= 0 ){
+                track.setBlood(num, false) //if blood is set before
+            }
+
             for (var k = 0; k < playerRepeater.count; k++){
                 playerRepeater.itemAt(k).locationNum = guimanager.getPlayerLocation(k)
                 playerRepeater.itemAt(k).phi = guimanager.getPlayerPhi(k)
@@ -58,9 +71,11 @@ Rectangle {
         for (var k = 0; k < locationRepeater.count; k++) {
             locationRepeater.itemAt(k).isVisiblePossibleMovements = false
         }
-        for (var i in list)
-        {
-            locationRepeater.itemAt(list[i]).isVisiblePossibleMovements = true
+        if (guimanager.areYouWhoMoves()) {
+            for (var i in list)
+            {
+                locationRepeater.itemAt(list[i]).isVisiblePossibleMovements = true
+            }
         }
     }
 
@@ -158,7 +173,8 @@ Rectangle {
                     anchors.left:  parent.left
                     anchors.top : parent.top
                     property int locationNum : guimanager.getPlayerLocation(index)
-                    visible: (locationNum === -1) ? false : true
+                    visible: guimanager.isVisible(index) && (locationNum != -1)
+//                    visible : true
                     property var phi : guimanager.getPlayerPhi(index)
                     property point shift: (phi === -1) ? Qt.point(0, 0) : Qt.point((width / 2) * (Math.cos(phi) ), (width / 2) * (Math.sin(phi)))
                     width: map.width * 100.0 / 3240.0
@@ -219,6 +235,11 @@ Rectangle {
         source: "file:" + "../sound/warning.wav"
     }
 
+    Audio {
+        id: healthMinusSound
+        source: "file:" + "../sound/health_minus.mp3"
+    }
+
     WarningMessage {
         id : messageRect
     }
@@ -243,7 +264,17 @@ Rectangle {
 
     Track{
         id: track
-        width : scene.width - scene.playerCardsWidth //what is it?
+        width : scene.width - scene.playerCardsWidth
+        openDuration: 100
+        closeDuration: 300
+
+        onHunterClickEye: {
+            var message = "Only Dracula could see his track!"
+            console.log(message)
+            messageRect.textValue = message
+            messageRect.startAnim()
+            warningSound.play()
+        }
     }
     PlayerCards {
         id :playerCards

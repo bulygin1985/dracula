@@ -53,7 +53,8 @@ SOURCES += \
     Logic/possibleactioncalculator.cpp \
     gameapplication.cpp \
     client.cpp \
-    server.cpp
+    server.cpp \
+    Tools/utilityfunctions.cpp
 
 HEADERS += \
     constants.h \
@@ -76,6 +77,7 @@ HEADERS += \
     parameters.h \
     gameapplication.h \
     client.h \
-    server.h
+    server.h \
+    Tools/utilityfunctions.h
 
 CONFIG += c++11

@@ -43,15 +43,17 @@ void GameState::setDayNightPosition(int value)
 void GameState::incrementDayNightPosition()
 {
     dayNightPosition++;
+    if (dayNightPosition > DAY_LENTH)
+    {
+        draculaScore++;
+        hunterScore++;
+    }
     dayNightPosition %= DAY_LENTH;
 }
 
 Track GameState::getTrack() const
 {
     QLOG_DEBUG() << "GameState::getTrack()";
-    QLOG_DEBUG() << "players[DRACULA_NUM]->name = " <<dynamic_cast<Dracula*>(players[DRACULA_NUM])->getName();
-    QLOG_DEBUG() << "players[DRACULA_NUM]->name = " <<dynamic_cast<Dracula*>(players[DRACULA_NUM])->getHealth();
-
     return getDracula()->getTrack();
 }
 
@@ -105,6 +107,16 @@ QSet<int> GameState::getHunterBlockedLocation(uint playerNum) const
     assert(playerNum >= LORD_NUM && playerNum <= MINA_NUM);
     QSet<int> blocked;
     return blocked;
+}
+
+int GameState::getDraculaScore() const
+{
+    return draculaScore;
+}
+
+int GameState::getHunterScore() const
+{
+    return hunterScore;
 }
 
 GameState::~GameState()

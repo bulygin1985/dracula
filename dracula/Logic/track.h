@@ -16,7 +16,9 @@ public:
     QList<TrackElement> getElements() const;
     bool operator==(const Track &l) const;
     bool operator!=(const Track &l) const;
-    bool isOnTrack(int i);
+    bool isOnTrack(int locationNum) const;
+    bool openTrack(int locationNum);
+    int getTrackIndex(int locationNum);
     QString toQString();
 
 private:

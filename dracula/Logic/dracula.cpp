@@ -3,6 +3,7 @@
 #include "constants.h"
 #include "logicobjects.h"
 #include "movementcalculator.h"
+#include "utilityfunctions.h"
 
 Dracula::Dracula() : movementModifier(NONE)
 {
@@ -31,11 +32,21 @@ void Dracula::setEventMaxNumber(int value)
     eventMaxNumber = value;
 }
 
-void Dracula::setLocationNum(int value)
+void Dracula::setLocationNum(int locationNum)
 {
-    QLOG_DEBUG() << "void Dracula::setLocationNum(" <<  value << ")";
-    Player::setLocationNum(value);
-    track.addTrackElement(TrackElement(value));
+    QLOG_DEBUG() << "Dracula::setLocationNum(" <<  locationNum << ")";
+    Player::setLocationNum(locationNum);
+    track.addTrackElement(TrackElement(locationNum));
+    if (isSea(track.getElements().front().location.number))
+    {
+        int numOfSeas = 0;
+        for (TrackElement& element : track.getElements())
+        {
+            if (isSea(element.location.number)) numOfSeas++;
+            else break;
+        }
+        if (numOfSeas % 2 == 1) health--;  //if it is odd sea
+    }
 }
 
 void Dracula::calcPossibleMovements(const QSet<int> forbittenPlaces, int prevLoc)
@@ -59,6 +70,12 @@ Track Dracula::getTrack() const
     return track;
 }
 
+Track &Dracula::getTrackRef()
+{
+    QLOG_DEBUG() << "Dracula::getTrackRef()";
+    return track;
+}
+
 void Dracula::copy(Player *player)
 {
     QLOG_DEBUG() << "Dracula::copy()";
@@ -67,17 +84,29 @@ void Dracula::copy(Player *player)
 
 Dracula::MovementModifier Dracula::getMovementModifier() const
 {
+    QLOG_DEBUG() << "Dracula::getMovementModifier()";
     return movementModifier;
 }
 
 void Dracula::setMovementModifier(const MovementModifier &value)
 {
+    QLOG_DEBUG() << "Dracula::setMovementModifier()";
     movementModifier = value;
+}
+
+void Dracula::changeHealth(int delta)
+{
+    QLOG_DEBUG() << "Dracula::changeHealth()";
+
+    health += delta;
+    if (health > maxHealth) health = maxHealth;
+    else if (health < 0) health = 0;
 }
 
 
 Dracula::~Dracula()
 {
+    QLOG_DEBUG() << "Dracula destructor";
 
 }
 

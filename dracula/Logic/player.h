@@ -37,7 +37,7 @@ public:
 protected:
     int locationNum;   // land 1-60 - locations(cities), sea 61-70 - sea location
     QString name;
-    uint maxHealth;
+    int maxHealth;
     Phase phase;
     int health;
     QList<int> possibleLocations;

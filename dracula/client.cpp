@@ -15,9 +15,13 @@ void Client::sendData(const Action &action)
     actionSerialized.push_back(action.number);
     actionSerialized.push_back(action.who);
     actionSerialized.push_back(255); //it will be -1 as char
-    QLOG_INFO() << "actionSerialized.size()= " << actionSerialized.size();
+
+    QString message = "( ";
     for (int i = 0; i < actionSerialized.size(); i++)
-        QLOG_INFO() << i << "=" << (int)actionSerialized[i];
+        message += ( QString::number((int)actionSerialized[i]) + " ");
+    message += ")";
+    QLOG_INFO() << "cliend is sending :" << message;
+
     if (state() == QTcpSocket::ConnectedState)
     {
         write(actionSerialized);

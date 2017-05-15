@@ -4,6 +4,7 @@
 #include "logicobjects.h"
 #include "loader.h"
 #include "parameters.h"
+#include "utilityfunctions.h"
 
 #include <QSet>
 #include <assert.h>
@@ -29,7 +30,7 @@ void Guimanager::processAction(int type, int num, int who) //TODO Enum class Typ
     case 0:
         if (areYou(gameState->getWhoMovesNum()))
         {
-            emit action(Action(type, num, who));
+            emit action(Action(type, num, gameState->getWhoMovesNum()));
         }
         else
         {
@@ -82,11 +83,11 @@ void Guimanager::calcPlayersPhi()
         }
     }
 }
-void Guimanager::paint()
+void Guimanager::paint(const Action & action)
 {
     QLOG_DEBUG() << " Guimanager::paint";
     calcPlayersPhi();
-    emit requestPaint();
+    emit requestPaint(action.type, action.number, action.who);
 }
 
 void Guimanager::setWrongMessage(QString message)
@@ -176,6 +177,16 @@ bool Guimanager::isTrackerChanged() const
     return true;
 }
 
+bool Guimanager::isDraculaHealthChanged() const
+{
+    QLOG_DEBUG() << "Guimanager::isDraculaHealthChanged()";
+    if (prevGameState->getDracula()->getHealth() != gameState->getDracula()->getHealth())
+    {
+        return true;
+    }
+    return false;
+}
+
 QList<int> Guimanager::getPossibleLocations()
 {
     QLOG_DEBUG() << "Guimanager::getPossibleLocations()";
@@ -216,5 +227,37 @@ void Guimanager::backToMainMenu()
 {
     QLOG_ERROR() << "Guimanager::backToMainMenu()";
     emit mainMenuClicked();
+}
+
+bool Guimanager::isVisible(int playerNum)
+{
+    assert((playerNum >= DRACULA_NUM) && (playerNum <= MINA_NUM));
+//    if (-1 == getPlayerLocation(playerNum))
+//    {
+//        return false;
+//    }
+    if ( (DRACULA_NUM == playerNum) && (!Parameters::get().whoAreYou.contains(DRACULA_NUM)) )
+    {
+        return false;
+    }
+    return true;
+}
+
+bool Guimanager::areYouWhoMoves()
+{
+    if (Parameters::get().whoAreYou.contains(getWhoMoves()))
+    {
+        return true;
+    }
+    return false;
+}
+
+bool Guimanager::areYouDracula()
+{
+    if (Parameters::get().whoAreYou.contains(DRACULA_NUM))
+    {
+        return true;
+    }
+    return false;
 }
 

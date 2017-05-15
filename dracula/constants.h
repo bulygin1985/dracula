@@ -1,6 +1,24 @@
 #ifndef CONSTANTS
 #define CONSTANTS
 
+#include <QString>
+
+enum class ActionType
+{
+    LOCATION = 0,
+    POWER = 1,
+    TRAIN_DICE = 2,
+    HUNTER_DICE = 3,
+    DRACULA_DICE = 4,
+    EVENT_FROM_HAND = 5,
+    ITEM_FROM_HAND = 6,
+    EVENT_DECK = 7,
+    ITEM_DECK = 8,
+    ENCOUNTER_FROM_HAND = 9,
+    DISCARD_EVENT = 10,
+    DISCARD_ITEM = 11,
+    CHOOSE_PLAYER = 12
+};
 
 const int PLAYER_AMOUNT = 5;
 enum PLAYER_NUM

@@ -37,17 +37,45 @@ bool Track::operator!=(const Track&l) const
     return (!(*this == l));
 }
 
-bool Track::isOnTrack(int i)
+bool Track::isOnTrack(int locationNum) const
 {
-    QLOG_DEBUG() << "Track::isOnTrack";
-    for (TrackElement  &element : elements)
+    QLOG_INFO() << "Track::isOnTrack( " << locationNum << " )";
+    for (const TrackElement &element : elements)
     {
-        if (i == element.location.number)
+        if (locationNum == element.location.number)
         {
             return true;
         }
     }
     return false;
+}
+
+bool Track::openTrack(int locationNum)  //if HIDE - open it too
+{
+    QLOG_INFO() << "Track::openTrack( " << locationNum << " )";
+    for (TrackElement &element : elements)
+    {
+        if (locationNum == element.location.number)
+        {
+            element.open();
+            return true;
+        }
+    }
+    return false;
+}
+
+int Track::getTrackIndex(int locationNum)
+{
+    for (int i = 0; i < elements.size(); i++)
+    {
+        TrackElement &element = elements[i];
+        if (locationNum == element.location.number)
+        {
+            QLOG_INFO() << "we get it!";
+            return i;
+        }
+    }
+    return -1;
 }
 
 QString Track::toQString()

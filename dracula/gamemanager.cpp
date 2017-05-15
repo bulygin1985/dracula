@@ -28,19 +28,22 @@ Guimanager *GameManager::getGuimanager() const
 
 bool GameManager::processAction(const Action& action)
 {
-    QLOG_DEBUG() << "GameManager::processAction()";
+    QLOG_INFO() << "GameManager::processAction(" << action.toQString() << ")";
     QString message;
     if (!possibleActionCalculator->isActionPossible(action, message))
     {
+        QLOG_INFO() << "wrong action";
         guimanager->setWrongMessage(message);
         return false;
     }
     prevGameState->copy(gameState);
     gameController->process(action);
+    if (!gameController->isGameFinished())
+    {
+        possibleActionCalculator->calc();
+    }
 
-    possibleActionCalculator->calc();
-
-    guimanager->paint();
+    guimanager->paint(action);
 
     if (Parameters::MULTI_PLAYER == Parameters::get().mode)
     {
@@ -56,8 +59,11 @@ void GameManager::receiveAction(const Action &action)
     //only correct action could be received from server
     prevGameState->copy(gameState);
     gameController->process(action);
-    possibleActionCalculator->calc();
-    guimanager->paint();
+    if (!gameController->isGameFinished())
+    {
+        possibleActionCalculator->calc();
+    }
+    guimanager->paint(action);
 }
 
 GameController *GameManager::getGameController() const

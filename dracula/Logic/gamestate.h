@@ -32,12 +32,16 @@ public:
     QSet<int> getHunterBlockedLocation(uint playerNum) const;
 
 
+    int getDraculaScore() const;
+
+    int getHunterScore() const;
+
 private:
     int dayNightPosition;            //from 0 to 5
     QVector<Player*> players;
     int whoMoves;                     // 0 - dracula, 1 - lord, 2 - doctor, 3- helsing, 4 - mina
-    uint hunterScore;
-    uint draculaScore;
+    int hunterScore;
+    int draculaScore;
 };
 
 #endif // GAMESTATE_H

@@ -67,17 +67,17 @@ int main(int argc, char *argv[])
         param.isServer = true;
     }
 
-    if (param.whoAreYou.isEmpty()) //default value
-    {
-        param.whoAreYou << 0 << 1 << 2 << 3 << 4;
-    }
+//    if (param.whoAreYou.isEmpty()) //default value
+//    {
+//        param.whoAreYou << 0 << 1 << 2 << 3 << 4;
+//    }
 
-    QLOG_ERROR() << "param.whoAreYou = " << param.whoAreYou;
-    QLOG_ERROR() << "param.mode = " <<param.mode;
+    QLOG_INFO() << "param.whoAreYou = " << param.whoAreYou;
+    QLOG_INFO() << "param.mode = " <<param.mode;
 
     GameApplication gameApplication;
-    gameApplication.runMainMenu();
-//    gameApplication.runGame();
+//    gameApplication.runMainMenu();
+    gameApplication.runGame();
 
     return a.exec();
 }

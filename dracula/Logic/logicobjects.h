@@ -2,6 +2,7 @@
 #define LOGICOBJECTS
 
 #include <QString>
+#include <assert.h>
 
 struct Action
 {
@@ -73,6 +74,13 @@ struct TrackElement
         this->encounter = encounterCard;
         this->draculaPower = draculaPower;
     }
+    void open()
+    {
+        location.isOpened = true;
+        encounter.isOpened = true;
+        draculaPower.isOpened = true;
+    }
+
     bool operator==(const TrackElement &l) const
     {
         return ( (encounter == l.encounter) && (location == l.location) && (draculaPower == l.draculaPower) );
@@ -82,10 +90,12 @@ struct TrackElement
         return (!(*this == l));
     }
     QString toQString() const{
-        return ( "(" + QString::number(location.number) + ", " + encounter.name + ", " +
-                 draculaPower.name + ")" );
+        return ( "| (" + QString::number(location.number) + ", " + QString::number(location.isOpened) +"), (" +
+                 encounter.name + ", " + QString::number(encounter.isOpened) + "), (" +
+                 draculaPower.name + ", " + QString::number(draculaPower.isOpened) + ") |" );
     }
 };
+
 
 
 #endif // LOGICOBJECTS

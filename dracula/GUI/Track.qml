@@ -4,6 +4,8 @@ import "../GUI"
 Image {
     id: track
     property real shift : track.width * 0.1327
+    property int openDuration : 300
+    property int closeDuration : 300
     property double part : 1.0
     property double heightToWidth : sourceSize.height /  sourceSize.width
     height: heightToWidth * gameWindow.width
@@ -13,6 +15,7 @@ Image {
     anchors.topMargin: -heightToWidth * gameWindow.width * part
     source: "file:" + "../images/track.png"
     onWidthChanged : track.anchors.topMargin = -heightToWidth * gameWindow.width * part
+    signal hunterClickEye
     MouseArea {
         id: mouseAreaTrack
         hoverEnabled: true
@@ -38,22 +41,25 @@ Image {
             property bool isOpened : false
             anchors.fill: parent
             onClicked: {
-                var trackLocations = guimanager.getLocations("track")
-                var trackLocationsState = guimanager.getOpenState("track_locations")
-                for (var j = 0; j < trackLocations.length; j++)
-                {
-                    if (trackLocations[j] !== -1) // ther is no location on this track element
-                    {
-                        if (!isOpened) {
-                            locationRepeater.itemAt(trackLocations[j]).isOpened = true
-                        }
-                        else {
-                            locationRepeater.itemAt(trackLocations[j]).isOpened = trackLocationsState[j]
+                if (guimanager.areYouDracula()) {
+                    var trackLocations = guimanager.getLocations("track")
+                    var trackLocationsState = guimanager.getOpenState("track_locations")
+                    for (var j = 0; j < trackLocations.length; j++) {
+                        if (trackLocations[j] !== -1) {// ther is no location on this track element
+                            if (!isOpened) {
+                                locationRepeater.itemAt(trackLocations[j]).isOpened = true
+                            }
+                            else {
+                                locationRepeater.itemAt(trackLocations[j]).isOpened = trackLocationsState[j]
+                            }
                         }
                     }
+                    isOpened = !isOpened
+                    edge.borderWidth = isOpened * 5
                 }
-                isOpened = !isOpened
-                edge.borderWidth = isOpened * 5
+                else {
+                    track.hunterClickEye()
+                }
             }
         }
         Rectangle {
@@ -78,6 +84,7 @@ Image {
         anchors.left : parent.left
 
         FlipableCard {
+            property bool isBlood : false
             property int position : -2
             anchors.top : parent.top
             anchors.left: parent.left
@@ -91,8 +98,23 @@ Image {
                     duration: scene.animationDuration
                 }
             }
+            Image {
+                visible: isBlood
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+                width: parent.width / 4
+                height: sourceSize.height * (width / sourceSize.width)
+                source: "file:" + "../images/tokens/blood.png"
+            }
         }
     }
+
+    function setBlood(locationNum, isSet) {
+        if (isSet) console.log("set blood to", locationNum)
+        var item = locationRepeater.itemAt(locationNum)
+        item.isBlood = isSet
+    }
+
     function changeTrack(isShown){
         if (isShown) track.state = "trackOn"
         for (var j = 0; j < locationRepeater.count; j++)
@@ -133,9 +155,9 @@ Image {
             from: ""
             to: "trackOn"
             NumberAnimation {
-                easing.type: Easing.InCubic
+                easing.type: Easing.Linear
                 properties: "topMargin"
-                duration: 300
+                duration: openDuration
             }
         },
         Transition {
@@ -144,7 +166,7 @@ Image {
             NumberAnimation {
                 easing.type: Easing.Linear
                 properties: "topMargin"
-                duration: 300
+                duration: closeDuration
             }
         }
     ]

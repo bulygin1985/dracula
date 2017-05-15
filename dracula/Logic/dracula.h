@@ -22,19 +22,22 @@ public:
     int getEventMaxNumber() const;
     void setEventMaxNumber(int value);
 
-    virtual void setLocationNum(int value);
+    virtual void setLocationNum(int locationNum);
     virtual void calcPossibleMovements(const QSet<int> forbittenPlaces = QSet<int>(), int prevLoc = -1);
 
     Track getTrack() const;
+    Track& getTrackRef();
     virtual void copy(Player * player);
 
     MovementModifier getMovementModifier() const;
     void setMovementModifier(const MovementModifier &value);
 
+    void changeHealth(int delta);
+
 private:
+    Track track;
     int encounterMaxNumber;  //maximum possible dracula encounters. Possible numbers: 5(initial), 7(if ally dracula's bride)
     int eventMaxNumber;      //depends on dracula ally
-    Track track;
     MovementModifier movementModifier;
 
 };
