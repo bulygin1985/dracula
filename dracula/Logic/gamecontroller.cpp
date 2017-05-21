@@ -85,16 +85,14 @@ bool GameController::isGameFinished()
 
     bool draculaWin = (gameState->getDraculaScore() >= DRACULA_MAX_SCORE);
     bool hunterWin = (gameState->getDracula()->getHealth() <= 0);
-    for (int i = DRACULA_NUM; i <= MINA_NUM; i++)
-    {
-        gameState->getPlayer(i)->resetPossibleAction();
-    }
     if (draculaWin)
     {
+        gameState->whoWin = WhoWin::DRACULA;
         QLOG_INFO() << "Dracula wins!";
     }
     if (hunterWin)
     {
+        gameState->whoWin = WhoWin::HUNTER;
         QLOG_INFO() << "Hunter wins!";
     }
     if (draculaWin || hunterWin)
@@ -119,7 +117,17 @@ void GameController::startNextTurn()
             (!isSea(num))     //time stops on sea
             && (num != -1))   //it is not first round
     {
+        int prevTime = gameState->getDayNightPosition();
         gameState->incrementDayNightPosition();
+        int nowTime = gameState->getDayNightPosition();
+        if (5 == prevTime && 0 == nowTime)
+        {
+            gameState->changeDraculaScore(1);
+            gameState->changeHunterScore(1);
+            QLOG_INFO() << "DraculaScore:" << gameState->getDraculaScore();
+            QLOG_INFO() << "HunterScore:" << gameState->getHunterScore();
+
+        }
     }
 }
 

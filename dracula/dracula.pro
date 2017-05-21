@@ -54,7 +54,8 @@ SOURCES += \
     gameapplication.cpp \
     client.cpp \
     server.cpp \
-    Tools/utilityfunctions.cpp
+    Tools/utilityfunctions.cpp \
+    ai.cpp
 
 HEADERS += \
     constants.h \
@@ -78,6 +79,7 @@ HEADERS += \
     gameapplication.h \
     client.h \
     server.h \
-    Tools/utilityfunctions.h
+    Tools/utilityfunctions.h \
+    ai.h
 
 CONFIG += c++11

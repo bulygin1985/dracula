@@ -261,3 +261,19 @@ bool Guimanager::areYouDracula()
     return false;
 }
 
+int Guimanager::whoWin()
+{
+    QLOG_DEBUG() << "Guimanager::whoWin()";
+    switch(gameState->whoWin)
+    {
+        case WhoWin::DRACULA : 0; break;
+        case WhoWin::HUNTER : 1; break;
+        default: -1;
+    }
+
+    if (WhoWin::HUNTER == gameState->whoWin)
+    {
+        return 1;
+    }
+}
+

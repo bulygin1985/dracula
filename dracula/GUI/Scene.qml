@@ -56,6 +56,12 @@ Rectangle {
             }
             dayNight.index = guimanager.getDayNightPosition()
             showPossibleMovements()
+            if (1 === guimanager.whoWin()){
+                huntersWin.visible = true
+            }
+            else if (0 === guimanager.whoWin()) {
+                draculaWins.visible = true
+            }
         }
         onWrongAction: {
             console.log(message)
@@ -63,6 +69,22 @@ Rectangle {
             messageRect.startAnim()
             warningSound.play()
         }
+
+    }
+
+    GameEnd {
+        id: huntersWin
+        imageWidth: scene.width / 2
+        message: "Hunters Win!"
+        source: "file:" + "../images/hunters_win.jpg"
+        z:1
+    }
+    GameEnd {
+        id: draculaWins
+        imageWidth: scene.width / 2
+        message: "Hunters Win!"
+        source: "file:" + "../images/dracula_wins.jpg"
+        z:1
     }
 
     function showPossibleMovements()
@@ -292,6 +314,7 @@ Rectangle {
             gameMenu.visible = false
             guimanager.backToMainMenu()
         }
+        z:2
     }
 
     Keys.onPressed: {

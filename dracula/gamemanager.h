@@ -8,6 +8,7 @@
 #include "guimanager.h"
 #include "gamecontroller.h"
 #include "possibleactioncalculator.h"
+#include "ai.h"
 
 class GameManager : public QObject
 {
@@ -27,6 +28,7 @@ public:
 public slots:
     bool processAction(const Action &action); //return false if Action is incorrect
     void receiveAction(const Action &action); //for network game
+    void requestAIaction();
 
 private:
     GameState* gameState; //TODO - remove to gameController.
@@ -34,6 +36,7 @@ private:
     GameController * gameController;
     Guimanager *guimanager;
     PossibleActionCalculator * possibleActionCalculator;
+    AI * ai;
 
 signals:
     void sendAction(const Action &action);

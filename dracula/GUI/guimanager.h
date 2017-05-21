@@ -38,6 +38,7 @@ public:
     Q_INVOKABLE bool isVisible(int playerNum);
     Q_INVOKABLE bool areYouWhoMoves();
     Q_INVOKABLE bool areYouDracula();
+    Q_INVOKABLE int whoWin();
 
 signals:
     void requestPaint(int type, int num, int who);                //to QML

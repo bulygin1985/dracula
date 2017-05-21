@@ -3,6 +3,7 @@
 #include "loader.h"
 #include "movementcalculator.h"
 #include "parameters.h"
+#include "utilityfunctions.h"
 
 
 GameApplication::GameApplication():

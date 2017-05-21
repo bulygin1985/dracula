@@ -1,5 +1,6 @@
 #include <assert.h>
 
+#include "parameters.h"
 #include "gamestate.h"
 #include "constants.h"
 #include "QsLog.h"
@@ -19,6 +20,7 @@ GameState::GameState()
     dayNightPosition = 0;
     hunterScore = 0;
     draculaScore = 0;
+    whoWin = WhoWin::NONE;
 }
 
 Player *GameState::getWhoMoves()
@@ -117,6 +119,42 @@ int GameState::getDraculaScore() const
 int GameState::getHunterScore() const
 {
     return hunterScore;
+}
+
+bool GameState::isAIturn()
+{
+    QLOG_DEBUG() << "GameState::isAIturn";
+
+    return !Parameters::get().whoAreYou.contains(whoMoves);
+}
+
+void GameState::changeHunterScore(int delta)
+{
+    QLOG_DEBUG() << "GameState::changeHunterScore";
+    hunterScore += delta;
+    if (hunterScore > HUNTER_MAX_SCORE)
+    {
+        hunterScore = HUNTER_MAX_SCORE;
+    }
+    if (hunterScore < 0)
+    {
+        hunterScore = 0;
+    }
+
+}
+
+void GameState::changeDraculaScore(int delta)
+{
+    QLOG_DEBUG() << "GameState::changeDraculaScore";
+    draculaScore += delta;
+    if (draculaScore > DRACULA_MAX_SCORE)
+    {
+        draculaScore = DRACULA_MAX_SCORE;
+    }
+    if (draculaScore < 0)
+    {
+        draculaScore = 0;
+    }
 }
 
 GameState::~GameState()

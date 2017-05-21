@@ -1,6 +1,7 @@
 #ifndef UTILITYFUNCTIONS_H
 #define UTILITYFUNCTIONS_H
 
+#include <QVector>
 
 
 bool isHunter(int playerNum);
@@ -16,6 +17,8 @@ bool isDay(int time);
 bool isNight(int time);
 
 int getLocationAmount();
+
+QVector<int> getRandom(int smallest, int largest, int size);
 
 
 

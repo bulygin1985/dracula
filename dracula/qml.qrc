@@ -12,5 +12,6 @@
         <file>GUI/WarningMessage.qml</file>
         <file>GUI/MainMenu.qml</file>
         <file>GUI/MenuText.qml</file>
+        <file>GUI/GameEnd.qml</file>
     </qresource>
 </RCC>

@@ -9,6 +9,13 @@
 #include "helsing.h"
 #include "mina.h"
 
+enum class WhoWin
+{
+    NONE = 0,
+    HUNTER = 1,
+    DRACULA = 2
+};
+
 class GameState
 {
 public:
@@ -31,11 +38,16 @@ public:
     QSet<int> getSaintPlaces() const;
     QSet<int> getHunterBlockedLocation(uint playerNum) const;
 
-
     int getDraculaScore() const;
 
     int getHunterScore() const;
+    bool isAIturn();
 
+    void changeHunterScore(int delta);
+    void changeDraculaScore(int delta);
+
+
+    WhoWin whoWin;
 private:
     int dayNightPosition;            //from 0 to 5
     QVector<Player*> players;

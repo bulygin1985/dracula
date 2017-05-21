@@ -17,7 +17,8 @@ enum class ActionType
     ENCOUNTER_FROM_HAND = 9,
     DISCARD_EVENT = 10,
     DISCARD_ITEM = 11,
-    CHOOSE_PLAYER = 12
+    CHOOSE_PLAYER = 12,
+    DO_NOTHING = 13 //forAI
 };
 
 const int PLAYER_AMOUNT = 5;

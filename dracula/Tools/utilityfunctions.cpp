@@ -4,6 +4,8 @@
 #include "parameters.h"
 #include "loader.h"
 
+#include <QTime>
+
 bool isHunter(int playerNum)
 {
     return (playerNum >= LORD_NUM && playerNum <= MINA_NUM);
@@ -62,4 +64,16 @@ bool isDay(int time)
 bool isNight(int time)
 {
     return ((time <= 5) && (time >= 3));
+}
+
+QVector<int> getRandom(int smallest, int largest, int size)
+{
+    QTime time = QTime::currentTime();
+    qsrand((uint)time.msec());
+    QVector<int> vect(size);
+    for (int i = 0; i < vect.size(); i++)
+    {
+        vect[i] = qrand() % ((largest + 1) - smallest) + smallest;
+    }
+    return vect;
 }

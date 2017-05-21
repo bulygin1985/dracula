@@ -13,10 +13,6 @@ PossibleActionCalculator::PossibleActionCalculator(GameState * gameState, GameSt
 void PossibleActionCalculator::calcPossibleMovements()
 {
     QLOG_DEBUG() << "PossibleActionCalculator::calcPossibleMovements()";
-    for (int i = DRACULA_NUM ; i <= MINA_NUM; i++ )
-    {
-        gameState->getPlayer(i)->resetPossibleAction();
-    }
     Player * player = gameState->getWhoMoves();
     int whoMoves = gameState->getWhoMovesNum();
     int locNum = player->getLocationNum();
@@ -48,6 +44,7 @@ void PossibleActionCalculator::calcPossibleMovements()
 void PossibleActionCalculator::calc()
 {
     QLOG_DEBUG() << "PossibleActionCalculator::calc()";
+    resetPossibleActions();
     calcPossibleMovements();
 }
 
@@ -67,5 +64,13 @@ void PossibleActionCalculator::setGameStates(GameState *gameState, GameState *pr
 {
     this->gameState = gameState;
     this->prevGameState = prevGameState;
+}
+
+void PossibleActionCalculator::resetPossibleActions()
+{
+    for (int i = DRACULA_NUM ; i <= MINA_NUM; i++ )
+    {
+        gameState->getPlayer(i)->resetPossibleAction();
+    }
 }
 

@@ -13,6 +13,7 @@ public:
     void calc();
     bool isActionPossible(const Action &action, QString& message);
     void setGameStates(GameState * gameState, GameState * prevGameState);
+    void resetPossibleActions();
 
 
 private:

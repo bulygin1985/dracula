@@ -6,6 +6,7 @@
 #include "QsLog.h"
 #include "parameters.h"
 
+
 #include <assert.h>
 
 GameManager::GameManager()
@@ -15,9 +16,14 @@ GameManager::GameManager()
     gameState = new GameState();
     guimanager = new Guimanager(gameState, prevGameState);
     gameController = new GameController(gameState, prevGameState);
+    ai = new AI(gameState, prevGameState);
     possibleActionCalculator = new PossibleActionCalculator(gameState, prevGameState);
     possibleActionCalculator->calc();
     connect(guimanager, SIGNAL(action(Action)), this, SLOT(processAction(Action)));
+    if (Parameters::SINGLE_PLAYER == Parameters::get().mode)
+    {
+        requestAIaction();
+    }
 }
 
 Guimanager *GameManager::getGuimanager() const
@@ -42,12 +48,20 @@ bool GameManager::processAction(const Action& action)
     {
         possibleActionCalculator->calc();
     }
+    else
+    {
+        possibleActionCalculator->resetPossibleActions();
+    }
 
     guimanager->paint(action);
 
     if (Parameters::MULTI_PLAYER == Parameters::get().mode)
     {
         emit sendAction(action);
+    }
+    if (Parameters::SINGLE_PLAYER == Parameters::get().mode)
+    {
+        requestAIaction();
     }
     //TODO - AI if single player
     return true;
@@ -56,14 +70,24 @@ bool GameManager::processAction(const Action& action)
 void GameManager::receiveAction(const Action &action)
 {
     QLOG_INFO() << "GameManager::receiveAction(" << action.toQString() << ")";
-    //only correct action could be received from server
-    prevGameState->copy(gameState);
-    gameController->process(action);
-    if (!gameController->isGameFinished())
+    processAction(action);
+}
+
+void GameManager::requestAIaction()
+{
+    QLOG_DEBUG() << "GameManager::requestAIaction";
+    QLOG_INFO() << "SINGLE_PLAYER mode";
+    if (gameState->isAIturn()) //your turn, then AI turn
     {
-        possibleActionCalculator->calc();
+        QLOG_INFO() << "gameState->isAIturn()";
+
+        Action action = ai->getAction(gameState->getWhoMovesNum());
+        QLOG_INFO() << "action:" << action.toQString();
+        if (action.type != (int)ActionType::DO_NOTHING)
+        {
+            processAction(action);
+        }
     }
-    guimanager->paint(action);
 }
 
 GameController *GameManager::getGameController() const
@@ -82,6 +106,7 @@ void GameManager::reset()
     guimanager->setGameStates(gameState, prevGameState);
     gameController->setGameStates(gameState, prevGameState);
     possibleActionCalculator->setGameStates(gameState, prevGameState);
+    ai->setGameStates(gameState, prevGameState);
     possibleActionCalculator->calc();
 }
 
@@ -104,5 +129,6 @@ GameManager::~GameManager()
     delete prevGameState;
     delete gameController;
     delete guimanager;
+    delete ai;
 }
 
